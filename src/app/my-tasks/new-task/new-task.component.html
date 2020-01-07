@@ -27,7 +27,7 @@
               (click)="rotateArrow()"
               formControlName="status"
               class="form-input select-input">
-              <option *ngFor="let status of statuses" [value]="status">{{ status.name }}</option>
+              <option *ngFor="let status of statuses" [value]="status.value">{{ status.name }}</option>
             </select>
             <p 
               *ngIf="!newTaskForm.get('status').valid && newTaskForm.get('status').touched"

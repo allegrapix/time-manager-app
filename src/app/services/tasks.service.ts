@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Task } from '../my-tasks/task/task.model';
 import { ActivatedRoute } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 
 
@@ -35,6 +37,7 @@ export class TasksService {
     params = params.append("status", statusParam);
     params = params.append("limit", limit.toString());
     params = params.append("skip", skip.toString());
+    params = params.append("sortBy", 'createdAt:desc');
     return this.http.get<Task[]>(`${this.url}/tasks/mytasks`, {params: params});
   }
   
@@ -56,5 +59,21 @@ export class TasksService {
         break;        
     }
     return color;
+  }
+
+  postTask(task: Task) {
+    return this.http
+    .post<Task>(`${this.url}/tasks/mytasks`, task)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(errorRes: HttpErrorResponse) {
+    let errorMsg = 'An error ocurred';
+    if (!errorRes.error) {
+      return throwError(errorMsg);
+    }
+    return throwError(errorRes.error);
   }
 }

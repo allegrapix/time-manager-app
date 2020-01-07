@@ -3,20 +3,11 @@ import { TasksService } from 'src/app/services/tasks.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Task } from './task.model';
 import { Subscription } from 'rxjs';
-import { trigger, transition, style, group, animate, query } from '@angular/animations';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss'],
-  animations: [
-    trigger('taskContentAnimation', [
-      transition(':enter', [
-        style({ height: '0px', overflow: 'hidden' }),
-        group([animate('350ms ease-out', style({ height: '!' }))])
-      ])
-    ])
-  ]
+  styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit, OnDestroy {
   task: Task = {
@@ -64,4 +55,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
 
   }
+
+  onDelete() {}
 }

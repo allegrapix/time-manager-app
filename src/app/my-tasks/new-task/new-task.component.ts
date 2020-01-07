@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-task',
@@ -14,8 +15,9 @@ export class NewTaskComponent implements OnInit {
   dropDownIsOpen = false;
   newTaskForm: FormGroup;
 
-  constructor(private tasksService: TasksService,
-    private http: HttpClient
+  constructor(
+    private router: Router,
+    private tasksService: TasksService
     ) { }
 
   ngOnInit() {
@@ -33,14 +35,8 @@ export class NewTaskComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.newTaskForm.value);
-    this.http
-      .post(
-        'http://localhost:3000/tasks/mytasks',
-        this.newTaskForm.value
-      )
-      .subscribe(responseData => {
-        console.log(responseData);
-      })
+    this.tasksService.postTask(this.newTaskForm.value).subscribe(resData => {
+      this.router.navigate(['/mytasks', resData._id]);
+    });
   }
 }

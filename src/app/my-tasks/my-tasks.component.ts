@@ -3,7 +3,7 @@ import { TasksService } from '../services/tasks.service';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { trigger, transition, style, group, animate, query } from '@angular/animations';
+import { trigger, transition, style, group, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-my-tasks',

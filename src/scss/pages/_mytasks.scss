@@ -183,11 +183,17 @@ app-my-tasks {
 
   .status-container {
     width: 30%;
-    padding: 5px 0 20px;
+    padding: 0 0 20px;
 
     .stats {
       display: flex;
       justify-content: space-between;
+    }
+  }
+
+  .btn-group {
+    .btn {
+      margin-bottom: 10px;
     }
   }
 

@@ -31,8 +31,8 @@
 
 .btn-alert {
   background: $fifth-color;
-  background-image: linear-gradient(to right, $fifth-color , $sixth-color);
-  background-size: 300%;
+  background-image: linear-gradient(to right, $fifth-color-light 1%, $fifth-color 99%);
+  background-size: 180%;
   background-position: left;
 
   @include on_event {

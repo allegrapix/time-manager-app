@@ -1,20 +1,28 @@
-<div class="task-container" [@taskContentAnimation]>
+<div class="task-container">
   <div class="task-header">
-    <p class="title">{{ task.title }}</p>
-    <button 
-      (click)="goToEditTask()"
-      class="btn">Edit</button>
-  </div>
-  <div class="status-container">
-    <div class="stats">
-      <p class="subtitle faded">Status:</p>
-      <p class="subtitle" [ngStyle]="{color: getColor()}">{{ task.status }}</p>      
+    <div class="status-container">
+      <p class="title">{{ task.title }}</p>
+      <div class="stats">
+        <p class="subtitle faded">Status:</p>
+        <p class="subtitle" [ngStyle]="{color: getColor()}">{{ task.status }}</p>      
+      </div>
+      <div class="stats">
+        <p class="subtitle faded">Hours worked:</p>
+        <p class="subtitle faded">{{ task.workedHours }}h</p> 
+      </div>
+    </div>    
+    <div class="btn-group">
+      <button 
+        (click)="goToEditTask()"
+        class="btn">Edit
+      </button>
+      <button 
+        (click)="onDelete()"
+        class="btn btn-alert">Delete
+      </button>
     </div>
-    <div class="stats">
-      <p class="subtitle faded">Hours worked:</p>
-      <p class="subtitle faded">{{ task.workedHours }}h</p> 
-    </div>
   </div>
+
   <p class="subtitle">Description:</p>
   <p class="default-text">{{ task.description }}</p>
 </div>
