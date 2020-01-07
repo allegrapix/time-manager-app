@@ -76,4 +76,12 @@ export class TasksService {
     }
     return throwError(errorRes.error);
   }
+
+  deleteTask(id: string) {
+    return this.http
+      .delete<Task>(`${this.url}/tasks/mytasks/${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 }
