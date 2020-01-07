@@ -395,7 +395,7 @@ app-my-tasks {
   
     .task-header .btn {
       width: 150px;
-      padding: 0 30px;
+      padding: 6px 30px;
     }
   
     .status-container {
@@ -490,6 +490,7 @@ app-my-tasks {
       @include border-radius(15px);
       margin: 15px 10px 30px 0;
       align-items: flex-start;
+      width: 150px;
   
       .task-color {
         height: 90px;
@@ -545,6 +546,10 @@ app-my-tasks {
         display: flex;
         justify-content: space-between;
       }
+
+      .stats-padding {
+        padding-top: 20px;
+      }
     }
   
     .default-text {
@@ -577,7 +582,7 @@ app-my-tasks {
 @media screen and (max-width: 650px) {
   .task-container {
     .task-header .btn {
-      width: 45%;
+      width: 100px;
     }
 
     &.new-task-container {
@@ -592,5 +597,4 @@ app-my-tasks {
       }
     }    
   }
-
 }
