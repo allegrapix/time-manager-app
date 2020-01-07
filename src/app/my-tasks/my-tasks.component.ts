@@ -46,7 +46,7 @@ export class MyTasksComponent implements OnInit, OnDestroy {
   taskListChangeSub: Subscription;
   statusParam: string;
   skip = 0;
-  limit = 3;
+  limit = 4;
   isfirstpage = true;
   islastpage = false;
   nrOfTasks;

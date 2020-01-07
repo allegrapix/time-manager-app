@@ -94,7 +94,8 @@ app-my-tasks {
   }
 
   app-task,
-  app-new-task {
+  app-new-task,
+  app-edit-task {
     width: 70%;
   }
 
@@ -482,7 +483,8 @@ app-my-tasks {
     }
   
     app-task,
-    app-new-task {
+    app-new-task,
+    app-edit-task  {
       width: 100%;
     }
   
