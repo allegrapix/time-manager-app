@@ -43,6 +43,7 @@ export class MyTasksComponent implements OnInit, OnDestroy {
   queryParams: string;
   noTaskSelected: boolean = true;
   queryParamsSub: Subscription;
+  taskListChangeSub: Subscription;
   statusParam: string;
   skip = 0;
   limit = 3;
@@ -59,6 +60,9 @@ export class MyTasksComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
+    this.taskListChangeSub = this.tasksService.taskListModified.subscribe(() => {
+      this.loadTasks(this.skip, this.limit);
+    })
   }
 
   addStatusParams(event: any) {
@@ -120,6 +124,7 @@ export class MyTasksComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.queryParamsSub.unsubscribe();
+    this.taskListChangeSub.unsubscribe();
   }
 
   checkPages() {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -37,6 +36,7 @@ export class NewTaskComponent implements OnInit {
   onSubmit() {
     this.tasksService.postTask(this.newTaskForm.value).subscribe(resData => {
       this.router.navigate(['/mytasks', resData._id]);
+      this.tasksService.taskListModified.emit();
     });
   }
 }

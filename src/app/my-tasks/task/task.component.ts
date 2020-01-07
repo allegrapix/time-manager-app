@@ -58,6 +58,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   onDelete() {
     this.tasksService.deleteTask(this.task._id).subscribe(resData => {
+      this.tasksService.taskListModified.emit();
       this.router.navigate(['/mytasks']);
     })
   }

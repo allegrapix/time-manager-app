@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Task } from '../my-tasks/task/task.model';
 import { ActivatedRoute } from '@angular/router';
@@ -21,6 +21,7 @@ export class TasksService {
     { name: 'completed', value: 'completed' }
   ];
   url = 'http://localhost:3000';
+  taskListModified = new EventEmitter<void>();
 
   getStatuses() {
     return this.statuses;
