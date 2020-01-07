@@ -1,0 +1,590 @@
+app-my-tasks {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 35px 0;
+
+  .mt-menu {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &-container {
+      width: 30%;
+      padding-left: 95px;
+
+      .title {
+        font-size: 24px;
+      }
+
+      .mt-select-container {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        padding: 10px 0;
+
+        .select-container {
+          width: 180px;
+          
+          .select-input {
+            @include font($color: $secondary-color, $font-weight: 600);
+            @include border-radius(10px);
+            padding: 5px 10px;
+            margin: 0;
+          }  
+          
+          .select-arrow {
+            @include size(8px, 12px);
+            border-color:  $bgr-color transparent transparent transparent;
+            right: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.user-info {
+  @include font($font-size: 18px, $text-decoration: none, $font-weight: 500, $color: $primary-color);
+  @include border-radius(20px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  padding: 2px 25px 2px 15px;
+  
+
+  p {
+    margin-right: 10px;
+    position: relative;
+
+    &::before {
+      @include position(absolute, null, 0, -3px null);
+      @include size(2px, 0);
+      content: '';
+      display: block;
+      background: $primary-color;
+      transition: all 200ms ease;
+    }
+  }
+
+  img {
+    @include size(30px, 30px);
+    @include border-radius(50%);
+    border: 1px solid $primary-color;
+  }
+
+  @include on_event {
+    p::before {
+      width: 100%;      
+    }
+  }
+}
+
+.tasks-container {
+  display: flex;  
+
+  .tasks-list-wrapper {
+    width: 30%;
+    position: relative;
+  }
+  
+  .task-list {
+    width: 100%;
+  }
+
+  app-task,
+  app-new-task {
+    width: 70%;
+  }
+
+  .task-item {
+    @include border-radius(20px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $default-color;
+    margin: 15px 0 30px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0px 10px 56px -26px rgba($primary-color, .75);
+    transition: all 200ms ease;
+
+    .task-color {
+      width: 6%;
+      height: 100px;
+    }
+
+    .task-info {
+      padding: 10px;
+      width: 70%;
+    }
+
+    .task-title {
+      @include font($font-size: 21px, $font-weight: 700, $color: $primary-color);
+      margin-bottom: 10px;
+    }
+
+    .task-status {
+      @include font($font-size: 16px, $font-weight: 700);
+    }
+
+    .task-date {
+      padding: 10px 15px 10px 0;
+      @include font($font-size: 21px, $font-weight: 700, $color: $secondary-color, $text-align: center);
+    }
+
+    @include on_event {
+      @include prefix(transform, translateX(10px), webkit moz ms 0);
+    }
+  }
+
+  .arrows {
+    @include size(15px, 15px);
+    position: absolute;
+    border: none;
+    background: transparent;
+    transition: all 200ms ease;
+
+    @include on_event {
+      opacity: .6;
+    }
+
+    &:disabled {
+      opacity: 0;
+    }
+  }
+
+  .arrow-left {
+    left: 0;
+  }
+
+  .arrow-right {
+    right: 0;
+  }
+}
+
+.task-container {
+  padding: 0 25px 0 50px;
+
+  .task-header {
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+      font-size: 28px;
+    }
+
+    .btn {
+      width: 200px;
+      font-size: 18px;
+    }
+  }
+
+  .status-container {
+    width: 30%;
+    padding: 5px 0 20px;
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .default-text {
+    @include font($font-size: 18px, $font-weight: 400, $line-height: 1.2, $text-align: justify);
+    text-justify: inter-word;
+    padding: 10px 0;
+  }
+
+  &.new-task-container {
+    .create-task-container {
+      padding: 10px 0;
+    }
+
+    .default-text {
+      @include font($font-size: 21px, $font-weight: 500);
+      padding: 5px 0;
+    }
+
+    .form-group-container {
+      display: flex;
+      justify-content: space-between;
+
+      .status-group {
+        width: 67%;
+      }
+      
+      .hours-group {
+        width: 200px;
+
+        .warning-msg {
+          bottom: 0;
+        }
+      }
+    }
+
+    .form-input {
+      margin: 5px 0 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  app-my-tasks .mt-menu-container {
+    padding-left: 50px;
+
+    .title {
+      font-size: 21px;
+    }
+
+    .mt-select-container {
+      padding: 5px 0;
+
+      .select-container {
+        width: 150px;
+        
+        .select-input {
+          padding: 2px 10px;
+        }  
+        
+        .select-arrow {
+          @include size(8px, 12px);
+          top: 30%;
+          right: 10px;
+        }
+      }
+    }
+  }
+  
+  .tasks-container {
+    .task-item {
+      @include border-radius(15px);
+      margin: 15px 0 20px;
+
+      .task-color {
+        height: 80px;
+      }
+  
+      .task-info {
+        padding: 10px;
+      }
+  
+      .task-title {
+        @include font($font-size: 18px);
+        margin-bottom: 5px;
+      }
+  
+ 
+      .task-date {
+        @include font($font-size: 18px);
+      }
+    }
+  }
+  
+  .task-container {  
+    .task-header {  
+      .title {
+        font-size: 21px;
+      }
+  
+      .btn {
+        padding: 8px 30px;
+        font-size: 16px;
+      }
+    }
+  
+    .status-container {
+      width: 30%;
+      padding: 5px 0 20px;
+  
+      .stats {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    &.new-task-container {
+      .create-task-container {
+        padding: 5px 0;
+      }
+  
+      .default-text {
+        font-size: 18px;
+      }
+  
+      .form-group-container {  
+        .status-group {
+          width: 58%;
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 991px) {
+  app-my-tasks {
+    padding: 25px 0;
+  
+    .mt-menu-container {
+      padding-left: 45px;
+
+      .title {
+        font-size: 18px;
+      }
+
+      .mt-select-container .select-container {
+        width: 120px;
+        
+        .select-input {
+          font-size: 14px;
+          padding: 3px 10px;
+          margin: 0;
+        }  
+        
+        .select-arrow {
+          @include size(6px, 8px);
+          right: 10px;
+        }
+      }
+    }
+  }
+  
+  .user-info {
+    @include font($font-size: 16px); 
+  
+    img {
+      @include size(25px, 25px);
+    }  
+  }
+  
+  .tasks-container { 
+    .task-item {  
+      .task-color {
+        height: 70px;
+      }
+
+      .task-title {
+        font-size: 16px;
+        margin-bottom: 3px;
+      }
+  
+      .task-status {
+        @include font($font-size: 16px);
+      }
+  
+      .task-date {
+        @include font($font-size: 16px);
+      }
+    }
+  
+    .arrows {
+      @include size(10px, 10px);
+    }
+  }
+  
+  .task-container {
+    padding: 0 25px 0 30px;
+  
+    .task-header .btn {
+      width: 150px;
+      padding: 0 30px;
+    }
+  
+    .status-container {
+      width: 40%;
+    }
+  
+    .default-text {
+      font-size: 16px;
+    }
+
+    &.new-task-container {
+      .default-text {
+        font-size: 16px;
+      }
+  
+      .form-group-container {  
+        .status-group {
+          width: 60%;
+        }
+        
+        .hours-group {
+          width: 150px;
+        }
+      }
+
+      .form-input {
+        padding: 6px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  app-my-tasks {
+    z-index: 2;
+    padding: 15px 0;
+  
+    .mt-menu {
+      flex-wrap: wrap;
+  
+      &-container {
+        order: 2;
+        width: 100%;
+        padding: 0 25px;
+  
+        .mt-select-container .select-container {
+          width: 80%;
+        }
+      }
+    }
+  }
+
+  app-profile-link {
+    width: 100%;
+  }
+  
+  .user-info {
+    order: 1;
+    justify-content: flex-end;    
+  
+    img {
+      @include size(20px, 20px);
+    }
+  }
+  
+  .tasks-container {
+    flex-wrap: wrap;
+    overflow: hidden;
+
+    .tasks-list-wrapper {
+      width: 100%;
+      display: flex;
+      overflow: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .task-list {
+      width: auto;
+      padding: 0 20px;
+      display: flex;
+    }
+  
+    app-task,
+    app-new-task {
+      width: 100%;
+    }
+  
+    .task-item {
+      @include border-radius(15px);
+      margin: 15px 10px 30px 0;
+      align-items: flex-start;
+  
+      .task-color {
+        height: 90px;
+      }
+  
+      .task-info {
+        padding: 15px 5px 10px;
+        margin-right: 15px;
+        width: 50%;
+      }
+  
+      .task-title {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+  
+      .task-status {
+        font-size: 14px;
+      }
+  
+      .task-date {
+        width: 30%;
+        padding: 17px 15px 10px 0;
+        font-size: 16px;
+      }
+    }
+  
+    .arrow-container {
+      display: none;
+    }
+  }
+  
+  .task-container {
+    padding: 0 25px;
+  
+    .task-header {  
+      .title {
+        font-size: 18px;
+        width: 60%;
+      }
+  
+      .btn {
+        width: 130px;
+        font-size: 14px;
+      }
+    }
+  
+    .status-container {
+      width: 60%;
+      padding: 5px 0 10px;
+  
+      .stats {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  
+    .default-text {
+      padding: 10px 0 20px;
+    }
+
+    &.new-task-container {
+      .default-text {
+        font-size: 16px;
+      }
+  
+      .form-group-container {  
+        .status-group {
+          width: 77%;
+        }
+        
+        .hours-group {
+          width: 130px;
+        }
+      }
+
+      .form-input {
+        padding: 5px;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 650px) {
+  .task-container {
+    .task-header .btn {
+      width: 45%;
+    }
+
+    &.new-task-container {
+      .form-group-container {  
+        .status-group {
+          width: 52%;
+        }
+        
+        .hours-group {
+          width: 45%;
+        }
+      }
+    }    
+  }
+
+}

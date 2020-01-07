@@ -1,0 +1,111 @@
+.btn {
+  @include font($font-size: 21px, $font-weight: 700, $text-decoration: none, $color: $default-color);
+  @include border-radius(10px);
+  background: $bgr-color;
+  background-image: linear-gradient(to right, $bgr-color-light , $bgr-color, $seventh-color);
+  background-size: 300%;
+  background-position: left;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: center;
+  transition: all 200ms ease-in-out;
+  position: relative;
+  z-index: 2;
+  border: none;
+
+  @include on_event {
+    background-position: right;
+  }
+
+  &:disabled {
+    background-position: left;
+  }
+}
+
+.btn-empty {
+  background: none;
+  border: none;
+}
+
+.btn-alert {
+  background: $fifth-color;
+  background-image: linear-gradient(to right, $fifth-color , $sixth-color);
+  background-size: 300%;
+  background-position: left;
+
+  @include on_event {
+    background-position: right;
+  }
+
+  &:disabled {
+    background-position: left;
+  }
+}
+
+.add-btn {
+  @include size(30px, 30px);
+  border: none;
+  background: transparent;
+
+  app-add-btn {
+    .cls-1,
+    .cls-2 {
+      transition: all 200ms ease;
+    }
+
+
+    .cls-1 {
+      fill: $bgr-color;
+      stroke: $bgr-color;
+      opacity: .6;
+      stroke-miterlimit: 10;
+    }
+    
+    .cls-2 {
+      fill: $default-color;
+      stroke: $default-color;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1px;
+    }
+  }
+
+  @include on_event {
+    app-add-btn {
+      .cls-1 {
+        fill: $default-color;
+        stroke: $bgr-color;
+        stroke-miterlimit: 10;
+      }
+      
+      .cls-2 {
+        fill: $bgr-color;
+        stroke: $bgr-color;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1px;
+      }
+    }
+  }
+}
+
+.arrow-1 {
+  fill: $eigth-color;
+  stroke: $eigth-color;
+  stroke-miterlimit: 10;
+  opacity: .6;
+}
+
+@media screen and (max-width: 1200px) {
+  .add-btn {
+    @include size(25px, 25px);
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .add-btn {
+    @include size(23px, 23px);
+  }
+}

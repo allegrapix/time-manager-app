@@ -1,0 +1,55 @@
+<a [routerLink]="'/'" class="logo-container" (click)="onGoToHome()">
+  <img src="../../assets/img/Logo.png" alt="logo" class="img-logo">
+  <p class="text-logo">Time management</p>
+</a>
+<div class="links-container">
+  <div class="burger-btn" (click)="onMenuOpen()">
+    <div class="burger-bar-container" [ngClass]="{open: menuIsOpen}">
+        <div class="burger-bar bar-1"></div>
+        <div class="burger-bar bar-2"></div>
+        <div class="burger-bar bar-3"></div>
+    </div>
+  </div>
+  <div class="desktop-links" 
+    (click)="onMenuOpen()"
+    [ngClass]="{mobileLinks: !menuIsOpen}"
+    >
+    <a 
+      [routerLink]="['/mytasks']" 
+      class="page-link page-tasks" 
+      routerLinkActive="active-tasks"
+      [routerLinkActiveOptions]="{ exact: false }"
+      *ngIf="!notLogged"
+      >My tasks</a>
+    <a 
+      [routerLink]="['/myschedule']" 
+      class="page-link page-schedule" 
+      routerLinkActive="active-schedule"
+      *ngIf="!notLogged"
+      >My schedule</a>
+    <a 
+      [routerLink]="['/myprofile']" 
+      class="page-link page-profile" 
+      routerLinkActive="active-profile"
+      *ngIf="!notLogged"
+      >My profile</a>
+    <a 
+      [routerLink]="['/login']" 
+      class="page-link page-signin" 
+      routerLinkActive="active-signin" 
+      *ngIf="!register && notLogged"
+      >Login</a> 
+    <a 
+      [routerLink]="['/register']" 
+      class="page-link page-signin" 
+      routerLinkActive="active-signin" 
+      *ngIf="register && notLogged"      
+      >Register</a>
+    <a 
+      class="page-link page-signin" 
+      *ngIf="!notLogged"
+      (click)="onLogout()"
+      >Logout</a> 
+  </div>
+</div>
+<ng-template appPlaceholder></ng-template>

@@ -1,0 +1,212 @@
+body {
+  font-family: $primary-font;
+  background: $bgr-secondary-color;
+}
+
+.body-container {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  max-width: 1180px;
+  min-height: 100vh;
+
+  .header-container,
+  .main-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .main-container {
+    @include border-radius(50px);
+    flex-grow: 1;
+    background: $default-color;
+    box-shadow: -50px 0px 0px 0px rgba($default-color,.2),
+                30px 0px 82px 13px rgba($secondary-color,0.1),
+                inset 50px 0px 0px 0px rgba($bgr-secondary-shadow, 1);
+    position: relative;
+
+    .effect-top {
+      @include position(absolute, 0, null, null, 50px);
+      width: 30%;
+    }
+
+    .effect-bottom {
+      @include position(absolute, null, 0, 0, null);
+      width: 50%;
+    }
+
+    .decorative-buttons {
+      width: 75px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      .bubble {
+        @include size(25px, 25px);
+        @include border-radius(50%);
+        background: $bgr-color;
+        box-shadow: inset -8px 0px 0px 0px rgba($default-color,.4),
+        inset -15px 0px 0px 0px rgba($default-color,.2);
+      }
+    }
+  }
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-text,
+.form-input {
+  display: block;
+}
+
+.form-input.ng-invalid.ng-touched {
+  border: 1px solid $fifth-color;
+  background-color: rgba($fifth-color, .2);
+}
+
+.form-input.ng-valid {
+  background-color: rgba($bgr-color, .2);
+}
+
+.form-input {
+  @include border-radius(5px);
+  @include font($color: $primary-color, $font-weight: 500);
+  width: 100%;
+  border: 1px solid $bgr-color;
+  padding: 10px;
+  margin: 10px 0 20px;
+  background-color: $default-color;
+  transition: all 200ms ease-in-out; 
+  position: relative;
+
+  @include on_event {
+    background-color: $bgr-secondary-shadow; 
+    color: $primary-color;
+  }
+}
+
+.warning-msg {
+  @include font($font-size: 14px, $color: $fifth-color, $font-weight: 600);
+  @include position(absolute, null, null, -16px)
+}
+
+.select-container {
+  position: relative;
+  background: $default-color;
+
+  .select-arrow {
+    @include position(absolute, 40%, 15px, null, null);
+    @include size(8px, 20px);
+    border: 9px solid transparent;
+    border-color:  $bgr-color transparent transparent transparent;
+    transform-origin: 50% 20%;
+    transition: all 200ms ease;
+    z-index: 1;
+
+    &.rotate-arrow {
+      @include prefix(transform, rotate(180deg), webkit moz ms o);
+    }
+  }
+
+  .select-input {
+    position: relative;
+    background-color : transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    z-index: 2;
+  }  
+}
+
+@media screen and (max-width: 1200px) {
+  .body-container {
+    max-width: 900px;
+  
+    .main-container {
+      @include border-radius(25px);
+      box-shadow: -25px 0px 0px 0px rgba($default-color,.2),
+                  30px 0px 82px 13px rgba($secondary-color,0.1),
+                  inset 25px 0px 0px 0px rgba($bgr-secondary-shadow, 1);
+                  
+      .effect-top {
+        @include position(absolute, 0, null, null, 25px);
+      }
+  
+      .decorative-buttons {
+        width: 50px;  
+        
+        .bubble {
+          @include size(20px, 20px);
+          box-shadow: inset -4px 0px 0px 0px rgba($default-color,.4),
+          inset -8px 0px 0px 0px rgba($default-color,.2);
+        }
+      }
+    }
+  }
+
+  .form-input {
+    padding: 8px;
+    margin: 8px 0 15px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .body-container {
+    max-width: 720px;
+  
+    .main-container {
+      box-shadow: -15px 0px 0px 0px rgba($default-color,.2),
+                  30px 0px 82px 13px rgba($secondary-color,0.1),
+                  inset 15px 0px 0px 0px rgba($bgr-secondary-shadow, 1);
+              
+      .effect-top {
+        @include position(absolute, 0, null, null, 15px);
+      }   
+  
+      .decorative-buttons {
+        width: 40px;  
+        
+        .bubble {
+          @include size(15px, 15px);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  body.positionFixed {
+    position: fixed;
+    width: 100%;
+
+    &::before {
+      @include position(absolute, 0, 0, 0, 0);
+      width: 100%;
+      content: '';
+      display: block;
+      position: absolute;
+      background: $primary-color;
+      opacity: .2;
+      z-index: 10;
+    }
+  }
+
+  .body-container .main-container {
+    @include border-radius(15px);
+    box-shadow: none;
+
+    .effect-top {
+      @include position(absolute, 0, null, null, 0);
+      width: 50%;
+    }
+
+    .effect-bottom {
+      width: 70%;
+    }
+
+    .decorative-buttons {
+      display: none;
+    }
+  }
+}

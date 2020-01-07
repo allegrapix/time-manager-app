@@ -1,0 +1,16 @@
+@import 'utils/reset';
+@import 'utils/mixins';
+@import 'utils/fonts';
+@import 'utils/colors';
+@import 'utils/buttons';
+@import 'utils/spinners';
+@import 'utils/text';
+
+@import 'components/global';
+@import 'components/header';
+@import 'components/banner';
+@import 'components/alert';
+
+@import 'pages/home';
+@import 'pages/login';
+@import 'pages/mytasks';

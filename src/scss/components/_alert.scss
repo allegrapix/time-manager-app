@@ -1,0 +1,235 @@
+.backdrop {
+  @include position(absolute, 0, 0 , 0, 0);
+  background: rgba($primary-color, .2);
+  z-index: 2;
+}
+
+.alert-box {
+  @include position(absolute, 50%, 50%, null, null);
+  @include prefix(transform, translate(50%, -50%), webkit moz ms o);
+  @include border-radius(15px);
+  transition: all 200ms ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 12;
+  padding: 25px 35px;
+  background: $default-color;
+  overflow: hidden;
+  box-shadow: 0px 10px 56px -26px rgba($primary-color, .75);
+
+  &::before {
+    @include position(absolute, 0, 97%, 0, 0);
+    content: '';
+    display: block;
+    background: $fifth-color;
+  }
+
+  .alert-info {
+    width: 60%;
+    
+  }
+
+  .title {
+    @include font($font-size: 21px, $text-align: center);
+  }
+
+  .alert-message {
+    @include font($font-size: 18px, $color:  $primary-color, $font-weight: 600, $line-height: 1.2);
+    opacity: .6;
+    padding: 5px 0 25px;
+  }
+}
+
+.alert-sign {
+  @include size(130px, 130px);
+  padding: 10px;
+
+  .cls-1,
+  .cls-2 {
+    fill: $fifth-color;
+    stroke: $fifth-color;
+  }
+    
+  .cls-1,
+  .cls-2,
+  .cls-4 {
+    stroke-miterlimit: 10;
+  }
+
+  .cls-1,
+  .cls-3,
+  .cls-4 {
+    transition: all 200ms ease;
+    transform-origin: center;
+  }
+  
+  .cls-1 {
+    opacity: .2;
+  }
+  
+  .cls-3 {
+    fill:$default-color;
+  }
+  
+  .cls-4 {
+    fill: none;
+    stroke:$default-color;
+    stroke-linecap: round;
+    stroke-width: 5px;
+  }
+
+  @include on_event {
+    .cls-1 {
+      @include prefix(transform, translateX(5px), webkit moz ms o);
+    }
+
+    .cls-3 {
+      @include prefix(transform, scale(1.2), webkit moz ms o);
+    }
+
+    .cls-4 {
+      @include prefix(transform, scale(1.1), webkit moz ms o);
+    }
+  }
+}
+
+.alert-close {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-btn {
+  position: relative;
+  transform-origin: center;
+  transition: all 200ms ease;
+
+  @include on_event {
+    @include prefix(transform, scale(1.1), webkit moz ms o);
+  }
+
+  .close-bar {
+    @include position(absolute);
+    @include size(25px, 2px);
+    transform-origin: center;
+    background: $primary-color;
+  }
+
+  .bar-left {
+    @include prefix(transform, rotate(45deg), webkit moz ms o);
+  }
+  
+  .bar-right {
+    @include prefix(transform, rotate(-45deg), webkit moz ms o);
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .alert-box .alert-info {
+      width: 80%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .alert-box {
+    @include position(absolute, 30%, 50%, null, null);
+    padding: 15px 35px;
+    width: 90%;
+  
+    &::before {
+      right: 95%;
+    }
+  
+    .alert-info {
+      width: 85%;
+    }
+  
+    .title {
+      font-size: 16px;
+    }
+  
+    .alert-message {
+      font-size: 14px;
+      opacity: .6;
+      padding: 5px 0 15px;
+    }
+  }
+  
+  .alert-sign {
+    @include size(90px, 90px);
+  
+    .cls-1,
+    .cls-2 {
+      fill: $fifth-color;
+      stroke: $fifth-color;
+    }
+      
+    .cls-1,
+    .cls-2,
+    .cls-4 {
+      stroke-miterlimit: 10;
+    }
+  
+    .cls-1,
+    .cls-3,
+    .cls-4 {
+      transition: all 200ms ease;
+      transform-origin: center;
+    }
+    
+    .cls-1 {
+      opacity: .2;
+    }
+    
+    .cls-3 {
+      fill:$default-color;
+    }
+    
+    .cls-4 {
+      fill: none;
+      stroke:$default-color;
+      stroke-linecap: round;
+      stroke-width: 5px;
+    }
+  
+    @include on_event {
+      .cls-1 {
+        @include prefix(transform, translateX(5px), webkit moz ms o);
+      }
+  
+      .cls-3 {
+        @include prefix(transform, scale(1.2), webkit moz ms o);
+      }
+  
+      .cls-4 {
+        @include prefix(transform, scale(1.1), webkit moz ms o);
+      }
+    }
+  }
+  
+  .alert-close {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .close-btn {
+    position: relative;
+  
+    .close-bar {
+      @include position(absolute);
+      @include size(25px, 2px);
+      background: $primary-color;
+    }
+  
+    .bar-left {
+      @include prefix(transform, rotate(45deg), webkit moz ms o);
+    }
+    
+    .bar-right {
+      @include prefix(transform, rotate(-45deg), webkit moz ms o);
+    }
+  }
+}

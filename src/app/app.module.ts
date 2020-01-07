@@ -1,18 +1,84 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { MainbodyComponent } from './mainbody/mainbody.component';
+import { FooterComponent } from './footer/footer.component';
+import { ButtonsComponent } from './mainbody/buttons/buttons.component';
+import { MyTasksComponent } from './my-tasks/my-tasks.component';
+import { HomeComponent } from './home/home.component';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { ProfileComponent } from './profile/profile.component';
+import { BannerComponent } from './components/banner/banner.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginOrRegisterService } from './services/login-or-resgister.service';
+import { TaskComponent } from './my-tasks/task/task.component';
+import { AddBtnComponent } from './components/add-btn/add-btn.component';
+import { ProfileLinkComponent } from './profile-link/profile-link.component';
+import { EditTaskComponent } from './my-tasks/edit-task/edit-task.component';
+import { NewTaskComponent } from './my-tasks/new-task/new-task.component';
+import { ArrowLeftComponent } from './components/arrow-left/arrow-left.component';
+import { ArrowRightComponent } from './components/arrow-right/arrow-right.component';
+import { FilterTasksPipe } from './pipes/filter-tasks.pipe';
+import { NoTaskComponent } from './my-tasks/no-task/no-task.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { AuthInterceptor } from './services/auth.interceptor';
+import { AlertComponent } from './components/alert/alert.component';
+import { AlertSignComponent } from './components/alert-sign/alert-sign.component';
+import { PlaceHolderDirective } from './services/placeholder.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    MainbodyComponent,
+    FooterComponent,
+    ButtonsComponent,
+    MyTasksComponent,
+    HomeComponent,
+    ScheduleComponent,
+    ProfileComponent,
+    BannerComponent,
+    LoginComponent,
+    RegisterComponent,
+    TaskComponent,
+    AddBtnComponent,
+    ProfileLinkComponent,
+    EditTaskComponent,
+    NewTaskComponent,
+    ArrowLeftComponent,
+    ArrowRightComponent,
+    FilterTasksPipe,
+    NoTaskComponent,
+    SpinnerComponent,
+    AlertComponent,
+    AlertSignComponent,
+    PlaceHolderDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    LoginOrRegisterService, 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AlertComponent
+  ]
 })
 export class AppModule { }

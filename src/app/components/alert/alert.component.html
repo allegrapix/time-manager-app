@@ -1,0 +1,18 @@
+<div class="backdrop" [@backdrop]></div>
+<div class="alert-box" [@alertContainer]>
+  <div class="alert-close">
+    <button class="btn-empty" (click)="onCloseAlert()">
+      <div class="close-btn">
+        <div class="close-bar bar-left"></div>
+        <div class="close-bar bar-right"></div>
+      </div>
+    </button>
+  </div>
+  <div class="alert-sign">
+    <app-alert-sign></app-alert-sign>
+  </div>
+  <div class="alert-info">
+    <p class="title">Alert message:</p>
+    <p class="alert-message">{{ message }}</p>    
+  </div>
+</div>

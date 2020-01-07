@@ -1,0 +1,358 @@
+.header-container {
+  justify-content: space-between;
+  
+  .logo-container,
+  .links-container {
+    display: flex;
+  }
+
+  .logo-container {
+    text-decoration: none;
+    align-items: center;
+    color: $default-color;
+    padding: 10px 50px;
+    outline: none;
+    width: 40%;
+
+    .img-logo {
+      height: 24px;
+    }
+    
+    .text-logo {
+      font-weight: 700;
+      font-size: 18px;
+      padding-left: 10px;
+    }
+  }
+
+  .links-container {
+    margin-right: 50px;
+    display: flex;
+    align-items: flex-end;
+    width: 45%;
+
+    .desktop-links {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+
+    .burger-btn {
+      display: none;
+    }
+
+    .page {
+      &-link {
+        @include font($color: $default-color, $text-decoration: none, $font-weight: 700, $font-size: 16px);
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        padding: 10px;
+        width: 24%;
+        text-align: center;
+        transition: all 200ms ease-in-out;
+        margin-left: 5px;
+
+        @include on_event {
+          padding: 15px 5px 10px;
+        }
+      }
+
+      &-tasks {
+        background: $third-color-dark;
+
+        @include on_event {
+          background: $default-color;
+          color: $third-color-dark;
+        }
+      }
+
+      &-schedule {
+        background: $bgr-color;
+
+        @include on_event {
+          background: $default-color;
+          color: $seventh-color;
+        }
+      }
+
+      &-profile {
+        background: $sixth-color;
+
+        @include on_event {
+          background: $default-color;
+          color: $sixth-color;
+        }
+      }
+
+      &-signin {
+        background: $fifth-color;
+        cursor: pointer;
+
+        @include on_event {
+          background: $default-color;
+          color: $fifth-color;
+        }
+      }
+    }
+
+    .active {
+      &-tasks,
+      &-schedule,
+      &-profile,
+      &-signin {
+        background: $default-color;
+        padding: 15px 10px 10px;
+      }
+
+      &-tasks {
+        color: $third-color-dark;
+      }
+
+      &-schedule {
+        color: $seventh-color;
+      }
+
+      &-profile {
+        color: $sixth-color;
+      }
+
+      &-signin {
+        color: $fifth-color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .header-container {    
+    .logo-container {
+      width: 30%;
+      padding: 10px 25px;
+    }
+  
+    .links-container {
+      width: 50%;
+
+      .page-link {
+        padding: 10px 5px;
+      }
+
+      .active {
+        &-tasks,
+        &-schedule,
+        &-profile,
+        &-signin {
+          padding: 10px 5px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .header-container {    
+    .logo-container {
+      padding-right: 0;
+      width: 35%;
+      
+      .text-logo {
+        padding-left: 10px;
+      }
+    }
+  
+    .links-container {
+      margin-right: 25px;
+      width: 65%;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header-container {
+    .logo-container {
+      padding: 15px 25px;
+      width: 50%;
+  
+      .img-logo {
+        height: 21px;
+      }
+      
+      .text-logo {
+        font-size: 16px;
+        padding-left: 5px;
+      }
+    }
+  
+    .links-container {
+      margin-right: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      width: 45%;
+      position: relative;
+
+      .desktop-links {
+        @include position(absolute, 100%);
+        transition: all 300ms ease-in-out;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        z-index: 10;
+      }
+
+
+      .burger-btn {
+        @include position(absolute, null, null, 0);
+        display: block;
+        width: 100%;
+        height: 40px;
+        background: $fifth-color;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+        z-index: 11;
+
+        .burger-bar-container {
+          @include position(absolute, 35%, 50%);
+          @include prefix(transform, translateX(50%), webkit moz ms o);
+          @include size(30px, 40px);
+          
+
+          .burger-bar {
+            @include size(2px, 100%);
+            display: block;
+            background: $default-color;
+            transition: all 200ms ease-in-out;
+          }
+
+          .bar-1,
+          .bar-2,
+          .bar-3 {
+            @include position(absolute, 0, 50%);
+            @include prefix(transform, translateX(50%), webkit moz ms o);
+            @include border-radius(1px);
+            transform-origin: 50%;
+          }
+
+          .bar-2 {
+            top: 5px;
+          }
+
+          .bar-3 {
+            top: 10px;
+          }
+
+          &.open {            
+            @include size(30px, 30px);
+
+            .bar-1 {
+              @include prefix(transform, rotate(-45deg), webkit moz ms o);
+              top: 5px;
+              right: 0;
+            }
+            
+            .bar-2 {
+              opacity: 0;
+            }
+
+            .bar-3 {
+              @include prefix(transform, rotate(45deg), webkit moz ms o);
+              top: 5px;
+              right: 0;
+            }
+          }
+        }
+      }
+  
+      .page {
+        &-link {
+          display: block;
+          border-top-right-radius: 0;
+          border-top-left-radius: 0;
+          width: 100%;
+        }
+
+        &-link, 
+        &-tasks,
+        &-schedule,
+        &-profile {
+          @include on_event {
+            opacity: .8;
+            padding: 20px 10px;
+          }
+        }
+  
+        &-tasks {  
+          @include on_event {
+            background:  $third-color-dark;
+            color: $default-color;
+          }
+        }
+  
+        &-schedule {  
+          @include on_event {
+            background: $seventh-color;
+            color: $default-color;
+          }
+        }
+  
+        &-profile {
+          @include on_event {
+            background: $sixth-color;
+            color: $default-color;
+          }
+        }
+  
+        &-signin {
+          border-bottom-right-radius: 10px;
+          border-bottom-left-radius: 10px;
+  
+          @include on_event {
+            background: $fifth-color;
+            color: $default-color;
+          }
+        }
+      }
+
+      .mobileLinks {
+        .page-link {
+          height: 0;
+          font-size: 0;
+          padding: 0;
+        }
+      }
+
+      .active {
+        &-tasks,
+        &-schedule,
+        &-profile,
+        &-signin {
+          color: $default-color;
+          padding: 20px 10px;
+        }
+  
+        &-tasks {
+          background: $third-color-dark;
+        }
+  
+        &-schedule {
+          background: $seventh-color;
+        }
+  
+        &-profile {
+          background: $sixth-color;
+        }
+  
+        &-signin {
+          background: $fifth-color;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .header-container .logo-container {
+      padding: 10px 25px;
+  }
+}

@@ -1,0 +1,66 @@
+
+<div class="mt-menu">
+  <div class="mt-menu-container">
+    <p class="title">My tasks</p>
+    <div class="mt-select-container">
+      <form 
+        #dropdownForm="ngForm"
+        class="select-container">
+        <div class="select-arrow" #arrow [ngClass]="{'rotate-arrow': dropDownIsOpen}"></div>
+        <select 
+          [(ngModel)] = "defaultStatus"
+          name="status"
+          class="select-input form-input" 
+          (change)="addStatusParams($event)"
+          (click)="rotateArrow()">
+          <option
+            *ngFor="let option of options"             
+            [value]="option.value">{{ option.name }}
+          </option>
+        </select>
+      </form>
+      <a 
+        (click)="goToNewTask()"
+        class="add-btn">
+        <app-add-btn></app-add-btn>
+      </a>
+    </div>
+  </div>
+  <app-profile-link></app-profile-link>
+</div>
+<div class="tasks-container">
+  <div class="tasks-list-wrapper">
+    <ul class="task-list">
+      <li 
+        [@taskListAnimation]
+        class="task-item" 
+        *ngFor="let task of tasks; let i of index" 
+        (click)="goToTask(task._id)">
+        <div class="task-color" [ngStyle]="{background: getColor(task.status)}"></div>
+        <div class="task-info">
+          <p class="task-title">{{ task.title }}</p>
+          <p class="task-status" [ngStyle]="{color: getColor(task.status)}">{{ task.status }}</p>
+        </div>
+        <div class="task-date">
+        <p class="task-day">{{ task.updatedAt | date: 'dd'}}</p>
+          <p class="task-month">{{ task.updatedAt | date: 'MMM' | uppercase }}</p>
+        </div>
+      </li>
+    </ul>
+    <div class="arrow-container">
+      <button 
+        [disabled]="isfirstpage"
+        (click)="previousTasks()"
+        class="arrows arrow-left">
+        <app-arrow-left></app-arrow-left>
+      </button>
+      <button
+        [disabled]="islastpage"
+        (click)="nextTasks()"
+        class="arrows arrow-right">
+        <app-arrow-right></app-arrow-right>
+      </button>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
