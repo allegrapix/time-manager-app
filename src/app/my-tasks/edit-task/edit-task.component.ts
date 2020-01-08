@@ -37,8 +37,6 @@ export class EditTaskComponent implements OnInit {
       'workedHours': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required)
     });
-
-    console.log(this.editTaskForm);
     
     const id = this.route.snapshot.params['id'];
     this.tasksService.getTask(id).subscribe(resData => {
@@ -58,6 +56,10 @@ export class EditTaskComponent implements OnInit {
   }
 
   onSaveChanges() {
-
+    this.tasksService.editTask(this.task._id, this.editTaskForm.value).subscribe(resData => {
+      console.log(resData);
+      this.tasksService.taskListModified.emit();
+      this.router.navigate(['/mytasks', this.task._id]);
+    });
   }
 }
