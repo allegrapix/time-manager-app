@@ -31,6 +31,8 @@ import { AlertComponent } from './components/alert/alert.component';
 import { AlertSignComponent } from './components/alert-sign/alert-sign.component';
 import { PlaceHolderDirective } from './services/placeholder.directive';
 import { TaskResolver } from './services/task-resolver.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { OopsComponent } from './components/oops/oops.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { TaskResolver } from './services/task-resolver.service';
     SpinnerComponent,
     AlertComponent,
     AlertSignComponent,
-    PlaceHolderDirective
+    PlaceHolderDirective,
+    PageNotFoundComponent,
+    OopsComponent
   ],
   imports: [
     BrowserModule,

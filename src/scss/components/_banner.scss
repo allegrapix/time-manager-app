@@ -1,6 +1,7 @@
 app-home,
 app-login,
-app-register {
+app-register,
+app-page-not-found {
   width: 95%;
   display: flex;
 
@@ -30,7 +31,8 @@ app-register {
 @media screen and (max-width: 1200px) {
   app-home,
   app-login,
-  app-register {
+  app-register,
+  app-page-not-found {
     app-banner {
       margin-left: 25px;
       border-top-left-radius: 25px;
@@ -48,7 +50,8 @@ app-register {
 @media screen and (max-width: 991px) {
   app-home,
   app-login,
-  app-register {
+  app-register,
+  app-page-not-found {
     app-banner {
       width: 40%;
       margin-left: 15px;
@@ -63,7 +66,8 @@ app-register {
 @media screen and (max-width: 767px) {
   app-home,
   app-login,
-  app-register {
+  app-register,
+  app-page-not-found {
     app-banner {
       display: none;
     }

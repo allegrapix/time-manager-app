@@ -11,6 +11,7 @@ import { NewTaskComponent } from './my-tasks/new-task/new-task.component';
 import { NoTaskComponent } from './my-tasks/no-task/no-task.component';
 import { AuthGuard } from './services/auth.guard';
 import { TaskResolver } from './services/task-resolver.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { 
@@ -62,8 +63,12 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
+    path: 'pageNotFound',
+    component: PageNotFoundComponent
+  },
+  {
     path: '**',
-    redirectTo: '/'
+    redirectTo: '/pageNotFound'
   }
 ];
 

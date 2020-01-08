@@ -1,0 +1,138 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  width: 50%;
+  padding: 100px 50px;
+
+  .not-found-status {
+    padding: 30px 0 25px;
+    width: 280px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .not-found-message {
+    padding: 15px 0 30px;
+    width: 300px;
+  }
+
+  .btn {
+    width: auto;
+    padding: 8px 50px;
+  }
+}
+
+.not-found-icon {
+  width: 80%;
+  padding: 20px 0;
+
+  .cls-1 {
+    fill: none;
+    stroke-miterlimit: 10;
+  }
+  
+  .cls-1,
+  .cls-10,
+  .cls-7,
+  .cls-8 {
+    stroke:#6fbd97;
+  }
+  
+  .cls-1,
+  .cls-7 {
+    stroke-width: 3px;
+  }
+  
+  .cls-2 { 
+    opacity:0.2;
+    font-size:47.31px;
+  }
+  
+  .cls-11,
+  .cls-12,
+  .cls-2,
+  .cls-9 {
+    fill:#6fbd97;
+  }
+  
+  .cls-12,
+  .cls-2 {
+    @include font($font-family: $secondary-font, $font-weight: 800);
+  }
+  
+  .cls-3 {
+    letter-spacing: -0.16px;
+  }
+  
+  .cls-4 {
+    letter-spacing: -0.16px;
+  }
+  
+  .cls-5 {
+    letter-spacing: 0;
+  }
+  
+  .cls-6 {
+    letter-spacing: -0.32px;
+  }
+
+  .cls-7 {
+    fill: $default-color;
+  }
+
+  .cls-10,
+  .cls-7,
+  .cls-8 {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  
+  .cls-10,
+  .cls-8 {
+    fill: $ninth-color;
+  }
+
+  .cls-8 {
+    fill-opacity: .5;
+    stroke-width: 2px;
+  }
+  
+  .cls-9 {
+    fill-opacity: .2;
+  }
+  
+  .cls-11 {
+    fill-opacity: .3;
+  }
+  
+  .cls-12 {
+    opacity: .5;
+    font-size: 24px;
+  }
+  
+  .cls-13 {
+    letter-spacing: 0.16px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .not-found-container {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .not-found-container {
+    width: 100%;
+    padding: 50px 15px;
+
+    .not-found-status {
+      padding: 5px 0 15px;
+      width: 200px;
+    }
+  }
+}
