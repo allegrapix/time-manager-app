@@ -80,9 +80,17 @@ export class TasksService {
 
   deleteTask(id: string) {
     return this.http
-      .delete<Task>(`${this.url}/tasks/mytasks/${id}`)
-      .pipe(
-        catchError(this.handleError)
-      );
+    .delete<Task>(`${this.url}/tasks/mytasks/${id}`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  editTask(id: string, task: Task) {
+    return this.http
+    .patch<Task>(`${this.url}/tasks/mytasks/${id}`, task)
+    .pipe(
+      catchError(this.handleError)
+    )
   }
 }
