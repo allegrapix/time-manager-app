@@ -20,7 +20,6 @@ import { LoginOrRegisterService } from './services/login-or-resgister.service';
 import { TaskComponent } from './my-tasks/task/task.component';
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { ProfileLinkComponent } from './profile-link/profile-link.component';
-import { EditTaskComponent } from './my-tasks/edit-task/edit-task.component';
 import { NewTaskComponent } from './my-tasks/new-task/new-task.component';
 import { ArrowLeftComponent } from './components/arrow-left/arrow-left.component';
 import { ArrowRightComponent } from './components/arrow-right/arrow-right.component';
@@ -31,6 +30,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { AlertComponent } from './components/alert/alert.component';
 import { AlertSignComponent } from './components/alert-sign/alert-sign.component';
 import { PlaceHolderDirective } from './services/placeholder.directive';
+import { TaskResolver } from './services/task-resolver.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,6 @@ import { PlaceHolderDirective } from './services/placeholder.directive';
     TaskComponent,
     AddBtnComponent,
     ProfileLinkComponent,
-    EditTaskComponent,
     NewTaskComponent,
     ArrowLeftComponent,
     ArrowRightComponent,
@@ -70,6 +69,7 @@ import { PlaceHolderDirective } from './services/placeholder.directive';
   ],
   providers: [
     LoginOrRegisterService, 
+    TaskResolver,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
