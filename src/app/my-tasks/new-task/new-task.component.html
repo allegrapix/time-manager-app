@@ -2,7 +2,9 @@
   <form [formGroup]="newTaskForm" (ngSubmit)="onSubmit()">
     <div class="task-header">
       <p class="title">New Task</p>
-      <button class="btn" type="submit">Create</button>
+      <button class="btn" type="submit">
+        {{ submitBtn }}
+      </button>
     </div>
     <div class="create-task-container">
       <div class="form-group">

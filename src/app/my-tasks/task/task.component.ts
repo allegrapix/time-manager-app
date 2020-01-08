@@ -49,7 +49,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   goToEditTask() {
-    this.router.navigate(['edit-task'], {queryParams: {status: this.statusParam}, relativeTo: this.route});
+    this.router.navigate(['edit-task', this.task], {queryParams: {status: this.statusParam}, relativeTo: this.route});
   }
 
   ngOnDestroy() {

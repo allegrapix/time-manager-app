@@ -7,10 +7,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { TaskComponent } from './my-tasks/task/task.component';
-import { EditTaskComponent } from './my-tasks/edit-task/edit-task.component';
 import { NewTaskComponent } from './my-tasks/new-task/new-task.component';
 import { NoTaskComponent } from './my-tasks/no-task/no-task.component';
 import { AuthGuard } from './services/auth.guard';
+import { TaskResolver } from './services/task-resolver.service';
 
 const routes: Routes = [
   { 
@@ -22,10 +22,25 @@ const routes: Routes = [
     component: MyTasksComponent, 
     canActivate: [AuthGuard],
     children: [
-      { path: 'noTask', component: NoTaskComponent },
-      { path: 'new', component: NewTaskComponent },
-      { path: ':id', component: TaskComponent },
-      { path: ':id/edit-task', component: EditTaskComponent }
+      { 
+        path: 'noTask', 
+        component: NoTaskComponent 
+      },
+      { 
+        path: 'new', 
+        component: NewTaskComponent 
+      },
+      { 
+        path: ':id',
+         component: TaskComponent 
+      },
+      { 
+        path: ':id/edit-task', 
+        component: NewTaskComponent,
+        resolve: {
+          task: TaskResolver
+        }
+      }
     ] 
   },
   { 
@@ -45,6 +60,10 @@ const routes: Routes = [
   { 
     path: 'register', 
     component: RegisterComponent
+  },
+  {
+    path: '**',
+    redirectTo: '/'
   }
 ];
 

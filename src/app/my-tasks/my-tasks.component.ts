@@ -124,7 +124,6 @@ export class MyTasksComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.queryParamsSub.unsubscribe();
-    this.taskListChangeSub.unsubscribe();
   }
 
   checkPages() {
