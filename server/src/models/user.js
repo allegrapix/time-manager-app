@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
   },
   expiresIn: {
     type: String,
-    default: '36000'
+    default: '360000'
   },
   tokens: [{
     token: {

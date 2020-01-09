@@ -5,8 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-
-
 @Injectable({providedIn: 'root'})
 export class TasksService {
   constructor(

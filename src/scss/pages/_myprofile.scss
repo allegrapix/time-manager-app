@@ -1,0 +1,69 @@
+app-profile {
+  padding: 50px 0;
+
+  .user-details-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .user-image-container {
+      @include border-radius(20px);
+      position: relative;
+      width: 30%;
+      height: 280px;
+      overflow: hidden; 
+      background: $default-color;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &::before {
+        @include position(absolute, 0, 95%, 0, 0);
+        display: block;
+        content: '';
+        background: $bgr-color;
+      }
+    }
+
+    .account-info-container {
+      width: 70%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 25px 0 50px;
+
+      .account-info {
+        width: 45%;
+      }
+
+      .username {
+        font-size: 24px;
+      }
+
+      .userrole {
+        font-size: 18px;
+        padding-bottom: 10px;
+      }
+
+      .select-input {
+        @include border-radius(10px);
+        @include font($font-weight: 700, $color: $bgr-color);
+        padding: 8px 15px;
+        
+      }
+    }
+
+    .buttons-container {
+      .btn {
+        padding: 8px 50px;
+        font-size: 18px;
+      }
+
+      .btn-edit {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
