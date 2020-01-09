@@ -11,6 +11,7 @@ export class TaskResolver implements Resolve<Task> {
     ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Task> | Promise<Task> {
-    return this.taskService.getTask(route.params.get('id'));
+    console.log(route.params);
+    return this.taskService.getTask(route.params.id);
   }
 }
