@@ -15,10 +15,8 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         const modifiedReqeq = req.clone({
           setHeaders: {
-            'Content-Type' : 'application/json; charset=utf-8',
-            'Accept'       : 'application/json',
             'Authorization': `Bearer ${user.token}`,
-          },
+          }
         });
     
         return next.handle(modifiedReqeq);

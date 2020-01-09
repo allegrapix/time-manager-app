@@ -13,8 +13,6 @@ export class MainbodyComponent implements OnInit {
   }
 
   prepareRoute(outlet: RouterOutlet) {
-    console.log(outlet);
-    
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 

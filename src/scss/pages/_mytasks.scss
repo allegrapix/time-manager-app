@@ -1,9 +1,12 @@
-app-my-tasks {
+app-my-tasks,
+app-profile {
   position: relative;
   z-index: 10;
   width: 100%;
   padding: 35px 0;
+}
 
+app-my-tasks {
   .mt-menu {
     display: flex;
     justify-content: space-between;
@@ -331,9 +334,12 @@ app-my-tasks {
 
 
 @media screen and (max-width: 991px) {
-  app-my-tasks {
+  app-my-tasks,
+  app-profile {
     padding: 25px 0;
-  
+  }
+
+  app-my-tasks {  
     .mt-menu-container {
       padding-left: 45px;
 
@@ -430,10 +436,13 @@ app-my-tasks {
 }
 
 @media screen and (max-width: 767px) {
-  app-my-tasks {
+  app-my-tasks,
+  app-profile {
     z-index: 2;
     padding: 15px 0;
-  
+  }
+
+  app-my-tasks {  
     .mt-menu {
       flex-wrap: wrap;
   

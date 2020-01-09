@@ -1,0 +1,35 @@
+
+  <div class="user-details-container">
+    <div class="user-image-container card-shadow">
+      <!-- <img src="../../assets/img/robot.png" alt="avatar"  *ngIf="selectedFile"> -->
+      <form (ngSubmit)="onSubmit()"> 
+        <input 
+          type="file" 
+          name="avatar"
+          (change)='onFileSelected($event)'>
+      </form> 
+    </div>
+    <div class="account-info-container">
+      <div class="account-info">
+        <p class="username title">User_name</p>
+        <p class="userrole subtitle faded">admin</p>
+        <label for="preferredHours" class="subtitle faded">Preferred working hours</label>
+        <div class="select-hours-container select-container">
+          <div class="select-arrow" #arrow [ngClass]="{'rotate-arrow': dropDownIsOpen}"></div>
+          <select
+            name="preferredHours"
+            class="form-input select-input" (click)="rotateArrow()">
+            <option
+              *ngFor="let hour of hours" 
+               [value]="hour">{{ hour }}h
+            </option>
+          </select
+          >
+        </div>        
+      </div>
+      <div class="buttons-container">
+        <button class="btn btn-edit">Edit profile</button>
+        <button class="btn btn-alert">Delete profile</button>
+      </div>
+    </div>
+  </div>
