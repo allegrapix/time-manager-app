@@ -6,7 +6,8 @@ export class User {
     public createdAt: Date,
     public updatedAt: Date,
     private _tokenExpirationDate: Date,
-    private _token: string
+    private _token: string,
+    public avatar?: any
   ) {}
 
   get token() {
