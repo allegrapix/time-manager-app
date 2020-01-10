@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Buffer } from 'buffer';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { User } from '../profile/user.model';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
   constructor(private http: HttpClient) {}
   url = 'http://localhost:3000';
+
+  getUser() {
+    return this.http
+    .get<User>(`${this.url}/users/me`)
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
 
   postAvatar(file) { 
     return this.http

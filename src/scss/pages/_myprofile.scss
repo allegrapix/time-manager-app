@@ -26,6 +26,26 @@ app-profile {
         content: '';
         background: $bgr-color;
       }
+
+      .image-upload-form {
+        @include position(absolute, 0, 0, 0, 0);
+
+        .image-upload {
+          @include position(absolute, 0, 0, 0, null);
+          width: 100%;
+          opacity: 0;
+          z-index: 2;
+          cursor: pointer;
+        }
+
+        .upload-text {
+          @include position(absolute, 50%, 50%, null, null);
+          @include prefix(transform, translate(50%, -50%), webkit moz ms o);
+          opacity: .3;
+          z-index: 1;
+          cursor: pointer;     
+        }
+      }
     }
 
     .account-info-container {
