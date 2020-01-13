@@ -102,47 +102,6 @@ app-my-tasks {
     width: 70%;
   }
 
-  .task-item {
-    @include border-radius(20px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: $default-color;
-    margin: 15px 0 30px;
-    cursor: pointer;
-    overflow: hidden;
-    box-shadow: 0px 10px 56px -26px rgba($primary-color, .75);
-    transition: all 200ms ease;
-
-    .task-color {
-      width: 6%;
-      height: 100px;
-    }
-
-    .task-info {
-      padding: 10px;
-      width: 70%;
-    }
-
-    .task-title {
-      @include font($font-size: 21px, $font-weight: 700, $color: $primary-color);
-      margin-bottom: 10px;
-    }
-
-    .task-status {
-      @include font($font-size: 16px, $font-weight: 700);
-    }
-
-    .task-date {
-      padding: 10px 15px 10px 0;
-      @include font($font-size: 21px, $font-weight: 700, $color: $secondary-color, $text-align: center);
-    }
-
-    @include on_event {
-      @include prefix(transform, translateX(10px), webkit moz ms 0);
-    }
-  }
-
   .arrows {
     @include size(15px, 15px);
     position: absolute;
@@ -237,6 +196,47 @@ app-my-tasks {
     .form-input {
       margin: 5px 0 15px;
     }
+  }
+}
+
+.task-item {
+  @include border-radius(20px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $default-color;
+  margin: 15px 0 30px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0px 10px 56px -26px rgba($primary-color, .75);
+  transition: all 200ms ease;
+
+  .task-color {
+    width: 6%;
+    height: 100px;
+  }
+
+  .task-info {
+    padding: 10px;
+    width: 70%;
+  }
+
+  .task-title {
+    @include font($font-size: 21px, $font-weight: 700, $color: $primary-color);
+    margin-bottom: 10px;
+  }
+
+  .task-status {
+    @include font($font-size: 16px, $font-weight: 700);
+  }
+
+  .task-date {
+    padding: 10px 15px 10px 0;
+    @include font($font-size: 21px, $font-weight: 700, $color: $secondary-color, $text-align: center);
+  }
+
+  @include on_event {
+    @include prefix(transform, translateX(10px), webkit moz ms 0);
   }
 }
 

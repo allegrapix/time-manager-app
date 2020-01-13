@@ -46,4 +46,49 @@
       </div>
     </div>
   </div>
+  <div class="tasks-and-calendar">
+    <div class="tasks-and-calendar-container">
+      <div class="profile-tasks-container">
+        <div class="profile-tasks-header">
+          <p class="subtitle faded">My tasks</p>
+          <div class="profile-new-task">
+            <span class="subtitle faded">New task</span>
+            <button type="button" class="add-btn">
+              <app-add-btn></app-add-btn>
+            </button>
+          </div>
+        </div>
+        <form class="select-container" #dropdownStatusForm="ngForm">
+          <div class="select-arrow" [ngClass]="{'rotate-arrow': dropdownStatusIsOpen}"></div>
+          <select name="status" class="select-input form-input">
+            <option
+            *ngFor="let option of options"             
+            [value]="option.value">{{ option.name }}
+          </option>
+          </select>
+        </form>
+        <div class="profile-task-list-container">
+          <ul class="task-list" [style.height.px]="listHeight">
+            <li
+              #listItem
+              class="task-item">
+              <div class="task-color"></div>
+              <div class="task-info">
+                <p class="task-title">Title</p>
+                <div class="task-status">Ongoing</div>
+              </div>
+              <div class="task-date">
+                <p class="task-day">24</p>
+                <p class="task-month">DEC</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="profile-calendar-container">
+        <p class="subtitle faded">My calendar</p>
+      </div>
+    </div>  
+  </div>
+
   

@@ -42,7 +42,7 @@
           <p class="task-status" [ngStyle]="{color: getColor(task.status)}">{{ task.status }}</p>
         </div>
         <div class="task-date">
-        <p class="task-day">{{ task.updatedAt | date: 'dd'}}</p>
+          <p class="task-day">{{ task.updatedAt | date: 'dd'}}</p>
           <p class="task-month">{{ task.updatedAt | date: 'MMM' | uppercase }}</p>
         </div>
       </li>

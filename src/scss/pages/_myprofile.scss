@@ -98,4 +98,78 @@ app-profile {
       }
     }
   }
+
+  .tasks-and-calendar {
+    display: flex;
+    justify-content: flex-end;
+
+    &-container {
+      width: 70%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 25px 0 50px;
+    }
+
+    .profile-tasks-container {
+      width: 45%;
+
+      .profile-tasks-header {
+        display: flex;
+        justify-content: space-between;
+
+        .profile-new-task {
+          display: flex;
+          align-items: center;
+        }
+
+        .subtitle {
+          margin-right: 10px;
+        }
+
+        .add-btn {
+          @include size(25px, 25px);
+        }
+      }
+
+      .select-input {
+        @include border-radius(12px);
+        @include font($color: $bgr-color, $font-weight: 600);
+        padding: 8px 10px;
+        margin: 20px 0;
+      }
+
+      .profile-task-list-container {
+        width: 100%;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .task-item {
+          box-shadow: 0px 10px 56px -26px rgba($primary-color, .5);
+          border: 1px solid rgba($secondary-color, .3);
+          margin: 15px 0;
+
+          .task-color {
+            width: 6%;
+            height: 85px;
+          }
+
+          @include on_event {
+            @include prefix(transform, translate(0, -10px), webkit moz ms 0);
+          }
+        }
+
+        .task-color {
+          background: $fifth-color;
+        }
+      }
+    }
+
+    .profile-calendar-container {
+      width: 50%;
+    }
+  }
 }
