@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
     { name: 'completed', value: 'completed' },
     { name: 'to do', value: 'todo' }
   ];
-
+  
   constructor(
     private userService: UserService,
     private domSanitizer: DomSanitizer,

@@ -1,0 +1,132 @@
+app-calendar {
+  width: 100%;
+
+  .e-calendar {
+    @include border-radius(20px);
+    position: relative;
+    border: none;
+    margin: 0;
+    margin-top: 15px;
+    max-width: 100%;
+    box-shadow: 0px 10px 70px -26px rgba($primary-color, .5);
+    padding: 10px 5px 10px 15px;
+
+    .e-btn.e-flat.e-primary {
+      @include font($font-family: $primary-font, $color: $fifth-color, $font-size: 16px, $font-weight: 700);
+      opacity: .8;
+      transition: 200ms all ease;
+
+      @include on_event {
+        color: $fifth-color;
+        opacity: 1;
+      }
+    }
+
+    &::before {
+      @include position(absolute, 0, 95%, 0, 0);
+      content: '';
+      display: block;
+      background: $bgr-color;
+    }
+
+    .e-header {
+      &.e-decade .e-title {
+        color: $bgr-color;
+      }
+
+      .e-title {
+        @include font($font-family: $primary-font, $color: $bgr-color, $font-size: 18px, $font-weight: 700);
+        transition: 200ms all ease;
+
+        @include on_event {
+          color: rgba($primary-color, .6);
+        }
+      }
+
+      span {
+        color: $bgr-color;
+      }
+
+      .e-icons {
+        transition: 200ms all ease;
+
+        @include on_event {
+          color: rgba($primary-color, .6);
+        }
+      }
+    }
+
+    .e-content {
+      &.e-month {
+        .e-cell {
+          padding: 6px;
+        }
+      }
+
+      &.e-year {
+        .e-cell {
+          padding: 17px;
+        }
+      }
+
+      &.e-decade {
+        .e-cell {
+          padding: 17px;
+        }
+      }
+      
+      .e-week-header {
+        position: relative;
+
+        &::before {
+          @include position(absolute, 95px, 30px, null, 40px);
+          display: block;
+          content: '';
+          height: 1px;
+          background: $secondary-color;
+          opacity: .4;
+        }
+      }
+
+      th {
+        @include font($font-family: $primary-font, $color: $secondary-color, $font-size: 16px, $font-weight: 700);
+        opacity: .8;
+        padding: 10px 0;
+      }
+
+      .e-cell {
+        span.e-day {
+          @include font($font-family: $primary-font, $color: $secondary-color, $font-size: 16px, $font-weight: 800);
+          opacity: .8;
+          transition: 200ms all ease;
+
+          @include on_event {
+            background: rgba($secondary-color, .3);
+          }
+        }
+
+        &.e-selected span.e-day {
+          background: $fifth-color;
+          color: $default-color;
+
+          @include on_event {
+            border: 1px solid rgba($primary-color, .6);
+            background: rgba($primary-color, .6);
+          }
+        }
+
+        &.e-today span.e-day {
+          border: 1px solid $fifth-color;
+          background: $fifth-color;
+          color: $default-color;
+          transition: 200ms all ease;
+
+          @include on_event {
+            border: 1px solid rgba($primary-color, .6);
+            background: rgba($primary-color, .6);
+          }
+        }
+      }
+    }
+  }
+}
