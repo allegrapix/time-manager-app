@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { throwError, Observable, Observer } from 'rxjs';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -18,15 +19,18 @@ export class ProfileComponent implements OnInit {
   avatarForm: FormGroup;
   base64Image: SafeUrl;
   noAvatar = true;
-
+  loadingBar = 0;
+  isLoading = false;
 
   constructor(
     private userService: UserService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private router: Router
     ) { }
 
   ngOnInit() {
     this.getUserAvatar();
+    
   }
 
   rotateArrow() {
@@ -48,21 +52,29 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-
-
   onSubmit() {
     const formData = new FormData();
     formData.append('avatar', this.selectedFile, this.selectedFile.name);
     this.userService
     .postAvatar(formData)
     .subscribe(event => {
-      console.log(event);
       if (event.type === HttpEventType.UploadProgress) {
-        console.log('Upload progress: ', Math.round(event.loaded / event.total * 100) + '%');
+        this.isLoading = true;
+        this.loadingBar = Math.round(event.loaded / event.total * 100);
       } else if (event.type === HttpEventType.Response) {
-        console.log(event);
-        this.getUserAvatar();
+        setTimeout(() => {
+          this.isLoading = false;
+          this.getUserAvatar();
+        }, 500);
       }
     });
+  }
+
+  goToEditProfile() {
+    this.router.navigate(['edit-profile']);
+  }
+
+  deleteProfile() {
+
   }
 }

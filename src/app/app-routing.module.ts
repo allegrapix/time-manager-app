@@ -12,6 +12,7 @@ import { NoTaskComponent } from './my-tasks/no-task/no-task.component';
 import { AuthGuard } from './services/auth.guard';
 import { TaskResolver } from './services/task-resolver.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { 
@@ -52,7 +53,12 @@ const routes: Routes = [
   { 
     path: 'myprofile', 
     canActivate: [AuthGuard],
-    component: ProfileComponent 
+    component: ProfileComponent
+  },
+  {
+    path: 'edit-profile',
+    canActivate: [AuthGuard],
+    component: EditProfileComponent
   },
   { 
     path: 'login', 

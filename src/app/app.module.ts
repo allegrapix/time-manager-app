@@ -33,6 +33,7 @@ import { PlaceHolderDirective } from './services/placeholder.directive';
 import { TaskResolver } from './services/task-resolver.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { OopsComponent } from './components/oops/oops.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { OopsComponent } from './components/oops/oops.component';
     AlertSignComponent,
     PlaceHolderDirective,
     PageNotFoundComponent,
-    OopsComponent
+    OopsComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
