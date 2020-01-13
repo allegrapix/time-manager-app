@@ -1,11 +1,11 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, NgForm } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { throwError, Observable, Observer } from 'rxjs';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -21,6 +21,16 @@ export class ProfileComponent implements OnInit {
   noAvatar = true;
   loadingBar = 0;
   isLoading = false;
+  @ViewChild('dropdownStatusForm', {static: true}) dropdownStatusForm: NgForm;
+  @ViewChild('listItem', {static: true}) listItem: ElementRef;
+  dropdownStatusIsOpen = false;
+  listHeight;
+  options = [
+    { name: 'all', value: 'all' },
+    { name: 'ongoing', value: 'ongoing' },
+    { name: 'completed', value: 'completed' },
+    { name: 'to do', value: 'todo' }
+  ];
 
   constructor(
     private userService: UserService,
@@ -30,7 +40,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getUserAvatar();
-    
+    this.listHeight = (this.listItem.nativeElement.offsetHeight + 15) * 3;
   }
 
   rotateArrow() {
@@ -75,6 +85,9 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteProfile() {
-
+    this.userService.deleteUser().subscribe(resData => {
+      localStorage.removeItem('userData');
+      this.router.navigate(['login']);      
+    });
   }
 }

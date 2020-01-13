@@ -27,6 +27,14 @@ export class UserService {
     );
   }
 
+  deleteUser() {
+    return this.http
+    .delete(`${this.url}/users/me`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(errorRes: HttpErrorResponse) {
     let errorMsg = 'An error ocurred';
     if (!errorRes.error) {
