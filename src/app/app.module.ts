@@ -34,6 +34,8 @@ import { TaskResolver } from './services/task-resolver.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { OopsComponent } from './components/oops/oops.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
     PlaceHolderDirective,
     PageNotFoundComponent,
     OopsComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,8 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CalendarModule
   ],
   providers: [
     LoginOrRegisterService, 
