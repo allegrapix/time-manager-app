@@ -10,8 +10,11 @@
           class="image-upload"
           (change)='onFileSelected($event)'/>
         <p class="upload-text subtitle faded"  *ngIf="noAvatar">Upload avatar</p>
-      </form> 
-      <img [src]="base64Image" *ngIf="!noAvatar">
+      </form>
+      <div class="loading-bar-container" *ngIf="isLoading">
+        <div class="loading-bar" [style.width.%]="loadingBar"></div>
+      </div>
+      <img [src]="base64Image" *ngIf="!noAvatar && !isLoading">
     </div>
     <div class="account-info-container">
       <div class="account-info">
@@ -31,8 +34,16 @@
         </div>        
       </div>
       <div class="buttons-container">
-        <button class="btn btn-edit">Edit profile</button>
-        <button class="btn btn-alert">Delete profile</button>
+        <button
+          class="btn btn-edit"
+          (click)="goToEditProfile()"
+          >Edit profile
+        </button>
+        <button
+          (click)="deleteProfile()"
+          class="btn btn-alert">Delete profile
+      </button>
       </div>
     </div>
   </div>
+  

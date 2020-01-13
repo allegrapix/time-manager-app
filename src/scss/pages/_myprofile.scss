@@ -27,6 +27,19 @@ app-profile {
         background: $bgr-color;
       }
 
+      .loading-bar-container {
+        @include size(10px, 50%);
+        @include border-radius(5px);
+        @include position(absolute, 50%, null, null, 50%);
+        @include prefix(transform, translate(-50%, -50%), webkit moz ms 0);
+        border: 2px solid $bgr-color;
+
+        .loading-bar {
+          background: $bgr-color;
+          height: 6px;          
+        }
+      }
+
       .image-upload-form {
         @include position(absolute, 0, 0, 0, 0);
 
@@ -68,10 +81,9 @@ app-profile {
       }
 
       .select-input {
-        @include border-radius(10px);
+        @include border-radius(15px);
         @include font($font-weight: 700, $color: $bgr-color);
         padding: 8px 15px;
-        
       }
     }
 
