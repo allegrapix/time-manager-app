@@ -72,6 +72,27 @@
     }
   }
 
+  app-edit-btn,
+  app-ok-btn {
+    .cls-1 {
+      fill: $bgr-color;
+      stroke: $bgr-color;
+      stroke-miterlimit: 10;
+      opacity: 0.3;
+      transition: 200ms all ease;
+    }
+    
+    .cls-2 { 
+      fill: $default-color;
+    }
+
+    @include on_event {
+      .cls-1 {
+        opacity: 0.8;
+      }
+    }
+  }
+
   @include on_event {
     app-add-btn {
       .cls-1 {

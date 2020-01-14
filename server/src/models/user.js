@@ -37,7 +37,11 @@ const userSchema = new mongoose.Schema({
   },
   expiresIn: {
     type: String,
-    default: '3600'
+    default: '36000'
+  },
+  preferredWorkingHours: {
+    type: Number,
+    default: 8
   },
   tokens: [{
     token: {

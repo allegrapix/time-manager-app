@@ -3,6 +3,8 @@ app-calendar {
 
   .e-calendar {
     @include border-radius(20px);
+    background: $default-color;
+    display: block;
     position: relative;
     border: none;
     margin: 0;
@@ -10,16 +12,16 @@ app-calendar {
     max-width: 100%;
     box-shadow: 0px 10px 70px -26px rgba($primary-color, .5);
     padding: 10px 5px 10px 15px;
+    overflow: hidden;
+
+    .e-footer-container {
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 30px 10px;
+    }
 
     .e-btn.e-flat.e-primary {
-      @include font($font-family: $primary-font, $color: $fifth-color, $font-size: 16px, $font-weight: 700);
-      opacity: .8;
-      transition: 200ms all ease;
-
-      @include on_event {
-        color: $fifth-color;
-        opacity: 1;
-      }
+      display: none;
     }
 
     &::before {
@@ -30,6 +32,39 @@ app-calendar {
     }
 
     .e-header {
+      padding: 15px 25px 5px;
+      display: flex;
+      justify-content: space-between;
+
+      .e-icon-container {
+        margin-right: 5px;
+
+        button {
+          @include size(0, 0);
+          background: transparent;
+          opacity: .6;
+          border: none;
+          transition: 200ms all ease;
+          
+          &.e-prev {
+            border-right: 10px solid $bgr-color;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            margin-right: 5px;
+          }
+
+          &.e-next {
+            border-left: 10px solid $bgr-color;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+          }
+
+          @include on_event {
+            opacity: .4;
+          }
+        }
+      }
+
       &.e-decade .e-title {
         color: $bgr-color;
       }
@@ -37,6 +72,7 @@ app-calendar {
       .e-title {
         @include font($font-family: $primary-font, $color: $bgr-color, $font-size: 18px, $font-weight: 700);
         transition: 200ms all ease;
+        cursor: pointer;
 
         @include on_event {
           color: rgba($primary-color, .6);
@@ -58,20 +94,26 @@ app-calendar {
 
     .e-content {
       &.e-month {
+        padding: 0 20px;
+
+        table {
+          width: 100%;
+        }
+
         .e-cell {
-          padding: 6px;
+          padding: 1px 5px;
         }
       }
 
       &.e-year {
         .e-cell {
-          padding: 17px;
+          padding: 25px 25px;
         }
       }
 
       &.e-decade {
         .e-cell {
-          padding: 17px;
+          padding: 25px 19px;
         }
       }
       
@@ -91,14 +133,22 @@ app-calendar {
       th {
         @include font($font-family: $primary-font, $color: $secondary-color, $font-size: 16px, $font-weight: 700);
         opacity: .8;
-        padding: 10px 0;
+        padding: 20px 0;
       }
 
       .e-cell {
+        &.e-other-month {
+          opacity: .4;
+        }
+
         span.e-day {
-          @include font($font-family: $primary-font, $color: $secondary-color, $font-size: 16px, $font-weight: 800);
+          @include font($font-family: $primary-font, $color: $secondary-color, $font-size: 16px, $font-weight: 800, $text-align: center);
+          @include border-radius(6px);
+          padding: 5px 0;
+          display: block;
           opacity: .8;
           transition: 200ms all ease;
+          cursor: pointer;
 
           @include on_event {
             background: rgba($secondary-color, .3);
@@ -122,8 +172,8 @@ app-calendar {
           transition: 200ms all ease;
 
           @include on_event {
-            border: 1px solid rgba($primary-color, .6);
-            background: rgba($primary-color, .6);
+            border: 1px solid rgba($bgr-color, .6);
+            background: rgba($bgr-color, .6);
           }
         }
       }

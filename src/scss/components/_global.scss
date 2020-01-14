@@ -1,6 +1,16 @@
 body {
   font-family: $primary-font;
   background: $bgr-secondary-color;
+
+  ::-moz-selection { 
+    color: $bgr-color;
+    background: rgba($bgr-color-light, .2);
+  }
+
+  ::selection {
+    color: $bgr-color;
+    background: rgba($bgr-color-light, .2);
+  }
 }
 
 .body-container {

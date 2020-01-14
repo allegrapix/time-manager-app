@@ -5,6 +5,7 @@ export class User {
     public email: string, 
     public createdAt: Date,
     public updatedAt: Date,
+    public preferredWorkingHours: number,
     private _tokenExpirationDate: Date,
     private _token: string,
     public avatar?: any

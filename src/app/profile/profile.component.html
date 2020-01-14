@@ -18,7 +18,41 @@
     </div>
     <div class="account-info-container">
       <div class="account-info">
-        <p class="username title">User_name</p>
+        <div class="user-info-container">
+          <div class="edited-field" *ngIf="!editName" [@editField]>
+            <p class="username title">{{ loggedUser.name | titlecase }}</p>
+            <button type="button" class="add-btn edit-btn" (click)="editUsername()">
+              <app-edit-btn></app-edit-btn>
+            </button>
+          </div>
+          <form
+          class="to-edit-field"
+          [formGroup]="userEditForm"
+          (ngSubmit)="submitNewName()"
+          *ngIf="editName"> 
+            <input 
+            type="text" 
+            name="name" 
+            class="form-input" 
+            formControlName="name"
+            [@expandField]>
+            <div [@editField]>
+              <button 
+              type="submit"
+              class="add-btn edit-btn" 
+              [disabled]="!userEditForm.valid">
+                <app-ok-btn></app-ok-btn>
+              </button>
+              <button 
+              type="button" 
+              class="add-btn cancel-btn" 
+              (click)="usernameCancel()">
+                <app-cancel-btn></app-cancel-btn>
+              </button>
+            </div>
+          </form>
+        </div>
+        <p class="email subtitle faded">{{ loggedUser.email }}</p>
         <p class="userrole subtitle faded">admin</p>
         <label for="preferredHours" class="subtitle faded">Preferred working hours</label>
         <div class="select-hours-container select-container">
@@ -34,11 +68,6 @@
         </div>        
       </div>
       <div class="buttons-container">
-        <button
-          class="btn btn-edit"
-          (click)="goToEditProfile()"
-          >Edit profile
-        </button>
         <button
           (click)="deleteProfile()"
           class="btn btn-alert">Delete profile

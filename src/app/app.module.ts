@@ -36,6 +36,9 @@ import { OopsComponent } from './components/oops/oops.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
+import { OkBtnComponent } from './components/ok-btn/ok-btn.component';
+import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,10 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     PageNotFoundComponent,
     OopsComponent,
     EditProfileComponent,
-    CalendarComponent
+    CalendarComponent,
+    EditBtnComponent,
+    OkBtnComponent,
+    CancelBtnComponent
   ],
   imports: [
     BrowserModule,

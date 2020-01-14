@@ -25,7 +25,7 @@ import { trigger, transition, style, group, animate } from '@angular/animations'
           )
         ])
       ])
-    ]),
+    ])
   ]
 })
 export class MyTasksComponent implements OnInit, OnDestroy {
