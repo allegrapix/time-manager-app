@@ -67,6 +67,43 @@ app-profile {
       justify-content: space-between;
       padding: 0 25px 0 50px;
 
+      .user-info-container {        
+        .edit-btn,
+        .cancel-btn {
+          @include size(25px, 25px);
+        }
+
+        .cancel-btn {
+          margin-left: 5px;
+        }
+
+        .edit-btn:disabled svg .cls-1{
+          opacity: .3;
+        }
+        
+        .edited-field {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .to-edit-field {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 3px 0;
+
+          .form-input {
+            @include border-radius(10px); 
+            @include font($color: $bgr-color, $font-weight: 700)        ;
+            width: 80%;
+            margin: 0;
+            padding: 5px 10px;
+          }
+        }
+      }
+
       .account-info {
         width: 45%;
       }
@@ -75,9 +112,21 @@ app-profile {
         font-size: 24px;
       }
 
+      .email {
+        font-size: 18px;
+      }
+
+      .email,
+      .userrole {
+        &.faded {
+          opacity: .4;
+        }
+      }
+
       .userrole {
         font-size: 18px;
         padding-bottom: 10px;
+        line-height: 1;
       }
 
       .select-input {
@@ -135,7 +184,7 @@ app-profile {
         @include border-radius(12px);
         @include font($color: $bgr-color, $font-weight: 600);
         padding: 8px 10px;
-        margin: 20px 0;
+        margin: 10px 0;
       }
 
       .profile-task-list-container {
@@ -152,9 +201,27 @@ app-profile {
           border: 1px solid rgba($secondary-color, .3);
           margin: 15px 0;
 
+          .task-info {
+            padding: 10px 0;
+          }
+
           .task-color {
             width: 6%;
-            height: 85px;
+            height: 70px;
+          }
+
+          .task-title {
+            font-size: 16px;
+            margin-bottom: 5px;
+          }
+
+          .task-status {
+            font-size: 14px;
+            font-weight: 500;
+          }
+
+          .task-date {
+            font-size: 16px;
           }
 
           @include on_event {

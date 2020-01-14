@@ -42,4 +42,12 @@ export class UserService {
     }    
     return throwError(errorRes.error);
   }
+
+  editUser(payload) {
+    return this.http
+    .patch(`${this.url}/users/me`, payload)
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
 }

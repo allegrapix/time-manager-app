@@ -10,6 +10,7 @@ interface AuthResponseData {
     _id: string;
     name: string;
     email: string;
+    preferredWorkingHours: number;
     createdAt: Date;
     updatedAt: Date;
     expiresIn: string;
@@ -48,6 +49,7 @@ export class AuthService {
             resData.user.email,
             resData.user.createdAt,
             resData.user.updatedAt,
+            resData.user.preferredWorkingHours,
             +resData.user.expiresIn,
             resData.token
           )
@@ -72,6 +74,7 @@ export class AuthService {
           resData.user.email,
           resData.user.createdAt,
           resData.user.updatedAt,
+          resData.user.preferredWorkingHours,
           +resData.user.expiresIn,
           resData.token
         )
@@ -86,13 +89,14 @@ export class AuthService {
       email: string,
       createdAt: Date,
       updatedAt: Date,
+      preferredWorkingHours: number,
       _tokenExpirationDate: string,
       _token: string
     } = JSON.parse(localStorage.getItem('userData'));    
     if (!userData) {
       return;
     }
-    const loadedUser = new User(userData._id, userData.name, userData.email, userData.createdAt, userData.updatedAt, new Date(userData._tokenExpirationDate), userData._token);    
+    const loadedUser = new User(userData._id, userData.name, userData.email, userData.createdAt, userData.updatedAt, userData.preferredWorkingHours, new Date(userData._tokenExpirationDate), userData._token);    
     if (loadedUser.token) {
       this.user.next(loadedUser);
       const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
@@ -111,9 +115,9 @@ export class AuthService {
     return throwError(errorMsg);
   }
 
-  private handleAuthentication(_id: string, name: string, email: string, createdAt: Date, updatedAt: Date, expiresIn: number, token: string ) {
+  private handleAuthentication(_id: string, name: string, email: string, createdAt: Date, updatedAt: Date, preferredWorkingHours: number, expiresIn: number, token: string ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new User( _id, name, email,  createdAt, updatedAt, expirationDate, token);
+    const user = new User( _id, name, email,  createdAt, updatedAt, preferredWorkingHours, expirationDate, token);
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));

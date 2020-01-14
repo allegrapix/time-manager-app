@@ -1,16 +1,49 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { FormGroup, FormControl, NgForm } from '@angular/forms';
-import { catchError } from 'rxjs/operators';
-import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
-import { throwError, Observable, Observer } from 'rxjs';
+import { FormGroup, NgForm, FormControl, Validators } from '@angular/forms';
+import { HttpEventType } from '@angular/common/http';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { User } from './user.model';
+import { trigger, transition, style, group, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  animations: [
+    trigger('editField', [
+      transition(':enter', [
+        style({ 
+            opacity: 0
+          }),
+        group([
+          animate('250ms ease-in',
+            style({ 
+              opacity: 1
+            })
+          )
+        ])
+      ])
+    ]),
+    trigger('expandField', [
+      transition(':enter', [
+        style({ 
+            opacity: 0,
+            width: 0
+          }),
+        group([
+          animate('250ms ease-in-out',
+            style({ 
+              opacity: 1,
+              width: '85%'
+            })
+          )
+        ])
+      ])
+    ])
+  ]
 })
 export class ProfileComponent implements OnInit {
   hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -31,16 +64,47 @@ export class ProfileComponent implements OnInit {
     { name: 'completed', value: 'completed' },
     { name: 'to do', value: 'todo' }
   ];
+  loggedUser: User;
+  editName = false;
+  userEditForm: FormGroup;
   
   constructor(
     private userService: UserService,
     private domSanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
     ) { }
 
   ngOnInit() {
     this.getUserAvatar();
     this.listHeight = (this.listItem.nativeElement.offsetHeight + 15) * 3;
+    this.getUser();
+  }
+
+  editUsername() {
+    this.editName = true;
+    this.userEditForm = new FormGroup({
+      'name': new FormControl(this.loggedUser.name, Validators.required)
+    });
+  }
+
+  usernameCancel() {
+    this.editName = false;
+  }
+
+  submitNewName() {
+    this.userService.editUser(this.userEditForm.value).subscribe((resData: User) => {
+      localStorage.setItem('userData', JSON.stringify(resData));
+      this.auth.autoLogin();
+      console.log('userSubject', this.auth.user.value);
+    });
+    this.editName = false;
+  }
+
+  getUser() {
+    this.auth.user.subscribe(user => {
+      this.loggedUser = user;
+    });
   }
 
   rotateArrow() {
@@ -62,6 +126,7 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
+
   onSubmit() {
     const formData = new FormData();
     formData.append('avatar', this.selectedFile, this.selectedFile.name);
