@@ -46,6 +46,8 @@ import { trigger, transition, style, group, animate } from '@angular/animations'
   ]
 })
 export class ProfileComponent implements OnInit {
+  @ViewChild('dropdownStatusForm', {static: true}) dropdownStatusForm: NgForm;
+  @ViewChild('listItem', {static: true}) listItem: ElementRef;
   hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   dropDownIsOpen = false;
   selectedFile: File = null;
@@ -54,8 +56,6 @@ export class ProfileComponent implements OnInit {
   noAvatar = true;
   loadingBar = 0;
   isLoading = false;
-  @ViewChild('dropdownStatusForm', {static: true}) dropdownStatusForm: NgForm;
-  @ViewChild('listItem', {static: true}) listItem: ElementRef;
   dropdownStatusIsOpen = false;
   listHeight;
   options = [
@@ -67,6 +67,7 @@ export class ProfileComponent implements OnInit {
   loggedUser: User;
   editName = false;
   userEditForm: FormGroup;
+  locStorage;
   
   constructor(
     private userService: UserService,
@@ -79,6 +80,7 @@ export class ProfileComponent implements OnInit {
     this.getUserAvatar();
     this.listHeight = (this.listItem.nativeElement.offsetHeight + 15) * 3;
     this.getUser();
+    this.locStorage = JSON.parse(localStorage.getItem('userData'));
   }
 
   editUsername() {
@@ -93,10 +95,10 @@ export class ProfileComponent implements OnInit {
   }
 
   submitNewName() {
-    this.userService.editUser(this.userEditForm.value).subscribe((resData: User) => {
-      localStorage.setItem('userData', JSON.stringify(resData));
+    this.userService.editUser(this.userEditForm.value).subscribe((updatedUser: User) => {
+      this.locStorage.name = updatedUser.name;
+      localStorage.setItem('userData', JSON.stringify(this.locStorage));
       this.auth.autoLogin();
-      console.log('userSubject', this.auth.user.value);
     });
     this.editName = false;
   }

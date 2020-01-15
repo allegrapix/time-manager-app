@@ -19,9 +19,9 @@
     <div class="account-info-container">
       <div class="account-info">
         <div class="user-info-container">
-          <div class="edited-field" *ngIf="!editName" [@editField]>
-            <p class="username title">{{ loggedUser.name | titlecase }}</p>
-            <button type="button" class="add-btn edit-btn" (click)="editUsername()">
+          <div class="edited-field">
+            <p class="username title" [ngClass]="{'hide-elem': editName}">{{ loggedUser.name | titlecase }}</p>
+            <button type="button" class="add-btn edit-btn" (click)="editUsername()" *ngIf="!editName"  [@editField]>
               <app-edit-btn></app-edit-btn>
             </button>
           </div>
@@ -36,7 +36,7 @@
             class="form-input" 
             formControlName="name"
             [@expandField]>
-            <div [@editField]>
+            <div [@editField] class="btn-group">
               <button 
               type="submit"
               class="add-btn edit-btn" 
