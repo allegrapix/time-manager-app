@@ -68,7 +68,16 @@ app-profile {
       padding: 0 25px 0 50px;
 
       .user-info-container {   
-        position: relative;     
+        position: relative;
+
+        .elem {
+          transition: 200ms all ease;
+
+          &.hide-elem {
+            opacity: 0;
+          }
+        }
+
         .edit-btn,
         .cancel-btn {
           @include size(25px, 25px);
@@ -85,7 +94,11 @@ app-profile {
         .edited-field {
           display: flex;
           justify-content: space-between;
-          align-items: center;         
+          align-items: center;
+          
+          &.email-field {
+            padding: 4.5px 0;
+          }
         }
 
         .to-edit-field {
@@ -114,7 +127,6 @@ app-profile {
 
       .username {
         font-size: 24px;
-        transition: 200ms all ease;
       }
 
       .email {
@@ -233,10 +245,6 @@ app-profile {
             @include prefix(transform, translate(0, -10px), webkit moz ms 0);
           }
         }
-
-        .task-color {
-          background: $fifth-color;
-        }
       }
     }
 
@@ -244,8 +252,4 @@ app-profile {
       width: 50%;
     }
   }
-}
-
-.hide-elem {
-  opacity: 0;
 }

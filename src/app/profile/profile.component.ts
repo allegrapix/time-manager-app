@@ -48,6 +48,8 @@ import { trigger, transition, style, group, animate } from '@angular/animations'
 export class ProfileComponent implements OnInit {
   @ViewChild('dropdownStatusForm', {static: true}) dropdownStatusForm: NgForm;
   @ViewChild('listItem', {static: true}) listItem: ElementRef;
+  @ViewChild('workingHoursForm', {static: true}) workingHoursForm: NgForm;
+  defaultStatus = 'all';
   hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   dropDownIsOpen = false;
   selectedFile: File = null;
@@ -66,7 +68,9 @@ export class ProfileComponent implements OnInit {
   ];
   loggedUser: User;
   editName = false;
-  userEditForm: FormGroup;
+  editEmail = false;
+  usernameEditForm: FormGroup;
+  emailEditForm: FormGroup;
   locStorage;
   
   constructor(
@@ -85,7 +89,7 @@ export class ProfileComponent implements OnInit {
 
   editUsername() {
     this.editName = true;
-    this.userEditForm = new FormGroup({
+    this.usernameEditForm = new FormGroup({
       'name': new FormControl(this.loggedUser.name, Validators.required)
     });
   }
@@ -95,12 +99,40 @@ export class ProfileComponent implements OnInit {
   }
 
   submitNewName() {
-    this.userService.editUser(this.userEditForm.value).subscribe((updatedUser: User) => {
-      this.locStorage.name = updatedUser.name;
+    this.patchUserInfo(this.usernameEditForm);
+    this.editName = false;
+  }
+
+  editUserEmail() {
+    this.editEmail = true;
+    this.emailEditForm = new FormGroup({
+      'email': new FormControl(this.loggedUser.email, [Validators.required, Validators.email])
+    });
+  }
+
+  emailCancel() {
+    this.editEmail = false;
+  }
+
+  submitNewEmail() {
+    this.patchUserInfo(this.emailEditForm);
+    this.editEmail = false;
+  }
+
+  changeWorkingHours(event: any) {
+    const wh = new FormGroup({
+      'preferredWorkingHours': new FormControl(parseInt(event.target.value), Validators.required)
+    });
+    this.patchUserInfo(wh);
+  }
+  
+  patchUserInfo(userInfo: FormGroup) {
+    const objKey = Object.keys(userInfo.value)[0];
+    this.userService.editUser(userInfo.value).subscribe((updatedUser: User) => {
+      this.locStorage[objKey] = updatedUser[objKey];
       localStorage.setItem('userData', JSON.stringify(this.locStorage));
       this.auth.autoLogin();
     });
-    this.editName = false;
   }
 
   getUser() {
@@ -156,5 +188,9 @@ export class ProfileComponent implements OnInit {
       localStorage.removeItem('userData');
       this.router.navigate(['login']);      
     });
+  }
+
+  navigateToNewTask() {
+    this.router.navigate(['/mytasks/new']);
   }
 }
