@@ -146,7 +146,12 @@
         </div>
         <form class="select-container" #dropdownStatusForm="ngForm">
           <div class="select-arrow" [ngClass]="{'rotate-arrow': dropdownStatusIsOpen}"></div>
-          <select name="status" class="select-input form-input">
+          <select 
+          name="status" 
+          [(ngModel)]="selectedStatus"
+          (change)="newStatusSelected($event)"
+          (click)="rotateStatusArrow()"
+          class="select-input form-input">
             <option
             *ngFor="let option of options"             
             [value]="option.value">{{ option.name }}
@@ -157,43 +162,19 @@
           <ul class="task-list" [style.height.px]="listHeight">
             <li
               #listItem
+              *ngFor="let task of tasks"
+              (click)="goToTask(task)"
               class="task-item">
-              <div class="task-color"></div>
+              <div class="task-color" [ngStyle]="{background: getColor(task.status)}"></div>
               <div class="task-info">
-                <p class="task-title">Title</p>
-                <div class="task-status">Ongoing</div>
+                <p class="task-title">{{ task.title }}</p>
+                <div class="task-status" [ngStyle]="{color: getColor(task.status)}">{{ task.status }}</div>
               </div>
               <div class="task-date">
-                <p class="task-day">24</p>
-                <p class="task-month">DEC</p>
+                <p class="task-day">{{ task.updatedAt | date: 'dd'}}</p>
+                <p class="task-month">{{ task.updatedAt | date: 'MMM' | uppercase}}</p>
               </div>
             </li>
-            <li
-            #listItem
-            class="task-item">
-            <div class="task-color"></div>
-            <div class="task-info">
-              <p class="task-title">Title</p>
-              <div class="task-status">Ongoing</div>
-            </div>
-            <div class="task-date">
-              <p class="task-day">24</p>
-              <p class="task-month">DEC</p>
-            </div>
-          </li>
-          <li
-          #listItem
-          class="task-item">
-          <div class="task-color"></div>
-          <div class="task-info">
-            <p class="task-title">Title</p>
-            <div class="task-status">Ongoing</div>
-          </div>
-          <div class="task-date">
-            <p class="task-day">24</p>
-            <p class="task-month">DEC</p>
-          </div>
-        </li>
           </ul>
         </div>
       </div>

@@ -34,8 +34,12 @@ export class TasksService {
   getTasks(statusParam, skip, limit) {
     let params = new HttpParams();   
     params = params.append("status", statusParam);
-    params = params.append("limit", limit.toString());
-    params = params.append("skip", skip.toString());
+    if (skip !== undefined) {
+      params = params.append("skip", skip.toString());
+    }
+    if (limit !== undefined) {
+      params = params.append("limit", limit.toString());
+    }
     params = params.append("sortBy", 'createdAt:desc');
     return this.http.get<Task[]>(`${this.url}/tasks/mytasks`, {params: params});
   }

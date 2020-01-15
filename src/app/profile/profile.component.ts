@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FormGroup, NgForm, FormControl, Validators } from '@angular/forms';
 import { HttpEventType } from '@angular/common/http';
@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { User } from './user.model';
 import { trigger, transition, style, group, animate } from '@angular/animations';
+import { TasksService } from '../services/tasks.service';
+import { Subscription } from 'rxjs';
+import { Task } from '../my-tasks/task/task.model';
 
 @Component({
   selector: 'app-profile',
@@ -45,7 +48,7 @@ import { trigger, transition, style, group, animate } from '@angular/animations'
     ])
   ]
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('dropdownStatusForm', {static: true}) dropdownStatusForm: NgForm;
   @ViewChild('listItem', {static: true}) listItem: ElementRef;
   @ViewChild('workingHoursForm', {static: true}) workingHoursForm: NgForm;
@@ -72,19 +75,44 @@ export class ProfileComponent implements OnInit {
   usernameEditForm: FormGroup;
   emailEditForm: FormGroup;
   locStorage;
+  selectedDate: Date = new Date();
+  getTasksSub: Subscription;
+  tasks: Task[] = [
+    {
+      status: "completed",
+      workedHours: 100,
+      _id: "5e1f00f52baa2919fc93c72f",
+      title: "Website",
+      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+      createdAt: new Date("2020-01-15T12:09:25.876Z"),
+      updatedAt: new Date("2020-01-15T12:09:25.876Z")
+    }
+  ];
+  selectedStatus = 'all'
   
   constructor(
     private userService: UserService,
     private domSanitizer: DomSanitizer,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService, 
+    private taskService: TasksService,
+    private elRef: ElementRef
     ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.getUserAvatar();
-    this.listHeight = (this.listItem.nativeElement.offsetHeight + 15) * 3;
     this.getUser();
     this.locStorage = JSON.parse(localStorage.getItem('userData'));
+    this.loadSelectedDayTasks(this.selectedDate);
+    
+  }
+
+  ngAfterViewInit() {
+    
+  }
+
+  ngOnDestroy() {
+    this.getTasksSub.unsubscribe();
   }
 
   editUsername() {
@@ -145,6 +173,10 @@ export class ProfileComponent implements OnInit {
     this.dropDownIsOpen = !this.dropDownIsOpen;
   }
 
+  rotateStatusArrow() {
+    this.dropdownStatusIsOpen = !this.dropdownStatusIsOpen;
+  }
+
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0]; 
     this.onSubmit();
@@ -192,5 +224,40 @@ export class ProfileComponent implements OnInit {
 
   navigateToNewTask() {
     this.router.navigate(['/mytasks/new']);
+  }
+
+  loadSelectedDayTasks(selDate: Date) {
+    const selDay = selDate.getDate();
+    const selMonth = selDate.getMonth();
+    this.getTasksSub = this.taskService.getTasks(this.selectedStatus, undefined, undefined).subscribe(resData => {
+      this.tasks = [];
+      const dd = new Date(resData[0].updatedAt).getDate();
+      const mm = new Date(resData[0].updatedAt).getMonth();
+      resData.filter((task: Task) => {
+        if (selDay === dd && selMonth === mm) {
+          this.tasks.push(task);
+        }
+      });      
+    },
+    (err) => {},
+    () => {
+      const stuff = this.elRef.nativeElement.querySelector('.task-item')
+      this.listHeight = (stuff.offsetHeight + 15) * 3;
+    });
+  }
+
+  getColor(status: string) {
+    const color = this.taskService.getColor(status);
+    return color;
+  }
+
+  goToTask(task: Task) {
+    this.router.navigate(['mytasks', task._id], {queryParams: {status:'all'}});
+  }
+
+  newStatusSelected(event: any) {
+    this.selectedStatus = event.target.value;
+    console.log(this.selectedStatus);
+    this.loadSelectedDayTasks(this.selectedDate);
   }
 }
