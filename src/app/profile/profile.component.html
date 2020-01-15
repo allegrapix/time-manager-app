@@ -20,14 +20,23 @@
       <div class="account-info">
         <div class="user-info-container">
           <div class="edited-field">
-            <p class="username title" [ngClass]="{'hide-elem': editName}">{{ loggedUser.name | titlecase }}</p>
-            <button type="button" class="add-btn edit-btn" (click)="editUsername()" *ngIf="!editName"  [@editField]>
+            <p 
+            class="username title elem" 
+            [ngClass]="{'hide-elem': editName}">
+            {{ loggedUser.name | titlecase }}
+            </p>
+            <button 
+            type="button" 
+            class="add-btn edit-btn" 
+            (click)="editUsername()" 
+            *ngIf="!editName"  
+            [@editField]>
               <app-edit-btn></app-edit-btn>
             </button>
           </div>
           <form
           class="to-edit-field"
-          [formGroup]="userEditForm"
+          [formGroup]="usernameEditForm"
           (ngSubmit)="submitNewName()"
           *ngIf="editName"> 
             <input 
@@ -40,7 +49,7 @@
               <button 
               type="submit"
               class="add-btn edit-btn" 
-              [disabled]="!userEditForm.valid">
+              [disabled]="!usernameEditForm.valid">
                 <app-ok-btn></app-ok-btn>
               </button>
               <button 
@@ -52,19 +61,67 @@
             </div>
           </form>
         </div>
-        <p class="email subtitle faded">{{ loggedUser.email }}</p>
+        <div class="user-info-container">
+          <div class="edited-field email-field">
+            <p 
+            class="email subtitle faded elem"
+            [ngClass]="{'hide-elem': editEmail}">
+            {{ loggedUser.email }}
+            </p>
+            <button 
+            type="button" 
+            class="add-btn edit-btn" 
+            (click)="editUserEmail()" 
+            *ngIf="!editEmail"  
+            [@editField]>
+              <app-edit-btn></app-edit-btn>
+            </button>
+          </div>
+          <form 
+          class="to-edit-field"
+          [formGroup]="emailEditForm"
+          (ngSubmit)="submitNewEmail()"
+          *ngIf="editEmail">
+            <input 
+            type="email" 
+            class="form-input"
+            formControlName="email"
+            name="email"
+            [@expandField]>
+            <div class="btn-group" [@editField]>
+              <button 
+              class="add-btn edit-btn"
+              [disabled]="!emailEditForm.valid"
+              type="submit">
+                <app-ok-btn></app-ok-btn>
+              </button>
+              <button
+              type="button"
+              class="add-btn cancel-btn"
+              (click)="emailCancel()">
+                <app-cancel-btn></app-cancel-btn>
+              </button>
+            </div>
+          </form>
+        </div>
         <p class="userrole subtitle faded">admin</p>
         <label for="preferredHours" class="subtitle faded">Preferred working hours</label>
         <div class="select-hours-container select-container">
-          <div class="select-arrow" #arrow [ngClass]="{'rotate-arrow': dropDownIsOpen}"></div>
-          <select
-            name="preferredHours"
-            class="form-input select-input" (click)="rotateArrow()">
-            <option
-              *ngFor="let hour of hours" 
-               [value]="hour">{{ hour }}h
-            </option>
-          </select>
+          <form 
+          #workingHoursForm="ngForm">
+            <div class="select-arrow" #arrow [ngClass]="{'rotate-arrow': dropDownIsOpen}"></div>
+            <select
+              name="preferredWorkingHours"
+              [(ngModel)] = "loggedUser.preferredWorkingHours"
+              class="form-input select-input" 
+              (change)="changeWorkingHours($event)"
+              (click)="rotateArrow()">
+              <option
+                *ngFor="let hour of hours" 
+                [value]="hour">{{ hour }}h
+              </option>
+            </select>
+          </form>
         </div>        
       </div>
       <div class="buttons-container">
@@ -82,7 +139,7 @@
           <p class="subtitle faded">My tasks</p>
           <div class="profile-new-task">
             <span class="subtitle faded">New task</span>
-            <button type="button" class="add-btn">
+            <button type="button" class="add-btn" (click)="navigateToNewTask()">
               <app-add-btn></app-add-btn>
             </button>
           </div>
