@@ -13,11 +13,16 @@ import { AuthGuard } from './services/auth.guard';
 import { TaskResolver } from './services/task-resolver.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { 
     path: '', 
     component: HomeComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent
   },
   { 
     path: 'mytasks', 
