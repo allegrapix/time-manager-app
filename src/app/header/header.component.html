@@ -15,6 +15,13 @@
     [ngClass]="{mobileLinks: !menuIsOpen}"
     >
     <a 
+      [routerLink]="['/dashboard']" 
+      class="page-link page-dashboard" 
+      routerLinkActive="active-dashboard"
+      [routerLinkActiveOptions]="{ exact: false }"
+      *ngIf="!notLogged"
+      >Dashboard</a>
+    <a 
       [routerLink]="['/mytasks']" 
       class="page-link page-tasks" 
       routerLinkActive="active-tasks"

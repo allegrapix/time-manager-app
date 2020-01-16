@@ -29,7 +29,7 @@
     margin-right: 50px;
     display: flex;
     align-items: flex-end;
-    width: 45%;
+    width: 55%;
 
     .desktop-links {
       width: 100%;
@@ -55,6 +55,16 @@
 
         @include on_event {
           padding: 15px 5px 10px;
+        }
+      }
+
+      &-dashboard {
+        background: $tenth-color;
+        $color: $default-color;
+
+        @include on_event {
+          background: $default-color;
+          color: $tenth-color;
         }
       }
 
@@ -97,12 +107,17 @@
     }
 
     .active {
+      &-dashboard,
       &-tasks,
       &-schedule,
       &-profile,
       &-signin {
         background: $default-color;
         padding: 15px 10px 10px;
+      }
+
+      &-dashboard {
+        color: $tenth-color;
       }
 
       &-tasks {
@@ -132,7 +147,7 @@
     }
   
     .links-container {
-      width: 50%;
+      width: 62%;
 
       .page-link {
         padding: 10px 5px;
@@ -154,16 +169,17 @@
   .header-container {    
     .logo-container {
       padding-right: 0;
-      width: 35%;
+      width: 20%;
       
       .text-logo {
         padding-left: 10px;
+        font-size: 14px;
       }
     }
   
     .links-container {
       margin-right: 25px;
-      width: 65%;
+      width: 77%;
     }
   }
 }
@@ -274,11 +290,19 @@
 
         &-link, 
         &-tasks,
+        &-dashboard,
         &-schedule,
         &-profile {
           @include on_event {
             opacity: .8;
             padding: 20px 10px;
+          }
+        }
+
+        &-dashboard {  
+          @include on_event {
+            background:  $tenth-color;
+            color: $default-color;
           }
         }
   
@@ -323,12 +347,17 @@
       }
 
       .active {
+        &-dashboard,
         &-tasks,
         &-schedule,
         &-profile,
         &-signin {
           color: $default-color;
           padding: 20px 10px;
+        }
+
+        &-dashboard {
+          background: $tenth-color;
         }
   
         &-tasks {

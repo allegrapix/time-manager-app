@@ -39,6 +39,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
 import { OkBtnComponent } from './components/ok-btn/ok-btn.component';
 import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component
     CalendarComponent,
     EditBtnComponent,
     OkBtnComponent,
-    CancelBtnComponent
+    CancelBtnComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
