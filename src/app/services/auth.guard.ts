@@ -22,3 +22,21 @@ export class AuthGuard implements CanActivate {
     ));
   }
 }
+
+@Injectable({providedIn: 'root'})
+export class AdminManagerGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
+  canActivate(route: ActivatedRouteSnapshot, router: RouterStateSnapshot): boolean | UrlTree | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
+    return this.authService.user.pipe(
+      take(1),
+      map(user => {
+        if (user.role === 'admin' || user.role === 'manager') {
+          return true;
+        } else {
+          this.authService.pageNotAllowed.emit();
+          return this.router.createUrlTree(['/myprofile'])
+        }
+      })
+    );
+  }
+}

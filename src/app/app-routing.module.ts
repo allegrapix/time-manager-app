@@ -9,7 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { TaskComponent } from './my-tasks/task/task.component';
 import { NewTaskComponent } from './my-tasks/new-task/new-task.component';
 import { NoTaskComponent } from './my-tasks/no-task/no-task.component';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard, AdminManagerGuard } from './services/auth.guard';
 import { TaskResolver } from './services/task-resolver.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
@@ -22,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard, AdminManagerGuard],
   },
   { 
     path: 'mytasks', 

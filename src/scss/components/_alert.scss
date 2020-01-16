@@ -1,7 +1,7 @@
 .backdrop {
   @include position(absolute, 0, 0 , 0, 0);
   background: rgba($primary-color, .2);
-  z-index: 2;
+  z-index: 12;
 }
 
 .alert-box {
