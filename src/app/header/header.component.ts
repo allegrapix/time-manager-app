@@ -19,9 +19,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   alertModal = false;
   @ViewChild(PlaceHolderDirective, {static: false}) alertHost: PlaceHolderDirective;
   private closeAlertSub: Subscription;
+  allowed = false;
 
   constructor(
-    private router: Router,
     private logOrRegServ: LoginOrRegisterService,
     private authService: AuthService,
     private componentFactoryResolver: ComponentFactoryResolver
@@ -32,6 +32,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userSub = this.authService.user.subscribe(user => {
       this.notLogged = !user;
+      console.log(user);
+      if (user.role === 'admin' || user.role === 'manager ') {
+        this.allowed = true;
+      } else {
+        this.allowed = false;
+      }      
     });
     this.authService.pageNotAllowed.subscribe(() => {
       this.showAlert();
