@@ -39,12 +39,14 @@
           [formGroup]="usernameEditForm"
           (ngSubmit)="submitNewName()"
           *ngIf="editName"> 
-            <input 
-            type="text" 
-            name="name" 
-            class="form-input" 
-            formControlName="name"
-            [@expandField]>
+            <div class="input-container">
+              <input 
+              type="text" 
+              name="name" 
+              class="form-input" 
+              formControlName="name"
+              [@expandField]>
+            </div>
             <div [@editField] class="btn-group">
               <button 
               type="submit"
@@ -82,12 +84,14 @@
           [formGroup]="emailEditForm"
           (ngSubmit)="submitNewEmail()"
           *ngIf="editEmail">
-            <input 
-            type="email" 
-            class="form-input"
-            formControlName="email"
-            name="email"
-            [@expandField]>
+            <div class="input-container">
+              <input 
+              type="email" 
+              class="form-input"
+              formControlName="email"
+              name="email"
+              [@expandField]>
+            </div>
             <div class="btn-group" [@editField]>
               <button 
               class="add-btn edit-btn"
@@ -104,7 +108,7 @@
             </div>
           </form>
         </div>
-        <p class="userrole subtitle faded">admin</p>
+        <p class="userrole subtitle faded">{{ loggedUser.role }}</p>
         <label for="preferredHours" class="subtitle faded">Preferred working hours</label>
         <div class="select-hours-container select-container">
           <form 

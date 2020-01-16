@@ -40,7 +40,7 @@ import { Task } from '../my-tasks/task/task.model';
           animate('250ms ease-in-out',
             style({ 
               opacity: 1,
-              width: '85%'
+              width: '100%'
             })
           )
         ])
