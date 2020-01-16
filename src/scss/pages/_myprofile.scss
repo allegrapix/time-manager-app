@@ -245,6 +245,31 @@ app-profile {
             @include prefix(transform, translate(0, -10px), webkit moz ms 0);
           }
         }
+
+        .notasks {
+          @include border-radius(20px);
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px 0;
+          box-shadow: 0px 10px 56px -26px rgba($primary-color, .5);
+          border: 1px solid rgba($secondary-color, .3);
+          margin: 15px 0;
+          overflow: hidden;
+
+          &::before {
+            @include position(absolute, 0, null, 0, 0);
+            display: block;
+            content: '';
+            background: $fifth-color;
+            width: 6%;
+          }
+
+          .subtitle {
+            color: $fifth-color;
+          }
+        }
       }
     }
 

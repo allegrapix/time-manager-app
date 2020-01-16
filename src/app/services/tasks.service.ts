@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Task } from '../my-tasks/task/task.model';
 import { ActivatedRoute } from '@angular/router';
@@ -20,6 +20,7 @@ export class TasksService {
   ];
   url = 'http://localhost:3000';
   taskListModified = new EventEmitter<void>();
+  @Output() newDateSelected = new EventEmitter<Date>();
 
   getStatuses() {
     return this.statuses;
@@ -52,6 +53,9 @@ export class TasksService {
     let color = '';
     switch (status) {
       case 'ongoing': 
+        color = '#EF463F';
+        break;
+      case '': 
         color = '#EF463F';
         break;
       case 'completed': 

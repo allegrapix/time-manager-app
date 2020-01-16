@@ -1,1 +1,8 @@
-<ejs-calendar class="e-calendar" id=calendar [value]='value' [min]='minDate' [max]='maxDate'></ejs-calendar>
+<ejs-calendar 
+class="e-calendar" 
+id=calendar 
+[(value)]='selectedDate' 
+(change)="onChangeDate($event)"
+[min]='minDate' 
+[max]='maxDate'>
+</ejs-calendar>
