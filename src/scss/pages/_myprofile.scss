@@ -106,11 +106,15 @@ app-profile {
           width: 100%;
           margin: 3px 0;
 
+          .input-container {
+            @include position(absolute, 0);
+            width: 80%;
+          }
+
           .form-input {
             @include border-radius(10px); 
             @include font($color: $bgr-color, $font-weight: 700);
-            @include position(absolute, 0);
-            width: 80%;
+            width: 100%;
             margin: 0;
             padding: 5px 10px;
           }
@@ -157,10 +161,6 @@ app-profile {
       .btn {
         padding: 8px 50px;
         font-size: 18px;
-      }
-
-      .btn-edit {
-        margin-bottom: 10px;
       }
     }
   }
@@ -277,4 +277,217 @@ app-profile {
       width: 50%;
     }
   }
+}
+
+@media screen and (max-width: 1200px) {
+  app-profile {  
+    .user-details-container {  
+      .user-image-container {
+        @include border-radius(15px);
+        height: 220px;   
+      }
+  
+      .account-info-container {  
+        .user-info-container {
+          .title {
+            font-size: 21px;
+          }
+
+          .subtitle {
+            font-size: 16px;
+          }
+
+          .edit-btn,
+          .cancel-btn {
+            @include size(20px, 20px);
+          }          
+  
+          .to-edit-field {  
+            .input-container {
+              width: 75%;
+            }
+
+            .form-input {
+              padding: 3px 10px;
+            }
+          }
+        }
+  
+        .account-info {
+          width: 45%;
+        }
+    
+        .select-input {
+          font-size: 16px;
+          padding: 5px 15px;
+        }
+      }
+  
+      .buttons-container {
+        .btn {
+          padding: 8px 35px;
+          font-size: 16px;
+        }
+      }
+    }
+  
+    .tasks-and-calendar {    
+      .profile-tasks-container {  
+        .profile-tasks-header {
+          .add-btn {
+            @include size(20px, 20px);
+          }
+        }
+  
+        .select-input {
+          @include border-radius(15px);
+          padding: 5px 15px;
+        }
+  
+        .profile-task-list-container {    
+          .task-item {  
+            .task-info {
+              width: 60%;
+            }
+  
+            .task-date {
+              font-size: 14px;
+            }
+          }  
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  app-profile {
+    padding: 25px 0;
+  
+    .user-details-container {  
+      .user-image-container {
+        @include border-radius(10px);        
+        height: 200px; 
+      }
+  
+      .account-info-container {
+        padding: 0 25px 0 30px;
+        flex-wrap: wrap;
+        
+  
+        .user-info-container {
+          .to-edit-field {  
+            .input-container {
+              width: 85%;
+            }  
+          }
+        }
+  
+        .account-info {
+          width: 100%;
+        } 
+      }
+    }
+  
+    .tasks-and-calendar {  
+      &-container {
+        width: 100%;
+        padding: 20px 25px 0 0;
+      }
+  
+      .profile-tasks-container {
+        width: 32%;
+  
+        .profile-tasks-header,
+        .select-container {
+          margin-left: 30px;
+        }  
+   
+        .profile-task-list-container {
+          width: 100%;
+          overflow-y: scroll;
+          scroll-behavior: smooth; 
+        }
+      }
+  
+      .profile-calendar-container {
+        width: 64%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  app-profile {
+    padding: 15px 0;
+  
+    .user-details-container {
+      padding: 0 25px;
+      align-items: flex-start;
+  
+      .user-image-container {
+        @include border-radius(10px);
+        order: 2;
+        height: 80px;  
+  
+        &::before {
+          @include position(absolute, 0, 0, 0, 90%);
+        }  
+      }
+  
+      .account-info-container {
+        padding: 0 15px 0 0;
+  
+        .user-info-container { 
+  
+          .to-edit-field {  
+            .input-container {
+              width: 70%;
+            }
+          }
+        } 
+      }
+  
+      .buttons-container {
+        width: 100%;
+      }
+    }
+  
+    .tasks-and-calendar {  
+      &-container {
+        width: 100%;
+        padding: 0 25px;
+        flex-wrap: wrap;
+      }
+  
+      .profile-tasks-container {
+        width: 100%;
+  
+        .profile-tasks-header {
+          margin-left: 0;
+          padding-top: 15px;
+        }
+
+        .select-container {
+          margin: 0;
+        }
+  
+        .profile-task-list-container {
+          .task-item {  
+            .task-info {
+              width: 70%;
+            }
+          } 
+        }
+      }
+  
+      .profile-calendar-container {
+        width: 100%;
+
+        .subtitle {
+          padding-top: 15px;
+        }
+      }
+    }
+  }  
 }

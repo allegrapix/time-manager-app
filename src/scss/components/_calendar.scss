@@ -179,3 +179,92 @@ app-calendar {
     }
   }
 }
+
+@media screen and (max-width: 1200px) {
+  app-calendar {  
+    .e-calendar {
+      @include border-radius(15px);
+
+      .e-header {
+        padding: 10px 12px 5px; 
+      }
+  
+      .e-content {
+        &.e-month {
+          padding: 0 10px;
+        }
+  
+        &.e-year {
+          .e-cell {
+            padding: 24px 14px;
+          }
+        }
+  
+        &.e-decade {
+          .e-cell {
+            padding: 24px 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  app-calendar {  
+    .e-calendar {
+      @include border-radius(20px);
+
+      .e-header {
+        padding: 15px 25px 5px;
+      }
+  
+      .e-content {
+        &.e-month {
+          padding: 0 10px;
+        }
+  
+        &.e-year {
+          .e-cell {
+            padding: 24px 35px;
+          }
+        }
+  
+        &.e-decade {
+          .e-cell {
+            padding: 24px 28px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  app-calendar {  
+    .e-calendar {
+      .e-header {
+        padding: 15px 25px 5px;
+      }
+  
+      .e-content {
+        &.e-month {
+          padding: 0 10px;
+        }
+  
+        &.e-year {
+          .e-cell {
+            padding: 25px 29px;
+          }
+        }
+  
+        &.e-decade {
+          .e-cell {
+            padding: 25px 22px;
+          }
+        }
+      }
+    }
+  }
+}
