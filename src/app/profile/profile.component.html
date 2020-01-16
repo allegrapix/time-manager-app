@@ -159,7 +159,9 @@
           </select>
         </form>
         <div class="profile-task-list-container">
-          <ul class="task-list" [style.height.px]="listHeight">
+          <ul 
+          class="task-list" 
+          [style.height.px]="listHeight">
             <li
               #listItem
               *ngFor="let task of tasks"

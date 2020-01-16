@@ -76,19 +76,18 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   emailEditForm: FormGroup;
   locStorage;
   selectedDate: Date = new Date();
-  getTasksSub: Subscription;
-  tasks: Task[] = [
-    {
-      status: "completed",
-      workedHours: 100,
-      _id: "5e1f00f52baa2919fc93c72f",
-      title: "Website",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
-      createdAt: new Date("2020-01-15T12:09:25.876Z"),
-      updatedAt: new Date("2020-01-15T12:09:25.876Z")
-    }
-  ];
-  selectedStatus = 'all'
+  getTasksSub: Subscription; 
+  noTask: Task = {
+    status: "",
+    workedHours: 0,
+    _id: "new",
+    title: "No tasks",
+    description: ""
+  }
+  tasks: Task[] = [this.noTask];
+  selectedStatus = 'all';
+  calendarSub: Subscription;
+  showNoTasks = false;
   
   constructor(
     private userService: UserService,
@@ -100,11 +99,16 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
     ) { }
 
   ngOnInit() {    
+    this.calendarSub = this.taskService.newDateSelected.subscribe(newDate => {
+      this.selectedDate = new Date(newDate); 
+      this.loadSelectedDayTasks(this.selectedDate);
+    });
     this.getUserAvatar();
     this.getUser();
-    this.locStorage = JSON.parse(localStorage.getItem('userData'));
-    this.loadSelectedDayTasks(this.selectedDate);
     
+  
+    
+    this.locStorage = JSON.parse(localStorage.getItem('userData'));
   }
 
   ngAfterViewInit() {
@@ -231,13 +235,16 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
     const selMonth = selDate.getMonth();
     this.getTasksSub = this.taskService.getTasks(this.selectedStatus, undefined, undefined).subscribe(resData => {
       this.tasks = [];
-      const dd = new Date(resData[0].updatedAt).getDate();
-      const mm = new Date(resData[0].updatedAt).getMonth();
       resData.filter((task: Task) => {
+        const dd = new Date(task.updatedAt).getDate();
+        const mm = new Date(task.updatedAt).getMonth();
         if (selDay === dd && selMonth === mm) {
           this.tasks.push(task);
-        }
-      });      
+        }        
+      }); 
+      if(this.tasks.length === 0) {
+        this.tasks.push(this.noTask);
+      }
     },
     (err) => {},
     () => {
@@ -257,7 +264,6 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
 
   newStatusSelected(event: any) {
     this.selectedStatus = event.target.value;
-    console.log(this.selectedStatus);
     this.loadSelectedDayTasks(this.selectedDate);
   }
 }
