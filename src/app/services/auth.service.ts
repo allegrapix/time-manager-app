@@ -10,6 +10,7 @@ interface AuthResponseData {
     _id: string;
     name: string;
     email: string;
+    role: string;
     preferredWorkingHours: number;
     createdAt: Date;
     updatedAt: Date;
@@ -30,14 +31,13 @@ export class AuthService {
     private router: Router
     ) {}
 
-  register(name: string, email: string, role: string, password: string) {
+  register(name: string, email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
         `${this.url}/users/singup`,
         {
           name,
           email,
-          role,
           password
         }
       ).pipe(
@@ -47,6 +47,7 @@ export class AuthService {
             resData.user._id,
             resData.user.name,
             resData.user.email,
+            resData.user.role,
             resData.user.createdAt,
             resData.user.updatedAt,
             resData.user.preferredWorkingHours,
@@ -72,6 +73,7 @@ export class AuthService {
           resData.user._id,
           resData.user.name,
           resData.user.email,
+          resData.user.role,
           resData.user.createdAt,
           resData.user.updatedAt,
           resData.user.preferredWorkingHours,
@@ -87,6 +89,7 @@ export class AuthService {
       _id: string,
       name: string,
       email: string,
+      role: string,
       createdAt: Date,
       updatedAt: Date,
       preferredWorkingHours: number,
@@ -96,7 +99,7 @@ export class AuthService {
     if (!userData) {
       return;
     }
-    const loadedUser = new User(userData._id, userData.name, userData.email, userData.createdAt, userData.updatedAt, userData.preferredWorkingHours, new Date(userData._tokenExpirationDate), userData._token);    
+    const loadedUser = new User(userData._id, userData.name, userData.email, userData.role, userData.createdAt, userData.updatedAt, userData.preferredWorkingHours, new Date(userData._tokenExpirationDate), userData._token);    
     if (loadedUser.token) {
       this.user.next(loadedUser);
       const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
@@ -115,9 +118,9 @@ export class AuthService {
     return throwError(errorMsg);
   }
 
-  private handleAuthentication(_id: string, name: string, email: string, createdAt: Date, updatedAt: Date, preferredWorkingHours: number, expiresIn: number, token: string ) {
+  private handleAuthentication(_id: string, name: string, email: string, role: string, createdAt: Date, updatedAt: Date, preferredWorkingHours: number, expiresIn: number, token: string ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new User( _id, name, email,  createdAt, updatedAt, preferredWorkingHours, expirationDate, token);
+    const user = new User( _id, name, email, role,  createdAt, updatedAt, preferredWorkingHours, expirationDate, token);
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
