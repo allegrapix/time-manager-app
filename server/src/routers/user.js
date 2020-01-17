@@ -69,7 +69,7 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
 
 router.get('/users', authManager, async (req, res) => {
     try {
-      const users = await User.find({});
+      const users = await User.find({}, null, {limit: parseInt(req.query.limit), skip: parseInt(req.query.skip)});
       res.send(users);
     } catch (error) {
       res.status(500).send();

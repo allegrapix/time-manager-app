@@ -32,12 +32,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userSub = this.authService.user.subscribe(user => {
       this.notLogged = !user;
-      console.log(user);
-      if (user.role === 'admin' || user.role === 'manager ') {
-        this.allowed = true;
-      } else {
-        this.allowed = false;
-      }      
     });
     this.authService.pageNotAllowed.subscribe(() => {
       this.showAlert();
