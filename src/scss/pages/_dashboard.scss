@@ -1,0 +1,31 @@
+app-dashboard {
+  .dashboard-search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+
+    .search-input {
+      @include border-radius(10px);
+      width: 60%;
+      padding: 3px 10px;
+      margin: 0;
+    }
+  }
+
+  .dashboard-menu-item {
+    margin: 15px 0;
+
+    .task-color {
+      height: 80px;
+    }
+  }
+
+  .user-accounts-color {
+    background: $tenth-color;
+  }
+
+  .tasks-color {
+    background: $bgr-color;
+  }
+}

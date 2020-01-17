@@ -14,6 +14,8 @@ import { TaskResolver } from './services/task-resolver.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserAccountsComponent } from './dashboard/user-accounts/user-accounts.component';
+import { TaskManagerComponent } from './dashboard/task-manager/task-manager.component';
 
 const routes: Routes = [
   { 
@@ -24,6 +26,16 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard, AdminManagerGuard],
+    children: [
+      {
+        path: 'accounts',
+        component: UserAccountsComponent
+      },
+      {
+        path: 'taks-manager',
+        component: TaskManagerComponent
+      }
+    ]
   },
   { 
     path: 'mytasks', 

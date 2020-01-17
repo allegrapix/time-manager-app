@@ -40,6 +40,8 @@ import { EditBtnComponent } from './components/edit-btn/edit-btn.component';
 import { OkBtnComponent } from './components/ok-btn/ok-btn.component';
 import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserAccountsComponent } from './dashboard/user-accounts/user-accounts.component';
+import { TaskManagerComponent } from './dashboard/task-manager/task-manager.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     EditBtnComponent,
     OkBtnComponent,
     CancelBtnComponent,
-    DashboardComponent
+    DashboardComponent,
+    UserAccountsComponent,
+    TaskManagerComponent
   ],
   imports: [
     BrowserModule,
