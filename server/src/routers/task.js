@@ -31,6 +31,15 @@ router.post('/tasks/:userID', authAdmin, async (req, res) => {
   }
 });
 
+router.get('/tasks/all', authManager, async (req, res) => {
+  try {
+    const tasks = await Task.find({});
+    res.send(tasks);
+  } catch (error) {
+    res.status(500).send();
+  } 
+});
+
 router.get('/tasks/mytasks', auth, async (req, res) => {
   const match = {};
   const sort = {};

@@ -31,13 +31,14 @@ export class AuthService {
     private router: Router
     ) {}
 
-  register(name: string, email: string, password: string) {
+  register(name: string, email: string, role: string, password: string) {
     return this.http
       .post<AuthResponseData>(
         `${this.url}/users/singup`,
         {
           name,
           email,
+          role,
           password
         }
       ).pipe(
