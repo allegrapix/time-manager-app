@@ -259,6 +259,10 @@ app-dashboard {
                 }
               }
             }
+
+            .mat-form-field.mat-focused .mat-form-field-ripple {
+              background: $bgr-color;
+            }
           }
 
           .worked-hours-container {
@@ -272,7 +276,7 @@ app-dashboard {
           }
         }
 
-        .header-list-wrapper {
+        .task-table-wrapper {
           @include font($color: $primary-color, $font-weight: 600, $font-size: 14px);
           padding: 20px 0 10px;
 
@@ -325,5 +329,24 @@ app-dashboard {
         height: auto;
       }
     }
+  }
+}
+
+.db-task-container {
+  @include border-radius(5px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 20px -8px rgba($primary-color, .75);
+  overflow: hidden;
+  
+  .db-task-color {
+    width: 2%;
+    height: 30px;
+    background: $fifth-color;
+  }
+
+  .db-title {
+    width: 25%;
   }
 }
