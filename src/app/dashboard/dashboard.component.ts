@@ -17,4 +17,12 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['accounts'], {relativeTo: this.route})
   }
 
+  goToAccounts() {
+    this.router.navigate(['accounts'], {relativeTo: this.route});
+  }
+
+  goToTasks() {
+    this.router.navigate(['task-manager'], {relativeTo: this.route})
+  }
+
 }

@@ -1,35 +1,40 @@
 <div class="mt-menu">
   <div class="mt-menu-container">
     <p class="title">Dashboard</p>
-      <form class="dashboard-search-container">
-        <label for="dashboard-search" class="subtitle faded">Search</label>
-        <input
-        type="text" 
-        name="dashboard-search" 
-        placeholder="..."
-        class="form-input search-input">
-      </form>
   </div>
+  <app-profile-link></app-profile-link>
 </div>
 <div class="tasks-container">
   <div class="tasks-list-wrapper">
+    <form class="dashboard-search-container">
+      <label for="dashboard-search" class="subtitle faded">Search</label>
+      <input
+      type="text" 
+      name="dashboard-search" 
+      placeholder="..."
+      class="form-input search-input">
+    </form>
     <ul class="task-list">
-      <li class="task-item dashboard-menu-item">
+      <li 
+      (click)="goToAccounts()"
+      class="task-item dashboard-menu-item">
         <div class="task-color user-accounts-color"></div>
         <div class="task-info">
           <p class="task-title">User accounts</p>
         </div>
-        <div class="task-date">
-          <!--  -->
+        <div class="menu-icon account-icon">
+          <app-account-icon></app-account-icon>
         </div>
       </li>
-      <li class="task-item dashboard-menu-item">
+      <li 
+      (click)="goToTasks()"
+      class="task-item dashboard-menu-item">
         <div class="task-color tasks-color"></div>
         <div class="task-info">
           <p class="task-title">Tasks</p>
         </div>
-        <div class="task-date">
-          <!--  -->
+        <div class="menu-icon task-icon">
+          <app-task-icon></app-task-icon>
         </div>
       </li>
     </ul>
