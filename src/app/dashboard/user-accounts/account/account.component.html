@@ -39,7 +39,7 @@
       </div>
       <div class="hidden-line">
         <p class="subtitle faded">Preferred working hours:</p>
-        <form class="preferred-hours-form">
+        <form class="preferred-hours-form input-container">
           <select 
           class="form-input select-input"
           name="preferredWorkingHours">
@@ -52,6 +52,30 @@
       </div>
       <div class="hidden-line">
         <p class="subtitle faded">User tasks</p>
+        <div class="date-picker-container input-container">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="month"></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="worked-hours-container">
+          <p class="subtitle">Hours worked: 10</p>
+        </div>
+      </div>
+      <div class="header-list-wrapper">
+        <div class="hidden-line">
+          <p class="header-title">Title</p>
+          <p class="header-status">Status</p>
+          <p class="header-hours">Hours worked</p>
+          <p class="header-date">Date</p>
+          <div class="header-btn">
+            <button class="btn-new">
+              <span>New task</span>
+              <app-add-btn></app-add-btn>
+            </button>
+          </div>
+        </div>        
       </div>
     </div>
   </div>
