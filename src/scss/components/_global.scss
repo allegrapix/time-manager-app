@@ -1,5 +1,5 @@
 body {
-  font-family: $primary-font;
+  font-family: $primary-font !important;
   background: $bgr-secondary-color;
 
   ::-moz-selection { 

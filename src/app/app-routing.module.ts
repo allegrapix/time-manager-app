@@ -32,7 +32,7 @@ const routes: Routes = [
         component: UserAccountsComponent
       },
       {
-        path: 'taks-manager',
+        path: 'task-manager',
         component: TaskManagerComponent
       }
     ]

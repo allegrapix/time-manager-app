@@ -42,6 +42,10 @@ import { CancelBtnComponent } from './components/cancel-btn/cancel-btn.component
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserAccountsComponent } from './dashboard/user-accounts/user-accounts.component';
 import { TaskManagerComponent } from './dashboard/task-manager/task-manager.component';
+import { AccountIconComponent } from './components/account-icon/account-icon.component';
+import { TaskIconComponent } from './components/task-icon/task-icon.component';
+import { AccountComponent } from './dashboard/user-accounts/account/account.component';
+import { OpenProfileComponent } from './components/open-profile/open-profile.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +82,11 @@ import { TaskManagerComponent } from './dashboard/task-manager/task-manager.comp
     CancelBtnComponent,
     DashboardComponent,
     UserAccountsComponent,
-    TaskManagerComponent
+    TaskManagerComponent,
+    AccountIconComponent,
+    TaskIconComponent,
+    AccountComponent,
+    OpenProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +95,7 @@ import { TaskManagerComponent } from './dashboard/task-manager/task-manager.comp
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    CalendarModule
+    CalendarModule,
   ],
   providers: [
     LoginOrRegisterService, 

@@ -1,0 +1,59 @@
+<div class="user-card" [@showUserCard] [@openCloseCard]="showProfile ? 'open' : 'closed'">
+  <div class="shown-info-container">
+    <div class="user-avatar">
+      <img src="../../../../assets/img/robot.png" alt="avatar">
+    </div>
+    <div class="user-card-info">
+      <div class="username-container">
+        <p class="username subtitle">Username</p>
+      </div>
+      <div class="userrole-container">
+        <p class="userrole">user</p>
+      </div>
+      <div class="edit-btn-container">
+        <button type="button" class="user-edit-btn">
+          <span>Edit</span>
+          <app-edit-btn></app-edit-btn>
+        </button>
+      </div>
+      <div class="open-btn-container">
+        <button 
+        type="button" 
+        (click)=showHiddenProfile()
+        class="show-profile-btn">
+          <span>Show profile</span>
+          <app-open-profile></app-open-profile>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div 
+  class="hidden-info-container"
+  [ngClass]="{'show-hidden-profile': showProfile}">
+    <div class="line-separator">
+      <div class="line"></div>
+    </div>
+    <div class="hidden-info">
+      <div class="hidden-line">
+        <p class="subtitle faded">email@test.com</p>
+      </div>
+      <div class="hidden-line">
+        <p class="subtitle faded">Preferred working hours:</p>
+        <form class="preferred-hours-form">
+          <select 
+          class="form-input select-input"
+          name="preferredWorkingHours">
+            <option value="8">8h</option>
+          </select>
+        </form>
+        <div class="delete-btn-container">
+          <button class="btn btn-alert">Delete profile</button>
+        </div>
+      </div>
+      <div class="hidden-line">
+        <p class="subtitle faded">User tasks</p>
+      </div>
+    </div>
+  </div>
+</div>
+
