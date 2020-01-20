@@ -64,6 +64,7 @@ app-dashboard {
       box-shadow: 0 0 20px -20px rgba($primary-color, .5);
       transition: all 200ms ease-in-out;
       margin-bottom: 5px;
+      overflow: hidden;
 
       .shown-info-container {
         display: flex;
@@ -189,6 +190,7 @@ app-dashboard {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          padding: 5px 0;
 
           .subtitle {
             font-size: 14px;
@@ -196,7 +198,7 @@ app-dashboard {
             width: 50%;
           }
 
-          .preferred-hours-form {
+          .input-container {
             width: 20%;
             padding-right: 20px;
           }
@@ -219,6 +221,101 @@ app-dashboard {
             @include font($font-size: 12px);
             padding: 5px 20px;
             margin-left: 50px;
+          }    
+          
+          .date-picker-container {
+            mat-form-field {
+              width: 100%;
+
+              .mat-form-field-wrapper {
+                padding: 0;
+                position: relative;
+
+                .mat-form-field-flex {
+                  display: flex;
+                  justify-content: space-between;
+
+                  .mat-datepicker-toggle-default-icon  {
+                    color: $secondary-color;
+                  }
+
+                  .mat-form-field-infix {
+                    border: none;
+                    padding: 0;
+
+                    .mat-input-element {
+                      @include font($font-size: 12px, $color: $secondary-color);
+                    }
+
+                    .mat-form-field-label-wrapper {
+                      display: none;
+                    }
+                  }
+                }
+
+                .mat-form-field-underline {
+                  @include position(absolute, null, null, 0);
+                  background: $secondary-color;
+                }
+              }
+            }
+          }
+
+          .worked-hours-container {
+            width: 30%;
+            display: flex;
+            justify-content: flex-end;
+
+            .subtitle {
+              width: auto;
+            }
+          }
+        }
+
+        .header-list-wrapper {
+          @include font($color: $primary-color, $font-weight: 600, $font-size: 14px);
+          padding: 20px 0 10px;
+
+          .header-title {
+            width: 30%;
+          }
+          
+          .header-status {
+            width: 20%;
+          }
+
+          .header-hours {
+            width: 20%;
+          }
+
+          .header-date {
+            width: 15%;
+          }
+
+          .header-btn {
+            width: 15%;
+            display: flex;
+            justify-content: flex-end;
+
+            .btn-new {
+              display: flex;
+              border: none;
+              background: none;
+
+              span {
+                color: $primary-color;
+                margin-right: 5px;
+              }
+
+              svg {
+                @include size(15px, 15px);
+
+                .cls-1 {
+                  fill: $bgr-color;
+                  stroke: $bgr-color;
+                }
+              }
+            }
           }
         }
       }
