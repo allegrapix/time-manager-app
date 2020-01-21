@@ -11,7 +11,9 @@
         <p class="userrole">{{ user.role }}</p>
       </div>
       <div class="edit-btn-container">
-        <button type="button" class="user-edit-btn">
+        <button type="button" 
+        (click)=editSelectedUser()
+        class="user-edit-btn">
           <span>Edit</span>
           <app-edit-btn></app-edit-btn>
         </button>
@@ -21,8 +23,9 @@
         type="button" 
         (click)=showHiddenProfile()
         class="show-profile-btn">
-          <span>Show profile</span>
-          <app-open-profile></app-open-profile>
+          <span *ngIf="!showProfile">Show profile</span>
+          <span *ngIf="showProfile">Hide profile</span>
+          <app-open-profile [ngClass]="{'rotate-tab': showProfile}"></app-open-profile>
         </button>
       </div>
     </div>
@@ -78,6 +81,10 @@
         </div> 
         <div class="db-tasks">
           <app-dashboard-task *ngFor="let task of tasks" [task]="task"></app-dashboard-task>
+       
+          <div *ngIf="noTasks" class="no-task-container">
+            <p class="subtitle faded">No tasks</p>
+          </div>
         </div>
       </div>
     </div>

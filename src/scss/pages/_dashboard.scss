@@ -55,6 +55,16 @@ app-dashboard {
     position: relative;
     z-index: 50;
 
+    .users-container-overflow {
+      height: 705px;
+      overflow-y: scroll;
+      scroll-behavior: smooth; 
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
     .user-card {
       @include border-radius(10px);
       border: .5px solid rgba($secondary-color, .3);
@@ -110,6 +120,12 @@ app-dashboard {
 
       .edit-btn-container {
         width: 20%;
+        opacity: .8;
+        transition: all 200ms ease;
+
+        @include on_event {
+          opacity: 1;
+        }
       }
 
       .open-btn-container {
@@ -150,13 +166,24 @@ app-dashboard {
       }
 
       .show-profile-btn {
+        
         span {
           @include font($font-size: 16px, $font-weight: 600, $color: $fifth-color);
         }
 
-        app-open-profile .cls-1 {
-          fill: $fifth-color;
-          stroke: $fifth-color;
+        app-open-profile {
+          @include size(20px, 20px);
+          transition: all 200ms ease;
+          transform-origin: center;
+
+          .cls-1 {
+            fill: $fifth-color;
+            stroke: $fifth-color;
+          }
+        }
+
+        .rotate-tab {
+          @include prefix(transform, rotate(-180deg), webkit moz ms o);
         }
       }
 
@@ -406,4 +433,11 @@ app-dashboard {
   @include on_event {
     box-shadow: 0 0 20px -8px rgba($primary-color, .75);
   }
+}
+
+.no-task-container {
+  height: 168px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
