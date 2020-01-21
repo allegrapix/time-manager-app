@@ -1,1 +1,3 @@
-<app-account *ngFor="let user of users" [user]="user"></app-account>
+<div class="users-container-overflow">
+  <app-account *ngFor="let user of users" [user]="user" class="account-item"></app-account>
+</div>

@@ -9,8 +9,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./user-accounts.component.scss']
 })
 export class UserAccountsComponent implements OnInit, OnDestroy {
-  users: User[] = [];
   getAllUsersSub: Subscription;
+  winHeight: number = window.innerHeight;
+  users: User[] = [];
 
   constructor(
     private userService: UserService
@@ -22,7 +23,7 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
 
   getAllUsers() {
     this.getAllUsersSub = this.userService.getUsers().subscribe(users => {
-      this.users = users;      
+      this.users = users; 
     });
   }
 

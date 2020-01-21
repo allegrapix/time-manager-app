@@ -246,8 +246,8 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
     },
     (err) => {},
     () => {
-      const stuff = this.elRef.nativeElement.querySelector('.task-item')
-      this.listHeight = (stuff.offsetHeight + 15) * 3;
+      const taskItemHeight = this.elRef.nativeElement.querySelector('.task-item')
+      this.listHeight = (taskItemHeight.offsetHeight + 15) * 3;
     });
   }
 

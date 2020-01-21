@@ -51,23 +51,29 @@ import { Subscription } from 'rxjs';
   ]
 })
 export class AccountComponent implements OnInit, OnDestroy {
-  showProfile = false;
   @Input() user: User;
+  showProfile = false;
   tasksSub: Subscription;
   tasks: Task[];
+  noTasks = true;
 
   constructor(
     private taskService: TasksService
   ) { }
 
   ngOnInit() {   
-    this.getUserTasks(); 
+    this.getUserTasks();  
   }
 
   getUserTasks() {
     this.tasksSub = this.taskService.getUserTasks(this.user._id).subscribe(tasks => {
       this.tasks = tasks;
+      this.noTasks = this.tasks.length > 0 ? false : true;
     });
+  }
+
+  editSelectedUser() {
+    this.showProfile = true;
   }
 
   showHiddenProfile() {
