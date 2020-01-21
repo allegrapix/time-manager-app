@@ -332,21 +332,78 @@ app-dashboard {
   }
 }
 
+.db-tasks {
+  height: 168px;
+  overflow-y: scroll;
+  scroll-behavior: smooth; 
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .db-task-container {
   @include border-radius(5px);
+  border: 1px solid rgba($secondary-color, .3);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0 20px -8px rgba($primary-color, .75);
+  box-shadow: 0 0 20px -8px rgba($primary-color, .3);
+  transition: all 200ms ease;
+  margin-top: 5px;
   overflow: hidden;
   
   .db-task-color {
     width: 2%;
-    height: 30px;
+    height: 35px;
     background: $fifth-color;
   }
 
-  .db-title {
-    width: 25%;
+  .db-task-title {
+    width: 28%;
+    padding-left: 15px;
+  }
+
+  .db-task-status {
+    width: 20%;
+  }
+
+  .db-worked-hours {
+    width: 20%;
+    opacity: .6;
+  }
+
+  .db-date {
+    width: 15%;
+    opacity: .6;
+  }
+
+  .db-btn-container {
+    width: 15%;
+    display: flex;
+    justify-content: flex-end;
+
+    button svg {
+      @include size(20px, 20px);
+    }
+
+    .edit-btn,
+    .cancel-btn {
+      app-edit-btn,
+      app-cancel-btn {
+        .cls-1 {
+          opacity: .8;
+          transition: all 200ms ease;
+
+          @include on_event {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  @include on_event {
+    box-shadow: 0 0 20px -8px rgba($primary-color, .75);
   }
 }
