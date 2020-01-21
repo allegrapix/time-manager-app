@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
+import { User } from 'src/app/profile/user.model';
+import { Task } from 'src/app/my-tasks/task/task.model';
+import { TasksService } from 'src/app/services/tasks.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-account',
@@ -46,15 +50,31 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
     ])
   ]
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent implements OnInit, OnDestroy {
   showProfile = false;
-  constructor() { }
+  @Input() user: User;
+  tasksSub: Subscription;
+  tasks: Task[];
 
-  ngOnInit() {
+  constructor(
+    private taskService: TasksService
+  ) { }
+
+  ngOnInit() {   
+    this.getUserTasks(); 
+  }
+
+  getUserTasks() {
+    this.tasksSub = this.taskService.getUserTasks(this.user._id).subscribe(tasks => {
+      this.tasks = tasks;
+    });
   }
 
   showHiddenProfile() {
     this.showProfile = !this.showProfile;
   }
 
+  ngOnDestroy() {
+    this.tasksSub.unsubscribe();
+  }
 }

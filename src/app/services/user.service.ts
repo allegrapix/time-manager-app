@@ -9,6 +9,14 @@ export class UserService {
   constructor(private http: HttpClient) {}
   url = 'http://localhost:3000';
 
+  getUsers() {
+    return this.http
+    .get<User[]>(`${this.url}/users`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getUser() {
     return this.http
     .get<User>(`${this.url}/users/me`)

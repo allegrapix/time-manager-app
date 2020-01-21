@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.router.navigate(['accounts'], {relativeTo: this.route})
+    this.router.navigate(['accounts'], {relativeTo: this.route});    
   }
 
   goToAccounts() {
@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit {
   }
 
   goToTasks() {
-    this.router.navigate(['task-manager'], {relativeTo: this.route})
+    this.router.navigate(['task-manager'], {relativeTo: this.route});
   }
-
 }
