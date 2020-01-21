@@ -48,6 +48,7 @@ import { TaskIconComponent } from './components/task-icon/task-icon.component';
 import { AccountComponent } from './dashboard/user-accounts/account/account.component';
 import { OpenProfileComponent } from './components/open-profile/open-profile.component';
 import { DashboardTaskComponent } from './dashboard/user-accounts/dashboard-task/dashboard-task.component';
+import { EditAccountComponent } from './components/edit-account/edit-account.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { DashboardTaskComponent } from './dashboard/user-accounts/dashboard-task
     TaskIconComponent,
     AccountComponent,
     OpenProfileComponent,
-    DashboardTaskComponent
+    DashboardTaskComponent,
+    EditAccountComponent
   ],
   imports: [
     BrowserModule,

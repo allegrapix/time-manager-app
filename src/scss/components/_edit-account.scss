@@ -1,0 +1,96 @@
+.edit-account {
+  @include position(absolute, 0, 0, 0, 0);
+  background: rgba($primary-color, .2);
+  z-index: 30;
+
+  &-container {
+    @include position(absolute, 10%, 50%);
+    @include prefix(transform, translateX(50%), webkit moz ms o);
+    @include size(auto, 40%);
+    @include border-radius(20px);
+    background: $default-color;
+    padding: 50px 25px;
+    min-height: 400px;
+
+    &::before {
+      @include position(absolute, 0, null, 0, 0);
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      width: 20px;
+      display: block;
+      content: '';
+      background: $tenth-color;
+    }
+
+    .btn-empty {
+      @include position(absolute, 20px, 40px);
+    }
+
+    .edit-user-form {
+      .edit-user-image-container {
+        @include position(absolute, 0, null, null, -50px);
+        @include size(200px, 25%);
+        @include border-radius(10px);
+        box-shadow: 0px 10px 56px -26px rgba($primary-color, .75);
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+          @include position(absolute, 0, null, 0, 0);
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+          width: 15px;
+          display: block;
+          content: '';
+          background: $bgr-color;
+        }
+
+        img {
+          @include size(100%, 100%);
+          object-fit: cover;
+        }
+
+        .image-upload {
+          @include position(absolute, 0, 0, 0, null);
+          width: 100%;
+          opacity: 0;
+          z-index: 2;
+          cursor: pointer;
+        }
+
+        .upload-text {
+          @include position(absolute, 0, 0, 0, 0);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .subtitle {
+            font-size: 18px;
+          }
+        }
+      }
+
+      .edit-user-info-container {
+        @include position(absolute, 50px, 30px);
+        width: 75%;
+        padding: 0 20px;
+
+        .title {
+          @include font($font-size: 21px);
+          padding: 10px 0;
+        }
+
+        .form-group {
+          .default-text {
+            font-size: 16px;
+          }
+
+          .form-input {
+            margin: 10px 0;
+            padding: 5px 10px;
+          }
+        }
+      }
+    }
+  }
+}
