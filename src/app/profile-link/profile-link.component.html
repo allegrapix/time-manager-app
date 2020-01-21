@@ -1,6 +1,6 @@
 <div class="mt-user-info">
     <a routerLink="/myprofile" class="user-info">
       <p>Username</p>
-      <img [src]="profileImg" alt="profile-image">
+      <img [src]="profileImg" alt="profile-image" *ngIf="!noAvatar">
     </a>
   </div>
