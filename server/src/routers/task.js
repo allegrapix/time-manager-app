@@ -75,7 +75,7 @@ router.get('/tasks/mytasks', auth, async (req, res) => {
   }
 });
 
-router.get('/tasks/:userID', authAdmin, async (req, res) => {
+router.get('/tasks/:userID', authManager, async (req, res) => {
   const _id = req.params.userID;
   try {
     const user = await User.findById(_id);

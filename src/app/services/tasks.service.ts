@@ -44,6 +44,14 @@ export class TasksService {
     params = params.append("sortBy", 'createdAt:desc');
     return this.http.get<Task[]>(`${this.url}/tasks/mytasks`, {params: params});
   }
+
+  getUserTasks(id: string) {
+    return this.http
+    .get<Task[]>(`${this.url}/tasks/${id}`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
   
   getTask(id: string) {
     return this.http.get<Task>(`${this.url}/tasks/mytasks/${id}`);

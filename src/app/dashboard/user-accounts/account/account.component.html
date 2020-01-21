@@ -5,10 +5,10 @@
     </div>
     <div class="user-card-info">
       <div class="username-container">
-        <p class="username subtitle">Username</p>
+        <p class="username subtitle">{{ user.name }}</p>
       </div>
       <div class="userrole-container">
-        <p class="userrole">user</p>
+        <p class="userrole">{{ user.role }}</p>
       </div>
       <div class="edit-btn-container">
         <button type="button" class="user-edit-btn">
@@ -35,7 +35,7 @@
     </div>
     <div class="hidden-info">
       <div class="hidden-line">
-        <p class="subtitle faded">email@test.com</p>
+        <p class="subtitle faded">{{ user.email}}</p>
       </div>
       <div class="hidden-line">
         <p class="subtitle faded">Preferred working hours:</p>
@@ -43,7 +43,7 @@
           <select 
           class="form-input select-input"
           name="preferredWorkingHours">
-            <option value="8">8h</option>
+        <option value="8">{{ user.preferredWorkingHours }}h</option>
           </select>
         </form>
         <div class="delete-btn-container">
@@ -77,12 +77,7 @@
           </div>
         </div> 
         <div class="db-tasks">
-            <app-dashboard-task></app-dashboard-task>
-            <app-dashboard-task></app-dashboard-task>
-            <app-dashboard-task></app-dashboard-task>
-            <app-dashboard-task></app-dashboard-task>
-            <app-dashboard-task></app-dashboard-task>
-            <app-dashboard-task></app-dashboard-task>
+          <app-dashboard-task *ngFor="let task of tasks" [task]="task"></app-dashboard-task>
         </div>
       </div>
     </div>
