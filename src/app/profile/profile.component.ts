@@ -105,9 +105,6 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     this.getUserAvatar();
     this.getUser();
-    
-  
-    
     this.locStorage = JSON.parse(localStorage.getItem('userData'));
   }
 
@@ -191,6 +188,7 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
       if (user.avatar) {
         this.noAvatar = false;
         this.base64Image  = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${user.avatar}`);
+        this.auth.user.value.avatar = user.avatar;
       } else {
         this.noAvatar = true
       }

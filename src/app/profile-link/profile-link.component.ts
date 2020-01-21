@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
@@ -12,6 +12,7 @@ import { UserService } from '../services/user.service';
 export class ProfileLinkComponent implements OnInit, OnDestroy {
   profileImg: SafeUrl;
   userSub: Subscription;
+  noAvatar = true;
 
   constructor(
     private authService: AuthService,
@@ -21,8 +22,12 @@ export class ProfileLinkComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userSub = this.userService.getUser().subscribe(user => {
-      this.profileImg  = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${user.avatar}`);
-      
+      if (user.avatar) {
+        this.profileImg  = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${user.avatar}`); 
+        this.noAvatar = false;
+      } else {
+        this.noAvatar = true;
+      }
     });
   }
 
