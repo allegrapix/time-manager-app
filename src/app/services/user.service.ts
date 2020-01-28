@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -8,6 +8,7 @@ import { User } from '../profile/user.model';
 export class UserService {
   constructor(private http: HttpClient) {}
   url = 'http://localhost:3000';
+  userToBeEdited = new EventEmitter<User>();
 
   getUsers() {
     return this.http
@@ -35,6 +36,17 @@ export class UserService {
     );
   }
 
+  postAvatarByAdmin(file, id) {
+    return this.http
+    .post(`${this.url}/users/${id}/avatar`, file, {
+      reportProgress: true,
+      observe: 'events'
+    })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   deleteUser() {
     return this.http
     .delete(`${this.url}/users/me`)
@@ -57,5 +69,13 @@ export class UserService {
     .pipe(
       catchError(this.handleError)
     )
+  }
+
+  editUserByAdmin(id, payload) {
+    return this.http
+    .patch(`${this.url}/users/${id}`, payload)
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 }
