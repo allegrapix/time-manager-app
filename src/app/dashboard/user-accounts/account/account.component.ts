@@ -59,6 +59,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   tasks: Task[];
   noTasks = true;
   base64Image: SafeUrl;
+  avatarChangeSub: Subscription;
 
   constructor(
     private taskService: TasksService,
@@ -69,6 +70,12 @@ export class AccountComponent implements OnInit, OnDestroy {
   ngOnInit() {   
     this.getUserTasks();
     this.getUserAvatar();
+    this.avatarChangeSub = this.userService.avatarChanged.subscribe(userData => {
+      if (this.user._id === userData._id) {
+        this.user = userData;
+        this.getUserAvatar()
+      }
+    });
   }
 
   getUserTasks() {
@@ -96,5 +103,6 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.tasksSub.unsubscribe();
+    this.avatarChangeSub.unsubscribe();
   }
 }

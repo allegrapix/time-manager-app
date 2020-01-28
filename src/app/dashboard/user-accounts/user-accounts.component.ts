@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class UserAccountsComponent implements OnInit, OnDestroy {
   getAllUsersSub: Subscription;
   winHeight: number = window.innerHeight;
-  users: User[] = [];
+  users: User[] = [];  
 
   constructor(
     private userService: UserService

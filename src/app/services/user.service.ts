@@ -9,6 +9,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
   url = 'http://localhost:3000';
   userToBeEdited = new EventEmitter<User>();
+  avatarChanged = new EventEmitter<User>();
 
   getUsers() {
     return this.http
@@ -26,6 +27,14 @@ export class UserService {
     )
   }
 
+  getUserByAdmin(id) {
+    return this.http
+    .get<User>(`${this.url}/users/${id}`)
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
+
   postAvatar(file) { 
     return this.http
     .post(`${this.url}/users/me/avatar`, file, {
@@ -38,10 +47,7 @@ export class UserService {
 
   postAvatarByAdmin(file, id) {
     return this.http
-    .post(`${this.url}/users/${id}/avatar`, file, {
-      reportProgress: true,
-      observe: 'events'
-    })
+    .post(`${this.url}/users/${id}/avatar`, file)
     .pipe(
       catchError(this.handleError)
     );
