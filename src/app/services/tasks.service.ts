@@ -8,8 +8,7 @@ import { throwError } from 'rxjs';
 @Injectable({providedIn: 'root'})
 export class TasksService {
   constructor(
-    private http: HttpClient,
-    private route: ActivatedRoute
+    private http: HttpClient
   ) {}
 
   tasks: Task[] = [];

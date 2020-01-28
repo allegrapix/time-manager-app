@@ -10,6 +10,7 @@ export class UserService {
   url = 'http://localhost:3000';
   userToBeEdited = new EventEmitter<User>();
   avatarChanged = new EventEmitter<User>();
+  userDeleted = new EventEmitter<string>();
 
   getUsers() {
     return this.http
@@ -55,7 +56,15 @@ export class UserService {
 
   deleteUser() {
     return this.http
-    .delete(`${this.url}/users/me`)
+    .delete<User>(`${this.url}/users/me`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteUserByAdmin(id) {
+    return this.http
+    .delete<User>(`${this.url}/users/${id}`)
     .pipe(
       catchError(this.handleError)
     );

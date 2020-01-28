@@ -6,6 +6,8 @@ import { TasksService } from 'src/app/services/tasks.service';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { FormControl } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material';
 
 @Component({
   selector: 'app-account',
@@ -56,10 +58,11 @@ export class AccountComponent implements OnInit, OnDestroy {
   @Input() user: User;
   showProfile = false;
   tasksSub: Subscription;
-  tasks: Task[];
+  tasks: Task[] = [];
   noTasks = true;
   base64Image: SafeUrl;
   avatarChangeSub: Subscription;
+  today = new FormControl(new Date());
 
   constructor(
     private taskService: TasksService,
@@ -67,8 +70,8 @@ export class AccountComponent implements OnInit, OnDestroy {
     private domSanitizer: DomSanitizer
   ) { }
 
-  ngOnInit() {   
-    this.getUserTasks();
+  ngOnInit() { 
+    this.getUserTasks(this.today.value);
     this.getUserAvatar();
     this.avatarChangeSub = this.userService.avatarChanged.subscribe(userData => {
       if (this.user._id === userData._id) {
@@ -78,9 +81,19 @@ export class AccountComponent implements OnInit, OnDestroy {
     });
   }
 
-  getUserTasks() {
+  getUserTasks(selDate: Date) {
+    const selDay = selDate.getDate();
+    const selMonth = selDate.getMonth();
+    
     this.tasksSub = this.taskService.getUserTasks(this.user._id).subscribe(tasks => {
-      this.tasks = tasks;
+      this.tasks = [];
+      tasks.filter((task: Task) => {
+        const dd = new Date(task.updatedAt).getDate();
+        const mm = new Date(task.updatedAt).getMonth();
+        if (selDay === dd && selMonth === mm) {
+          this.tasks.push(task);
+        }  
+      })
       this.noTasks = this.tasks.length > 0 ? false : true;
     });
   }
@@ -99,6 +112,16 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   showHiddenProfile() {
     this.showProfile = !this.showProfile;
+  }
+
+  deleteSelectedUser() {
+    this.userService.deleteUserByAdmin(this.user._id).subscribe(resData => {
+      this.userService.userDeleted.emit(resData._id);
+    })
+  }
+
+  getTodaysTasks(event: MatDatepickerInputEvent<Date>) {
+    this.getUserTasks(event.value);    
   }
 
   ngOnDestroy() {

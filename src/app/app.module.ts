@@ -49,6 +49,7 @@ import { AccountComponent } from './dashboard/user-accounts/account/account.comp
 import { OpenProfileComponent } from './components/open-profile/open-profile.component';
 import { DashboardTaskComponent } from './dashboard/user-accounts/dashboard-task/dashboard-task.component';
 import { EditAccountComponent } from './components/edit-account/edit-account.component';
+import { TaskModalComponent } from './components/task-modal/task-modal.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { EditAccountComponent } from './components/edit-account/edit-account.com
     AccountComponent,
     OpenProfileComponent,
     DashboardTaskComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    TaskModalComponent
   ],
   imports: [
     BrowserModule,
