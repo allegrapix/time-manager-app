@@ -1,7 +1,7 @@
 <div class="user-card" [@showUserCard] [@openCloseCard]="showProfile ? 'open' : 'closed'">
   <div class="shown-info-container">
     <div class="user-avatar">
-      <img src="../../../../assets/img/robot.png" alt="avatar">
+      <img [src]="base64Image" alt="avatar">
     </div>
     <div class="user-card-info">
       <div class="username-container">
@@ -46,7 +46,7 @@
           <select 
           class="form-input select-input"
           name="preferredWorkingHours">
-        <option value="8">{{ user.preferredWorkingHours }}h</option>
+        <option [value]="user.preferredWorkingHours">{{ user.preferredWorkingHours }}h</option>
           </select>
         </form>
         <div class="delete-btn-container">

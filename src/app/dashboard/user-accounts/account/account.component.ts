@@ -4,6 +4,8 @@ import { User } from 'src/app/profile/user.model';
 import { Task } from 'src/app/my-tasks/task/task.model';
 import { TasksService } from 'src/app/services/tasks.service';
 import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-account',
@@ -56,13 +58,17 @@ export class AccountComponent implements OnInit, OnDestroy {
   tasksSub: Subscription;
   tasks: Task[];
   noTasks = true;
+  base64Image: SafeUrl;
 
   constructor(
-    private taskService: TasksService
+    private taskService: TasksService,
+    private userService: UserService,
+    private domSanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {   
-    this.getUserTasks();  
+    this.getUserTasks();
+    this.getUserAvatar();
   }
 
   getUserTasks() {
@@ -72,8 +78,16 @@ export class AccountComponent implements OnInit, OnDestroy {
     });
   }
 
+  getUserAvatar() {
+    if(this.user.avatar) {
+      this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${this.user.avatar}`);
+    } else {
+      this.base64Image = '../../../../assets/img/robot.png';
+    }
+  }
+
   editSelectedUser() {
-    this.showProfile = true;
+    this.userService.userToBeEdited.emit(this.user);
   }
 
   showHiddenProfile() {

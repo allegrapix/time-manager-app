@@ -67,6 +67,24 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
   res.status(400).send({error: error.message});
 });
 
+router.post('/users/:userID/avatar', authManager, upload.single('avatar'), async (req, res) => {
+  const _id = req.params.userID;
+  console.log(_id);
+  
+  try {
+    const user = await User.findById(_id);
+    if(!user) {
+      return res.status(404).send();
+    }
+    const buffer = await sharp(req.file.buffer).toBuffer();
+    user.avatar = buffer;
+    await user.save();
+    res.send(user);
+  } catch (error) {
+    res.status(500).send();
+  }
+});
+
 router.get('/users', authManager, async (req, res) => {
     try {
       const users = await User.find({}, null, {limit: parseInt(req.query.limit), skip: parseInt(req.query.skip)});
