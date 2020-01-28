@@ -43,7 +43,7 @@ export class EditAccountComponent implements OnInit {
   dropDownIsOpen = false;
   hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   base64Image: SafeUrl;
-
+  
   constructor(
     private userService: UserService,
     private domSanitizer: DomSanitizer
@@ -81,19 +81,27 @@ export class EditAccountComponent implements OnInit {
         this.selectedUser[update] = resData[update];
       })
       this.editModalIsOpen = false;
-    })
+    });
   }
 
   onAvatarSelected(event) {
     this.selectedFile = <File>event.target.files[0];
+    this.onSubmitAvatar();
   }
 
   onSubmitAvatar() {
     const formData = new FormData();
     formData.append('avatar', this.selectedFile, this.selectedFile.name);    
     this.userService.postAvatarByAdmin(formData, this.selectedUser._id).subscribe(resData => {
-      console.log(resData);     
-      // this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${resData.avatar}`); 
+      this.getUserAvatar();
+    })
+  }
+
+  getUserAvatar() {
+    this.userService.getUserByAdmin(this.selectedUser._id).subscribe(resData => {
+      this.selectedUser.avatar = resData.avatar;
+      this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${resData.avatar}`);      
+      this.userService.avatarChanged.emit(this.selectedUser);
     })
   }
 

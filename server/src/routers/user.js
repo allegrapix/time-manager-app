@@ -69,8 +69,6 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
 
 router.post('/users/:userID/avatar', authManager, upload.single('avatar'), async (req, res) => {
   const _id = req.params.userID;
-  console.log(_id);
-  
   try {
     const user = await User.findById(_id);
     if(!user) {
