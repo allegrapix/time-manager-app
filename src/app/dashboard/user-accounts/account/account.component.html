@@ -4,7 +4,7 @@
       <img [src]="base64Image" alt="avatar">
     </div>
     <div class="user-card-info">
-      <div class="username-container">
+      <div class="username-container" (click)=showHiddenProfile()>
         <p class="username subtitle">{{ user.name }}</p>
       </div>
       <div class="userrole-container">
@@ -42,22 +42,18 @@
       </div>
       <div class="hidden-line">
         <p class="subtitle faded">Preferred working hours:</p>
-        <form class="preferred-hours-form input-container">
-          <select 
-          class="form-input select-input"
-          name="preferredWorkingHours">
-        <option [value]="user.preferredWorkingHours">{{ user.preferredWorkingHours }}h</option>
-          </select>
-        </form>
+        <div class="display-hours-container">
+          <p class="display-hour">{{ user.preferredWorkingHours}}h</p>
+        </div>
         <div class="delete-btn-container">
-          <button class="btn btn-alert">Delete profile</button>
+          <button class="btn btn-alert" (click)="deleteSelectedUser()">Delete profile</button>
         </div>
       </div>
       <div class="hidden-line">
         <p class="subtitle faded">User tasks</p>
         <div class="date-picker-container input-container">
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+            <input matInput [matDatepicker]="picker" [formControl]="today" (dateChange)="getTodaysTasks($event)">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker startView="month"></mat-datepicker>
           </mat-form-field>
@@ -80,8 +76,7 @@
           </div>
         </div> 
         <div class="db-tasks">
-          <app-dashboard-task *ngFor="let task of tasks" [task]="task"></app-dashboard-task>
-       
+          <app-dashboard-task *ngFor="let task of tasks" [task]="task"></app-dashboard-task>       
           <div *ngIf="noTasks" class="no-task-container">
             <p class="subtitle faded">No tasks</p>
           </div>

@@ -12,6 +12,7 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
   getAllUsersSub: Subscription;
   winHeight: number = window.innerHeight;
   users: User[] = [];  
+  userDeleteSub : Subscription;
 
   constructor(
     private userService: UserService
@@ -19,6 +20,10 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getAllUsers();
+    this.userDeleteSub = this.userService.userDeleted.subscribe(user_id => {
+      const index = this.users.findIndex(user => user._id === user_id);
+      this.users.splice(index, 1);
+    })
   }
 
   getAllUsers() {
