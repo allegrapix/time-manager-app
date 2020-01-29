@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -8,9 +8,9 @@ import { User } from '../profile/user.model';
 export class UserService {
   constructor(private http: HttpClient) {}
   url = 'http://localhost:3000';
-  userToBeEdited = new EventEmitter<User>();
-  avatarChanged = new EventEmitter<User>();
-  userDeleted = new EventEmitter<string>();
+  @Output() userToBeEdited = new EventEmitter<User>();
+  @Output() avatarChanged = new EventEmitter<User>();
+  @Output() userDeleted = new EventEmitter<string>();
 
   getUsers() {
     return this.http
@@ -28,12 +28,12 @@ export class UserService {
     )
   }
 
-  getUserByAdmin(id) {
+  getUserByAdmin(id) {    
     return this.http
     .get<User>(`${this.url}/users/${id}`)
     .pipe(
       catchError(this.handleError)
-    )
+    );
   }
 
   postAvatar(file) { 

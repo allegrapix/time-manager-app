@@ -29,15 +29,15 @@ export class NewTaskComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
     ) { }
 
-  ngOnInit() {
+  ngOnInit() {  
     this.statuses = this.tasksService.getStatuses();
     this.newTaskForm = new FormGroup({
       'title': new FormControl(null, Validators.required),
       'status': new FormControl(null, Validators.required),
       'workedHours': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required)
-    });
-    this.route.data.subscribe((data: Data) => {
+    });    
+    this.route.data.subscribe((data: Data) => {      
       this.task = data['task'];
       if (this.task) {
         this.newTaskForm.setValue({
