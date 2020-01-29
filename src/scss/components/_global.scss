@@ -81,7 +81,7 @@ body {
 }
 
 .form-input.ng-valid {
-  background-color: rgba($bgr-color, .2);
+  background-color: rgba($bgr-secondary-shadow, .5);
 }
 
 .form-input {
@@ -96,7 +96,7 @@ body {
   position: relative;
 
   @include on_event {
-    background-color: $bgr-secondary-shadow; 
+    background-color: rgba($bgr-secondary-shadow, .5);
     color: $primary-color;
   }
 }
@@ -130,7 +130,19 @@ body {
     -webkit-appearance: none;
     appearance: none;
     z-index: 2;
+
+    &.ng-valid {
+      background-color: rgba($bgr-secondary-shadow, .5); 
+      color: $primary-color;
+    }
   }  
+
+  @include on_event {
+    .select-input {
+      background-color: rgba($bgr-secondary-shadow, .5); 
+      color: $primary-color;
+    } 
+  }
 }
 
 @media screen and (max-width: 1200px) {

@@ -202,9 +202,8 @@ app-dashboard {
           padding: 10px 0;
           
           .line {
-            @include size(.5px, 100%);
+            @include size(1px, 100%);
             background: rgba($secondary-color, .3);
-
           }
         }
 
@@ -346,18 +345,36 @@ app-dashboard {
               display: flex;
               border: none;
               background: none;
-
+              
               span {
-                color: $primary-color;
+                @include font($color: $primary-color, $font-weight: 600);                
                 margin-right: 5px;
               }
-
+              
               svg {
                 @include size(15px, 15px);
 
+                .cls-1,
+                .cls-2 {
+                  transition: all 200ms ease;
+                }
+                
                 .cls-1 {
                   fill: $bgr-color;
                   stroke: $bgr-color;
+                }
+              }
+
+              @include on_event {
+                svg {
+                  .cls-1 {
+                    fill: $default-color;
+                  }
+
+                  .cls-2 {
+                    fill: $bgr-color;
+                    stroke: $bgr-color;
+                  }
                 }
               }
             }

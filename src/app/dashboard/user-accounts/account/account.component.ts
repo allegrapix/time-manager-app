@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { User } from 'src/app/profile/user.model';
 import { Task } from 'src/app/my-tasks/task/task.model';
@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -63,11 +64,14 @@ export class AccountComponent implements OnInit, OnDestroy {
   base64Image: SafeUrl;
   avatarChangeSub: Subscription;
   today = new FormControl(new Date());
+  @Output() newUserSelected: EventEmitter<User> = new EventEmitter<User>();
 
   constructor(
     private taskService: TasksService,
     private userService: UserService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() { 
@@ -83,8 +87,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   getUserTasks(selDate: Date) {
     const selDay = selDate.getDate();
-    const selMonth = selDate.getMonth();
-    
+    const selMonth = selDate.getMonth();    
     this.tasksSub = this.taskService.getUserTasks(this.user._id).subscribe(tasks => {
       this.tasks = [];
       tasks.filter((task: Task) => {
@@ -122,6 +125,10 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   getTodaysTasks(event: MatDatepickerInputEvent<Date>) {
     this.getUserTasks(event.value);    
+  }
+
+  openTaskModal() {
+    this.taskService.taskModal.emit(this.user._id);
   }
 
   ngOnDestroy() {

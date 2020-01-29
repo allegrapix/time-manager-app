@@ -108,6 +108,7 @@ import { TaskModalComponent } from './components/task-modal/task-modal.component
   providers: [
     LoginOrRegisterService, 
     TaskResolver,
+    // UserResolver,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -116,7 +117,8 @@ import { TaskModalComponent } from './components/task-modal/task-modal.component
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AlertComponent
+    AlertComponent,
+    TaskModalComponent
   ]
 })
 export class AppModule { }

@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Task } from '../my-tasks/task/task.model';
-import { ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -19,6 +18,8 @@ export class TasksService {
   ];
   url = 'http://localhost:3000';
   taskListModified = new EventEmitter<void>();
+  @Output() taskModal = new EventEmitter<string>();
+  @Output() closeTaskModal = new EventEmitter<void>();
   @Output() newDateSelected = new EventEmitter<Date>();
 
   getStatuses() {

@@ -1,6 +1,12 @@
-<div class="task-modal-background"></div>
-<div class="task-modal">
-  <div class="task-modal-container">
+<div class="task-modal-background" [@showTaskModalBgr] (click)="onCloseTask()"></div>
+<div class="task-modal" [@showTaskModal]>
+  <div class="close-modal-container">
+    <button class="btn-empty" (click)="onCloseTask()">
+      <div class="close-btn">
+        <div class="close-bar bar-left"></div>
+        <div class="close-bar bar-right"></div>
+      </div>
+    </button>
   </div>
   <app-new-task></app-new-task>
 </div>
