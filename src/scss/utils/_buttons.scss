@@ -44,6 +44,21 @@
   }
 }
 
+.btn-warning {
+  background: $tenth-color;
+  background-image: linear-gradient(to right, $tenth-color-light 1%, $tenth-color 99%);
+  background-size: 180%;
+  background-position: left;
+
+  @include on_event {
+    background-position: right;
+  }
+
+  &:disabled {
+    background-position: left;
+  }
+}
+
 .add-btn {
   @include size(30px, 30px);
   border: none;

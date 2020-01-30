@@ -1,0 +1,136 @@
+.confirm-modal.task-modal {
+  top: 30%;
+  width: auto;
+  padding: 50px 70px 50px 80px;
+  text-align: center;
+
+  &::before {
+    background: $fifth-color;
+    width: 20px;
+  }
+
+  .title {
+    font-size: 21px;
+    padding: 10px 0 5px;
+  }
+
+  .confirm-message {
+    @include font($font-weight: 500, $font-size: 16px);
+    padding-bottom: 20px;
+  }
+
+  .btn-group {
+    .btn {
+      @include font($font-size: 16px);
+      width: auto;
+      padding: 6px 50px;
+    }
+  }
+  
+  .alert-icon {
+    display: block;
+    position: relative;
+    height: 140px;
+
+    .envelope, 
+    .letter,
+    .envelope-front {
+      @include position(absolute, null, 50%);
+      @include prefix(transform, translateX(50%), webkit moz ms o);
+    }
+
+    .letter {
+      top: 0;
+      animation: envelope 2s linear 0s infinite;
+      -webkit-animation: envelope 2s linear 0s infinite;
+    }
+
+    svg {
+      width: 150px;
+    }
+
+    .envelope-back,
+    .env-9 {
+      fill: $default-color;
+      stroke: $secondary-color;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-linejoin: round;
+      stroke-width: 3px;
+    }
+
+    .env-1,
+    .env-6 {
+      fill: $default-color;
+      opacity: 1;
+    }
+    
+    .env-1,
+    .env-8 {
+      stroke: $secondary-color;
+    }
+    
+    .env-1,
+    .env-4,
+    .env-5,
+    .env-8 {
+      stroke-linecap: round;
+    }
+    
+    .env-1,
+    .env-5,
+    .env-8 {
+      stroke-linejoin: round;
+    }
+    
+    .env-1,
+    .env-2,
+    .env-5,
+    .env-8 {
+      stroke-width: 3px;
+    }
+
+    .env-2,
+    .env-4,
+    .env-8 {
+      fill: none;
+    }
+    
+    .env-2,
+    .env-4,
+    .env-5 {
+      stroke: $fifth-color;
+    }
+    
+    .env-2,
+    .env-4 {
+      stroke-miterlimit: 10;
+    }
+    
+    .env-3,
+    .env-5,
+    .env-7 {
+      fill: $fifth-color;
+    }
+    
+    .env-4 {
+      stroke-width: 5px;
+    }
+    
+    .env-7 {
+      opacity: .1;
+    }
+  }
+}
+
+@keyframes envelope {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: -20px;
+  }
+  100% {
+    top: 0;
+  }
+}

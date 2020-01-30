@@ -104,7 +104,6 @@ export class TaskModalComponent implements OnInit {
       });
     } else {
       this.taskService.editTaskByAdmin(this.userID, this.taskID, this.modalForm.value).subscribe(task => {
-        console.log(task);
         this.taskService.closeTaskModal.emit(task);
       })
     }

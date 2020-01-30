@@ -1,13 +1,12 @@
-import { Component, OnInit, OnDestroy, ComponentFactoryResolver, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { LoginOrRegisterService } from '../services/login-or-resgister.service';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
 import { AlertComponent } from '../components/alert/alert.component';
 import { PlaceHolderDirective } from '../services/placeholder.directive';
 import { TaskModalComponent } from '../components/task-modal/task-modal.component';
 import { TasksService } from '../services/tasks.service';
-import { UserService } from '../services/user.service';
+import { ConfirmComponent } from '../components/confirm/confirm.component';
 
 @Component({
   selector: 'app-header',
@@ -22,10 +21,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   alertModal = false;
   @ViewChild(PlaceHolderDirective, {static: false}) alertHost: PlaceHolderDirective;
   @ViewChild(PlaceHolderDirective, {static: false}) newTaskHost: PlaceHolderDirective;
+  @ViewChild(PlaceHolderDirective, {static: false}) confirmAlertHost: PlaceHolderDirective;
   private closeAlertSub: Subscription;
-  private taskModalSub: Subscription;
+  taskModalSub: Subscription;
   private closeTaskSub: Subscription;
   allowed = false;
+  private closeConfirmSub: Subscription;
+  confirmDeleteSub: Subscription;
 
   constructor(
     private logOrRegServ: LoginOrRegisterService,
@@ -48,6 +50,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.showNewTask(foundUser);
       }
     });
+    this.confirmDeleteSub = this.taskService.confirmDeleteAlert.subscribe(userInfo => {
+      this.confirmAlert(userInfo);
+    })
   }
 
   showNewTask(userInfo) {
@@ -84,6 +89,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.closeTaskSub) {
       this.closeTaskSub.unsubscribe();
     }
+    if (this.closeConfirmSub) {
+      this.closeConfirmSub.unsubscribe();
+    }
   }
 
   onLogout() {
@@ -104,5 +112,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.closeAlertSub.unsubscribe();
       hostViewContainerRef.clear();
     }, 5000);
+  }
+
+  confirmAlert(userInfo) {
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(ConfirmComponent);
+    const hostViewContainerRef = this.confirmAlertHost.viewContainerRef;
+    hostViewContainerRef.clear();    
+    const confirmCompRef = hostViewContainerRef.createComponent(compFactory);
+    confirmCompRef.instance.userID = userInfo.userID;
+    confirmCompRef.instance.taskID = userInfo.taskID;
+    this.closeConfirmSub = this.taskService.deleteTaskConfirmedByAdmin.subscribe(() => {
+      this.closeConfirmSub.unsubscribe();
+      hostViewContainerRef.clear();
+    });
   }
 }

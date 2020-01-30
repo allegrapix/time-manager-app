@@ -26,6 +26,8 @@ export class TasksService {
   @Output() taskModal = new EventEmitter<TaskModalMode>();
   @Output() closeTaskModal = new EventEmitter<Task>();
   @Output() newDateSelected = new EventEmitter<Date>();
+  @Output() confirmDeleteAlert = new EventEmitter<TaskModalMode>();
+  @Output() deleteTaskConfirmedByAdmin = new EventEmitter<boolean>();
 
   getStatuses() {
     return this.statuses;
