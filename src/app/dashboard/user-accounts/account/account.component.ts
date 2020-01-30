@@ -8,7 +8,6 @@ import { UserService } from 'src/app/services/user.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -132,7 +131,10 @@ export class AccountComponent implements OnInit, OnDestroy {
   }
 
   openTaskModal() {
-    this.taskService.taskModal.emit(this.user._id);
+    this.taskService.taskModal.emit({
+      userID: this.user._id,
+      taskID: null
+    });
   }
 
   ngOnDestroy() {

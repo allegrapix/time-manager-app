@@ -1,4 +1,4 @@
-<div class="db-task-container">
+<div class="db-task-container" [@showUserTask]>
   <div class="db-task-color"  [ngStyle]="{background: getColor(task.status)}"></div>
   <p class="db-task-title">{{ task.title }}</p>
   <p class="db-task-status" [ngStyle]="{color: getColor(task.status)}">{{ task.status }}</p>

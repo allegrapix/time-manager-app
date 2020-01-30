@@ -4,6 +4,11 @@ import { Task } from '../my-tasks/task/task.model';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
+interface TaskModalMode {
+  userID: string;
+  taskID: string;
+}
+
 @Injectable({providedIn: 'root'})
 export class TasksService {
   constructor(
@@ -18,7 +23,7 @@ export class TasksService {
   ];
   url = 'http://localhost:3000';
   taskListModified = new EventEmitter<void>();
-  @Output() taskModal = new EventEmitter<string>();
+  @Output() taskModal = new EventEmitter<TaskModalMode>();
   @Output() closeTaskModal = new EventEmitter<Task>();
   @Output() newDateSelected = new EventEmitter<Date>();
 
@@ -55,6 +60,10 @@ export class TasksService {
   
   getTask(id: string) {
     return this.http.get<Task>(`${this.url}/tasks/mytasks/${id}`);
+  }
+
+  getUserTask(userID: string, taskID: string) {
+    return this.http.get<Task>(`${this.url}/tasks/${userID}/${taskID}`);
   }
 
   getColor(status: string) {
@@ -108,9 +117,25 @@ export class TasksService {
     );
   }
 
+  deleteTaskByAdmin(userID: string, taskID: string) {
+    return this.http
+    .delete<Task>(`${this.url}/tasks/${userID}/${taskID}`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   editTask(id: string, task: Task) {
     return this.http
     .patch<Task>(`${this.url}/tasks/mytasks/${id}`, task)
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  editTaskByAdmin(userID: string, taskID: string, task: Task) {
+    return this.http
+    .patch<Task>(`${this.url}/tasks/${userID}/${taskID}`, task)
     .pipe(
       catchError(this.handleError)
     )

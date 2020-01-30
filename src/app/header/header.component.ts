@@ -31,8 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private logOrRegServ: LoginOrRegisterService,
     private authService: AuthService,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private taskService: TasksService,
-    private userService: UserService
+    private taskService: TasksService
     ) {
     this.logOrRegServ.goToRegister.subscribe((isTrue: boolean) => {this.register = isTrue;})
   }
@@ -44,19 +43,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.pageNotAllowed.subscribe(() => {
       this.showAlert();
     })
-    this.taskModalSub = this.taskService.taskModal.subscribe(foundUserID => {
-      if(foundUserID) {
-        this.showNewTask(foundUserID);
+    this.taskModalSub = this.taskService.taskModal.subscribe(foundUser => {     
+      if(foundUser.userID) {
+        this.showNewTask(foundUser);
       }
     });
   }
 
-  showNewTask(userID) {
+  showNewTask(userInfo) {
     const compFactory = this.componentFactoryResolver.resolveComponentFactory(TaskModalComponent);
     const hostViewContainerRef = this.newTaskHost.viewContainerRef;
     hostViewContainerRef.clear();
     const newTaskCompRef = hostViewContainerRef.createComponent(compFactory);  
-    newTaskCompRef.instance.userID = userID;  
+    newTaskCompRef.instance.userID = userInfo.userID;
+    newTaskCompRef.instance.taskID = userInfo.taskID;
     this.closeTaskSub = this.taskService.closeTaskModal.subscribe(() => {
       this.closeTaskSub.unsubscribe();
       hostViewContainerRef.clear();
