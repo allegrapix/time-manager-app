@@ -8,5 +8,73 @@
       </div>
     </button>
   </div>
-  <app-new-task></app-new-task>
+  <div class="task-modal-container">
+    <div class="task-container new-task-container">
+      <form [formGroup]="modalForm" (ngSubmit)="onSubmit()">
+        <div class="task-header">
+          <p class="title">New Task</p>
+          <button class="btn" type="submit">
+            {{ submitBtn }}
+          </button>
+        </div>
+        <div class="create-task-container">
+          <div class="form-group">
+            <label for="title" class="default-text">Title:</label>
+            <input 
+              type="text" 
+              formControlName="title"
+              class="form-input" 
+              name="title"/> 
+            <p 
+              *ngIf="!modalForm.get('title').valid && modalForm.get('title').touched"
+              class="warning-msg">Required
+            </p>
+          </div>
+          <div class="form-group-container">
+            <div class="form-group status-group">
+              <label for="status" class="default-text">Status:</label>
+              <div class="select-container">
+                <div class="select-arrow" #arrow [ngClass]="{'rotate-arrow': dropDownIsOpen}"></div>
+                <select
+                  name="status" 
+                  (click)="rotateArrow()"
+                  formControlName="status"
+                  class="form-input select-input">
+                  <option *ngFor="let status of statuses" [value]="status.value">{{ status.name }}</option>
+                </select>
+                <p 
+                  *ngIf="!modalForm.get('status').valid && modalForm.get('status').touched"
+                  class="warning-msg">Required
+                </p>
+              </div>
+            </div>
+            <div class="form-group hours-group">
+              <label for="workedHours" class="default-text">Worked hours:</label>
+              <input 
+                type="number" 
+                formControlName="workedHours"
+                class="form-input" 
+                name="workedHours"/>  
+              <p 
+                *ngIf="!modalForm.get('workedHours').valid && modalForm.get('workedHours').touched"
+                class="warning-msg">Required
+              </p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="description" class="default-text">Description:</label>
+            <textarea 
+              name="description" 
+              formControlName="description"
+              rows="15" 
+              class="form-input"></textarea>
+            <p 
+              *ngIf="!modalForm.get('description').valid && modalForm.get('description').touched"
+              class="warning-msg">Required
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

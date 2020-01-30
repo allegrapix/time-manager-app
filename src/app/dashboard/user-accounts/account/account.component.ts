@@ -65,13 +65,12 @@ export class AccountComponent implements OnInit, OnDestroy {
   avatarChangeSub: Subscription;
   today = new FormControl(new Date());
   @Output() newUserSelected: EventEmitter<User> = new EventEmitter<User>();
+  newTaskAdded: Subscription;
 
   constructor(
     private taskService: TasksService,
     private userService: UserService,
-    private domSanitizer: DomSanitizer,
-    private router: Router,
-    private route: ActivatedRoute
+    private domSanitizer: DomSanitizer
   ) { }
 
   ngOnInit() { 
@@ -81,6 +80,11 @@ export class AccountComponent implements OnInit, OnDestroy {
       if (this.user._id === userData._id) {
         this.user = userData;
         this.getUserAvatar()
+      }
+    });
+    this.newTaskAdded = this.taskService.closeTaskModal.subscribe(task => {
+      if(task) {
+        this.getUserTasks(this.today.value);
       }
     });
   }
@@ -134,5 +138,6 @@ export class AccountComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.tasksSub.unsubscribe();
     this.avatarChangeSub.unsubscribe();
+    this.newTaskAdded.unsubscribe();
   }
 }

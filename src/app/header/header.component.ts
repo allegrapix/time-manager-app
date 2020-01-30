@@ -51,6 +51,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
+  showNewTask(userID) {
+    const compFactory = this.componentFactoryResolver.resolveComponentFactory(TaskModalComponent);
+    const hostViewContainerRef = this.newTaskHost.viewContainerRef;
+    hostViewContainerRef.clear();
+    const newTaskCompRef = hostViewContainerRef.createComponent(compFactory);  
+    newTaskCompRef.instance.userID = userID;  
+    this.closeTaskSub = this.taskService.closeTaskModal.subscribe(() => {
+      this.closeTaskSub.unsubscribe();
+      hostViewContainerRef.clear();
+    })
+  }
+
   onHandleClose() {
     this.alertModal = false;
   }
@@ -92,17 +104,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.closeAlertSub.unsubscribe();
       hostViewContainerRef.clear();
     }, 5000);
-  }
-
-  showNewTask(userID) {
-    const compFactory = this.componentFactoryResolver.resolveComponentFactory(TaskModalComponent);
-    const hostViewContainerRef = this.newTaskHost.viewContainerRef;
-    hostViewContainerRef.clear();
-    const newTaskCompRef = hostViewContainerRef.createComponent(compFactory);  
-    newTaskCompRef.instance.userID = userID;  
-    this.closeTaskSub = this.taskService.closeTaskModal.subscribe(() => {
-      this.closeTaskSub.unsubscribe();
-      hostViewContainerRef.clear();
-    })
   }
 }
