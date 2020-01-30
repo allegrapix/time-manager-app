@@ -4,6 +4,8 @@ import { TasksService } from 'src/app/services/tasks.service';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Task } from 'src/app/my-tasks/task/task.model';
 
 @Component({
   selector: 'app-task-modal',
@@ -57,18 +59,45 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TaskModalComponent implements OnInit, OnDestroy {
   @Input() userID: string;
+  modalForm: FormGroup;
+  submitBtn = 'Submit';
+  statuses = [];
+  task: Task = {
+    _id: null,
+    title: '',
+    status: '',
+    workedHours: 0,
+    description: ''
+  }
+  defaultStatus = 'todo';
+  dropDownIsOpen = false;
   constructor(
     private taskService: TasksService,
     private userService: UserService
     ) { }
 
   ngOnInit() {
-    console.log(this.userID);  
-
+    this.statuses = this.taskService.getStatuses();
+    this.modalForm = new FormGroup({
+      'title': new FormControl(null, Validators.required),
+      'status': new FormControl(null, Validators.required),
+      'workedHours': new FormControl(null, Validators.required),
+      'description': new FormControl(null, Validators.required)
+    });
   }
 
   onCloseTask() {
-    this.taskService.closeTaskModal.emit();
+    this.taskService.closeTaskModal.emit(null);
+  }
+
+  onSubmit() {
+    this.taskService.postTaskByAdmin(this.userID, this.modalForm.value).subscribe(task => {   
+      this.taskService.closeTaskModal.emit(task);
+    });
+  }
+
+  rotateArrow() {
+    this.dropDownIsOpen = !this.dropDownIsOpen;
   }
   
   ngOnDestroy() {

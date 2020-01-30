@@ -19,4 +19,12 @@ export class DashboardTaskComponent implements OnInit {
     return color;
   }
 
+  editSelectedTask() {
+
+  }
+
+  DeleteSelectedTask() {
+    
+  }
+
 }

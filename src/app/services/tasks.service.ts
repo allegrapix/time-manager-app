@@ -19,7 +19,7 @@ export class TasksService {
   url = 'http://localhost:3000';
   taskListModified = new EventEmitter<void>();
   @Output() taskModal = new EventEmitter<string>();
-  @Output() closeTaskModal = new EventEmitter<void>();
+  @Output() closeTaskModal = new EventEmitter<Task>();
   @Output() newDateSelected = new EventEmitter<Date>();
 
   getStatuses() {
@@ -79,6 +79,14 @@ export class TasksService {
   postTask(task: Task) {
     return this.http
     .post<Task>(`${this.url}/tasks/mytasks`, task)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  postTaskByAdmin(userID: string, task: Task) {
+    return this.http
+    .post<Task>(`${this.url}/tasks/${userID}`, task)
     .pipe(
       catchError(this.handleError)
     );
