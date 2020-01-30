@@ -65,6 +65,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   today = new FormControl(new Date());
   @Output() newUserSelected: EventEmitter<User> = new EventEmitter<User>();
   newTaskAdded: Subscription;
+  taskDeletedSub: Subscription;
 
   constructor(
     private taskService: TasksService,
@@ -83,6 +84,13 @@ export class AccountComponent implements OnInit, OnDestroy {
     });
     this.newTaskAdded = this.taskService.closeTaskModal.subscribe(task => {
       if(task) {
+        this.getUserTasks(this.today.value);
+      }
+    });
+    this.taskDeletedSub = this.taskService.deleteTaskConfirmedByAdmin.subscribe(confirmed => {
+      console.log(confirmed);
+      
+      if(confirmed) {
         this.getUserTasks(this.today.value);
       }
     });
@@ -141,5 +149,6 @@ export class AccountComponent implements OnInit, OnDestroy {
     this.tasksSub.unsubscribe();
     this.avatarChangeSub.unsubscribe();
     this.newTaskAdded.unsubscribe();
+    this.taskDeletedSub.unsubscribe();
   }
 }

@@ -50,6 +50,9 @@ import { OpenProfileComponent } from './components/open-profile/open-profile.com
 import { DashboardTaskComponent } from './dashboard/user-accounts/dashboard-task/dashboard-task.component';
 import { EditAccountComponent } from './components/edit-account/edit-account.component';
 import { TaskModalComponent } from './components/task-modal/task-modal.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
+import { EnvelopeAlertComponent } from './components/envelope-alert/envelope-alert.component';
+import { EnvelopeSuccessComponent } from './components/envelope-success/envelope-success.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +96,10 @@ import { TaskModalComponent } from './components/task-modal/task-modal.component
     OpenProfileComponent,
     DashboardTaskComponent,
     EditAccountComponent,
-    TaskModalComponent
+    TaskModalComponent,
+    ConfirmComponent,
+    EnvelopeAlertComponent,
+    EnvelopeSuccessComponent
   ],
   imports: [
     BrowserModule,
@@ -108,7 +114,6 @@ import { TaskModalComponent } from './components/task-modal/task-modal.component
   providers: [
     LoginOrRegisterService, 
     TaskResolver,
-    // UserResolver,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -118,7 +123,8 @@ import { TaskModalComponent } from './components/task-modal/task-modal.component
   bootstrap: [AppComponent],
   entryComponents: [
     AlertComponent,
-    TaskModalComponent
+    TaskModalComponent,
+    ConfirmComponent
   ]
 })
 export class AppModule { }

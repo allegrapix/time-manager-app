@@ -1,0 +1,12 @@
+<div class="task-modal-background" (click)="cancelDelete()"></div>
+<div class="task-modal confirm-modal">
+  <div class="confirm-modal-container">
+    <app-envelope-alert class="alert-icon"></app-envelope-alert>
+    <p class="title">Alert message:</p>
+    <p class="confirm-message subtitle faded">Are you sure you want to delete this task?</p>
+    <div class="btn-group flex-evenly">
+      <button class="btn" (click)="cancelDelete()">Cancel</button>
+      <button class="btn btn-alert" (click)="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Task } from 'src/app/my-tasks/task/task.model';
 import { TasksService } from 'src/app/services/tasks.service';
 import { User } from 'src/app/profile/user.model';
 import { trigger, transition, style, animate, state } from '@angular/animations';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-task',
@@ -39,6 +40,7 @@ export class DashboardTaskComponent implements OnInit {
   constructor(
     private tasksService: TasksService
     ) { }
+
   ngOnInit() {
   }
 
@@ -54,8 +56,10 @@ export class DashboardTaskComponent implements OnInit {
     });
   }
 
-  DeleteSelectedTask() {
-    
+  onDeleteSelectedTask() {
+    this.tasksService.confirmDeleteAlert.emit({
+      userID: this.user._id,
+      taskID: this.task._id
+    });
   }
-
 }
