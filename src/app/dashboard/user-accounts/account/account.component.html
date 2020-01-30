@@ -76,7 +76,7 @@
           </div>
         </div> 
         <div class="db-tasks">
-          <app-dashboard-task *ngFor="let task of tasks" [task]="task"></app-dashboard-task>       
+          <app-dashboard-task *ngFor="let task of tasks" [task]="task" [user]="user"></app-dashboard-task>       
           <div *ngIf="noTasks" class="no-task-container">
             <p class="subtitle faded">No tasks</p>
           </div>

@@ -1,9 +1,6 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, Input } from '@angular/core';
 import { TasksService } from 'src/app/services/tasks.service';
 import { trigger, transition, style, animate, state } from '@angular/animations';
-import { Router, ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Task } from 'src/app/my-tasks/task/task.model';
 
@@ -57,8 +54,9 @@ import { Task } from 'src/app/my-tasks/task/task.model';
     ])
   ]
 })
-export class TaskModalComponent implements OnInit, OnDestroy {
+export class TaskModalComponent implements OnInit {
   @Input() userID: string;
+  @Input() taskID: string;
   modalForm: FormGroup;
   submitBtn = 'Submit';
   statuses = [];
@@ -72,8 +70,7 @@ export class TaskModalComponent implements OnInit, OnDestroy {
   defaultStatus = 'todo';
   dropDownIsOpen = false;
   constructor(
-    private taskService: TasksService,
-    private userService: UserService
+    private taskService: TasksService
     ) { }
 
   ngOnInit() {
@@ -84,6 +81,16 @@ export class TaskModalComponent implements OnInit, OnDestroy {
       'workedHours': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required)
     });
+    if(this.taskID) {
+      this.taskService.getUserTask(this.userID, this.taskID).subscribe(task => {
+        this.modalForm.setValue({
+          'title': task.title,
+          'status': task.status,
+          'workedHours': task.workedHours,
+          'description': task.description
+        });
+      })
+    }
   }
 
   onCloseTask() {
@@ -91,15 +98,19 @@ export class TaskModalComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.taskService.postTaskByAdmin(this.userID, this.modalForm.value).subscribe(task => {   
-      this.taskService.closeTaskModal.emit(task);
-    });
+    if (!this.taskID) {
+      this.taskService.postTaskByAdmin(this.userID, this.modalForm.value).subscribe(task => {   
+        this.taskService.closeTaskModal.emit(task);
+      });
+    } else {
+      this.taskService.editTaskByAdmin(this.userID, this.taskID, this.modalForm.value).subscribe(task => {
+        console.log(task);
+        this.taskService.closeTaskModal.emit(task);
+      })
+    }
   }
 
   rotateArrow() {
     this.dropDownIsOpen = !this.dropDownIsOpen;
-  }
-  
-  ngOnDestroy() {
   }
 }

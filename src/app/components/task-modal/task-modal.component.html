@@ -13,7 +13,9 @@
       <form [formGroup]="modalForm" (ngSubmit)="onSubmit()">
         <div class="task-header">
           <p class="title">New Task</p>
-          <button class="btn" type="submit">
+          <button class="btn" 
+          [disabled]="!modalForm.valid"
+          type="submit">
             {{ submitBtn }}
           </button>
         </div>
