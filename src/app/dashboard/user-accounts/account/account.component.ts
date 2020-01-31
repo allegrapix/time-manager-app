@@ -87,9 +87,7 @@ export class AccountComponent implements OnInit, OnDestroy {
         this.getUserTasks(this.today.value);
       }
     });
-    this.taskDeletedSub = this.taskService.deleteTaskConfirmedByAdmin.subscribe(confirmed => {
-      console.log(confirmed);
-      
+    this.taskDeletedSub = this.taskService.deleteTaskConfirmedByAdmin.subscribe(confirmed => {     
       if(confirmed) {
         this.getUserTasks(this.today.value);
       }

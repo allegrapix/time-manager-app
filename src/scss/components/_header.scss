@@ -1,14 +1,8 @@
 .header-container {
   justify-content: space-between;
-  
-  .logo-container,
-  .links-container {
-    display: flex;
-  }
 
   .logo-container {
     text-decoration: none;
-    align-items: center;
     color: $default-color;
     padding: 10px 50px;
     outline: none;
@@ -27,15 +21,10 @@
 
   .links-container {
     margin-right: 50px;
-    display: flex;
-    align-items: flex-end;
-    width: 55%;
+    width: 45%;
 
     .desktop-links {
       width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
     }
 
     .burger-btn {
@@ -147,7 +136,7 @@
     }
   
     .links-container {
-      width: 62%;
+      width: 50%;
 
       .page-link {
         padding: 10px 5px;
@@ -169,7 +158,7 @@
   .header-container {    
     .logo-container {
       padding-right: 0;
-      width: 20%;
+      width: 40%;
       
       .text-logo {
         padding-left: 10px;
@@ -179,7 +168,7 @@
   
     .links-container {
       margin-right: 25px;
-      width: 77%;
+      width: 60%;
     }
   }
 }
@@ -200,7 +189,7 @@
       }
     }
   
-    .links-container {
+    .links-container.flex-end-align-end {
       margin-right: 15px;
       display: flex;
       flex-direction: column;
@@ -208,7 +197,7 @@
       width: 45%;
       position: relative;
 
-      .desktop-links {
+      .desktop-links.flex-end-align-end {
         @include position(absolute, 100%);
         transition: all 300ms ease-in-out;
         display: flex;
@@ -216,7 +205,6 @@
         width: 100%;
         z-index: 10;
       }
-
 
       .burger-btn {
         @include position(absolute, null, null, 0);
@@ -383,5 +371,13 @@
 @media screen and (max-width: 450px) {
   .header-container .logo-container {
       padding: 10px 25px;
+
+      .img-logo {
+        height: 25px;
+      }
+
+      .text-logo {
+        display: none;
+      }
   }
 }

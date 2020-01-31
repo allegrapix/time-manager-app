@@ -1,8 +1,8 @@
-<a [routerLink]="'/'" class="logo-container" (click)="onGoToHome()">
+<a [routerLink]="'/'" class="logo-container flex-align-center" (click)="onGoToHome()">
   <img src="../../assets/img/Logo.png" alt="logo" class="img-logo">
   <p class="text-logo">Time management</p>
 </a>
-<div class="links-container">
+<div class="links-container flex-end-align-end">
   <div class="burger-btn" (click)="onMenuOpen()">
     <div class="burger-bar-container" [ngClass]="{open: menuIsOpen}">
         <div class="burger-bar bar-1"></div>
@@ -10,7 +10,7 @@
         <div class="burger-bar bar-3"></div>
     </div>
   </div>
-  <div class="desktop-links" 
+  <div class="desktop-links flex-end-align-end" 
     (click)="onMenuOpen()"
     [ngClass]="{mobileLinks: !menuIsOpen}"
     >
@@ -28,12 +28,6 @@
       [routerLinkActiveOptions]="{ exact: false }"
       *ngIf="!notLogged"
       >My tasks</a>
-    <a 
-      [routerLink]="['/myschedule']" 
-      class="page-link page-schedule" 
-      routerLinkActive="active-schedule"
-      *ngIf="!notLogged"
-      >My schedule</a>
     <a 
       [routerLink]="['/myprofile']" 
       class="page-link page-profile" 

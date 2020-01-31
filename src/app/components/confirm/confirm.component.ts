@@ -22,8 +22,7 @@ export class ConfirmComponent implements OnInit {
   }
 
   confirmDelete() {
-    this.taskService.deleteTaskByAdmin(this.userID, this.taskID).subscribe(task => {
-      console.log(task);      
+    this.taskService.deleteTaskByAdmin(this.userID, this.taskID).subscribe(task => {  
     })
     this.taskService.deleteTaskConfirmedByAdmin.emit(true);
   }

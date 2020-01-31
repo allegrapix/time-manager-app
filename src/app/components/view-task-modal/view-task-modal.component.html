@@ -1,8 +1,8 @@
-<div class="task-modal-background" (click)="closeView()"></div>
-<div class="view-task-modal">
-  <div class="task-color"></div>
+<div class="task-modal-background" (click)="closeView()" [@showTaskModalBgr]></div>
+<div class="view-task-modal" [@showTaskModal]>
+  <div class="task-color" [ngStyle]="{background: getColor()}"></div>
   <div class="task-header flex-between">
-    <app-view-task-icon class="view-task-icon"></app-view-task-icon>
+    <app-view-task-icon class="view-task-icon" [color]="getColor()"></app-view-task-icon>
     <div class="task-header-container">
       <div class="header-line flex-between-start">
         <p class="title">{{ task.title }}</p>
@@ -13,11 +13,11 @@
           </div>
         </button>
       </div>
-      <div class="line-separator"></div>
+      <div class="line-separator" [ngStyle]="{background: getColor()}"></div>
       <div class="header-line">
         <div class="flex-between">
           <p class="subtitle faded">Status:
-            <span class="status">{{ task.status }}</span>
+            <span class="status" [ngStyle]="{color: getColor()}">{{ task.status }}</span>
           </p>
         <p class="subtitle faded">Worked hours: {{ task.workedHours}}h</p>
         </div>
