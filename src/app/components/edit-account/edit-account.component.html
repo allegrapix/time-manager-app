@@ -1,5 +1,8 @@
-<div class="edit-account" *ngIf="editModalIsOpen" [@showEditModal]> 
-  <div class="edit-account-container">
+<div class="edit-account"
+*ngIf="editModalIsOpen" 
+[@showEditModal] 
+(click)="closeEditModal()"> 
+  <div class="edit-account-container" stop-propagation>
     <button class="btn-empty" (click)="closeEditModal()">
       <div class="close-btn">
         <div class="close-bar bar-left"></div>

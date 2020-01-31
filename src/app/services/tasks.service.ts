@@ -28,6 +28,8 @@ export class TasksService {
   @Output() newDateSelected = new EventEmitter<Date>();
   @Output() confirmDeleteAlert = new EventEmitter<TaskModalMode>();
   @Output() deleteTaskConfirmedByAdmin = new EventEmitter<boolean>();
+  @Output() viewTaskByAdmin = new EventEmitter<TaskModalMode>();
+  @Output() closeViewTaskByAdmin = new EventEmitter<boolean>();
 
   getStatuses() {
     return this.statuses;

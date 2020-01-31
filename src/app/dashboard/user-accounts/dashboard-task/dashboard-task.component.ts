@@ -3,7 +3,6 @@ import { Task } from 'src/app/my-tasks/task/task.model';
 import { TasksService } from 'src/app/services/tasks.service';
 import { User } from 'src/app/profile/user.model';
 import { trigger, transition, style, animate, state } from '@angular/animations';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-task',
@@ -58,6 +57,13 @@ export class DashboardTaskComponent implements OnInit {
 
   onDeleteSelectedTask() {
     this.tasksService.confirmDeleteAlert.emit({
+      userID: this.user._id,
+      taskID: this.task._id
+    });
+  }
+
+  viewSelectedTask() {
+    this.tasksService.viewTaskByAdmin.emit({
       userID: this.user._id,
       taskID: this.task._id
     });

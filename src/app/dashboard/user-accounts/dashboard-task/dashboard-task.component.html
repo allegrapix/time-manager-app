@@ -1,14 +1,14 @@
-<div class="db-task-container" [@showUserTask]>
+<div class="db-task-container" [@showUserTask] (click)="viewSelectedTask()">
   <div class="db-task-color"  [ngStyle]="{background: getColor(task.status)}"></div>
   <p class="db-task-title">{{ task.title }}</p>
   <p class="db-task-status" [ngStyle]="{color: getColor(task.status)}">{{ task.status }}</p>
   <p class="db-worked-hours">{{ task.workedHours }}h</p>
   <p class="db-date">{{ task.updatedAt | date: 'dd' }} {{ task.updatedAt | date: 'MMM' }}</p>
   <div class="db-btn-container">
-    <button class="add-btn edit-btn" (click)="editSelectedTask()">
+    <button class="add-btn edit-btn" stop-propagation (click)="editSelectedTask()">
       <app-edit-btn></app-edit-btn>
     </button>
-    <button class="add-btn cancel-btn" (click)="onDeleteSelectedTask()">
+    <button class="add-btn cancel-btn" stop-propagation (click)="onDeleteSelectedTask()">
       <app-cancel-btn></app-cancel-btn>
     </button>
   </div>
