@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-view-task-icon',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-task-icon.component.scss']
 })
 export class ViewTaskIconComponent implements OnInit {
-
+  @Input() color: string;
   constructor() { }
 
   ngOnInit() {
