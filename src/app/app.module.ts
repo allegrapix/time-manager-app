@@ -53,6 +53,9 @@ import { TaskModalComponent } from './components/task-modal/task-modal.component
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { EnvelopeAlertComponent } from './components/envelope-alert/envelope-alert.component';
 import { EnvelopeSuccessComponent } from './components/envelope-success/envelope-success.component';
+import { ViewTaskModalComponent } from './components/view-task-modal/view-task-modal.component';
+import { StopEventPropagation } from './services/stop-event-propagation.directive';
+import { ViewTaskIconComponent } from './components/view-task-icon/view-task-icon.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +83,7 @@ import { EnvelopeSuccessComponent } from './components/envelope-success/envelope
     AlertComponent,
     AlertSignComponent,
     PlaceHolderDirective,
+    StopEventPropagation,
     PageNotFoundComponent,
     OopsComponent,
     EditProfileComponent,
@@ -99,7 +103,9 @@ import { EnvelopeSuccessComponent } from './components/envelope-success/envelope
     TaskModalComponent,
     ConfirmComponent,
     EnvelopeAlertComponent,
-    EnvelopeSuccessComponent
+    EnvelopeSuccessComponent,
+    ViewTaskModalComponent,
+    ViewTaskIconComponent
   ],
   imports: [
     BrowserModule,
@@ -124,7 +130,8 @@ import { EnvelopeSuccessComponent } from './components/envelope-success/envelope
   entryComponents: [
     AlertComponent,
     TaskModalComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    ViewTaskModalComponent
   ]
 })
 export class AppModule { }

@@ -1,10 +1,10 @@
-<div class="user-card" [@showUserCard] [@openCloseCard]="showProfile ? 'open' : 'closed'">
+<div class="user-card" [@showUserCard] [@openCloseCard]="showProfile ? 'open' : 'closed'" (click)=showHiddenProfile()>
   <div class="shown-info-container">
     <div class="user-avatar">
       <img [src]="base64Image" alt="avatar">
     </div>
     <div class="user-card-info">
-      <div class="username-container" (click)=showHiddenProfile()>
+      <div class="username-container">
         <p class="username subtitle">{{ user.name }}</p>
       </div>
       <div class="userrole-container">
@@ -12,6 +12,7 @@
       </div>
       <div class="edit-btn-container">
         <button type="button" 
+        stop-propagation
         (click)=editSelectedUser()
         class="user-edit-btn">
           <span>Edit</span>
@@ -21,6 +22,7 @@
       <div class="open-btn-container">
         <button 
         type="button" 
+        stop-propagation
         (click)=showHiddenProfile()
         class="show-profile-btn">
           <span *ngIf="!showProfile">Show profile</span>
@@ -32,6 +34,7 @@
   </div>
   <div 
   class="hidden-info-container"
+  stop-propagation
   [ngClass]="{'show-hidden-profile': showProfile}">
     <div class="line-separator">
       <div class="line"></div>

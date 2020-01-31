@@ -1,0 +1,34 @@
+<div class="task-modal-background" (click)="closeView()"></div>
+<div class="view-task-modal">
+  <div class="task-color"></div>
+  <div class="task-header flex-between">
+    <app-view-task-icon class="view-task-icon"></app-view-task-icon>
+    <div class="task-header-container">
+      <div class="header-line flex-between-start">
+        <p class="title">{{ task.title }}</p>
+        <button class="btn-empty" (click)="closeView()">
+          <div class="close-btn">
+            <div class="close-bar bar-left"></div>
+            <div class="close-bar bar-right"></div>
+          </div>
+        </button>
+      </div>
+      <div class="line-separator"></div>
+      <div class="header-line">
+        <div class="flex-between">
+          <p class="subtitle faded">Status:
+            <span class="status">{{ task.status }}</span>
+          </p>
+        <p class="subtitle faded">Worked hours: {{ task.workedHours}}h</p>
+        </div>
+        <div class="flex-between">
+          <p class="subtitle faded">Data: {{ task.updatedAt | date: 'dd' }} {{ task.updatedAt | date: 'MMM' }}</ p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="task-description">
+    <div class="title">Description:</div>
+    <p class="default-text">{{ task.description }}</p>
+  </div>
+</div>

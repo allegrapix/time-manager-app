@@ -1,0 +1,66 @@
+.view-task-modal {
+  @include position(absolute, 100px, 50%);
+  @include prefix(transform, translateX(50%), webkit moz ms o);
+  @include border-radius(15px);
+  width: 35%;
+  padding: 35px 50px 35px 60px;
+  background: $default-color;
+  z-index: 12;
+
+  .task-color {
+    @include position(absolute, 0, null, 0, 0);
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    background: $fifth-color;
+    width: 20px;
+  }
+
+  .view-task-icon {
+    width: 10%;
+
+    svg {
+      width: 100%;
+    }
+    .cls-1,.cls-5{fill:#fff;}.cls-1,.cls-3{stroke:#a78d6f;}.cls-1,.cls-2,.cls-3,.cls-4,.cls-5,.cls-6{stroke-linecap:round;stroke-width:1.41px;}.cls-1,.cls-3,.cls-5,.cls-6{stroke-linejoin:round;}.cls-1{stroke-opacity:0.4;}.cls-2{fill:#c2e6d1;stroke:#c2e6d1;}.cls-2,.cls-4{stroke-miterlimit:10;}.cls-3,.cls-4{fill:none;}.cls-3{stroke-opacity:0.6;}.cls-4,.cls-5{stroke:#cabba9;}.cls-6{fill:#f26c66;stroke:#f26c66;}
+  }
+
+  .title {
+    @include font($font-size: 21px);
+  }
+
+  .subtitle {
+    font-size: 16px;
+
+    .status {
+      color: $fifth-color;
+    }
+  }
+
+  .default-text {
+    @include font($font-size: 16px, $line-height: 1.4, $text-align: justify);
+    padding: 5px 0;
+  }
+
+  .task-header-container {
+    width: 85%;
+
+    .header-line {
+      padding: 5px 0;
+    }
+
+    .close-btn {
+      top: -15px;
+      right: 10px;
+    }
+
+    .line-separator {
+      @include size(2px, 100%);
+      display: block;
+      background: $fifth-color;
+    }
+  }
+  
+  .task-description {
+    padding: 10px 0;
+  }
+}
