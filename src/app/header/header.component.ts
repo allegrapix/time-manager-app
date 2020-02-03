@@ -7,7 +7,6 @@ import { PlaceHolderDirective } from '../services/placeholder.directive';
 import { TaskModalComponent } from '../components/task-modal/task-modal.component';
 import { TasksService } from '../services/tasks.service';
 import { ConfirmComponent } from '../components/confirm/confirm.component';
-import { userInfo } from 'os';
 import { ViewTaskModalComponent } from '../components/view-task-modal/view-task-modal.component';
 
 @Component({

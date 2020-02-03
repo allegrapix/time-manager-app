@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { trigger, state, style, transition, animate, keyframes, group } from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 
 @Component({
@@ -8,9 +8,6 @@ import { trigger, state, style, transition, animate, keyframes, group } from '@a
   styleUrls: ['./alert.component.scss'],
   animations: [
     trigger('backdrop', [
-      state('fadeIn', style({
-        opacity: 1
-      })),
       transition('void => *', [
         style({
           opacity: 0

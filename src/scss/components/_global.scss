@@ -134,6 +134,10 @@ body {
   }
 }
 
+.shadow {
+  box-shadow: 0 0 20px -20px rgba($primary-color, .75);
+}
+
 @media screen and (max-width: 1200px) {
   .body-container {
     max-width: 900px;
