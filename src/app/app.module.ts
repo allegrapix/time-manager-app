@@ -56,6 +56,9 @@ import { EnvelopeSuccessComponent } from './components/envelope-success/envelope
 import { ViewTaskModalComponent } from './components/view-task-modal/view-task-modal.component';
 import { StopEventPropagation } from './services/stop-event-propagation.directive';
 import { ViewTaskIconComponent } from './components/view-task-icon/view-task-icon.component';
+import { NoUsersFoundComponent } from './dashboard/user-accounts/no-users-found/no-users-found.component';
+import { NoResultsIconComponent } from './components/no-results-icon/no-results-icon.component';
+import { Animations } from './animations/transitions-animations';
 
 @NgModule({
   declarations: [
@@ -105,7 +108,9 @@ import { ViewTaskIconComponent } from './components/view-task-icon/view-task-ico
     EnvelopeAlertComponent,
     EnvelopeSuccessComponent,
     ViewTaskModalComponent,
-    ViewTaskIconComponent
+    ViewTaskIconComponent,
+    NoUsersFoundComponent,
+    NoResultsIconComponent
   ],
   imports: [
     BrowserModule,

@@ -59,6 +59,19 @@
   }
 }
 
+.btn-reset {
+  @include font($color: $secondary-color);
+  border: 1px solid rgba($secondary-color, .3);
+  background: $default-color;
+  padding: 20px;
+  margin-bottom: 5px;
+  transition: all 200ms ease;
+
+  @include on_event {
+    background: rgba($secondary-color, .05);
+  }
+}
+
 .add-btn {
   @include size(30px, 30px);
   border: none;

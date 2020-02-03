@@ -1,3 +1,5 @@
 <div class="users-container-overflow">
+  <button class="btn btn-reset shadow" (click)="resetSearch()"  *ngIf="noUsersFound || usersFound">Reset</button>
   <app-account *ngFor="let user of users" [user]="user" class="account-item"></app-account>
+  <app-no-users-found [searchMsg]="searchMsg" *ngIf="noUsersFound"></app-no-users-found>
 </div>

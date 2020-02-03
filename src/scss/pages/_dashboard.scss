@@ -473,3 +473,82 @@ app-dashboard {
   justify-content: center;
   align-items: center;
 }
+
+app-no-users-found {
+  .no-results {
+    @include border-radius(10px);
+    padding: 15px;
+    border: 1px solid rgba($secondary-color, .3);
+    background: $default-color;
+
+    &-container {
+      padding: 0 10px;
+      width: 90%;
+    }
+
+    &-msg {
+      @include font($font-size: 18px, $color: $fifth-color, $font-weight: 500);
+      padding: 10px 0;
+
+      span {
+        font-weight: 600;
+      }
+    }
+
+    app-no-results-icon {
+      width: 8%;
+
+      svg {
+        .cls-1,
+        .cls-3 {
+          fill: $default-color;
+        }
+        
+        .cls-1 {
+          stroke: $secondary-color;
+        }
+        
+        .cls-1,
+        .cls-2,
+        .cls-5,
+        .cls-6 {
+          stroke-linecap: round;
+        }
+        
+        .cls-1,
+        .cls-2,
+        .cls-6 {
+          stroke-linejoin: round;
+        }
+        
+        .cls-2,
+        .cls-5 {
+          fill:none;
+        }
+        
+        .cls-2,
+        .cls-3,
+        .cls-5,
+        .cls-6 {
+          stroke: $fifth-color;
+        }
+        
+        .cls-2,
+        .cls-3,
+        .cls-5 {
+          stroke-width: 3px;
+        }
+        
+        .cls-3,
+        .cls-5 {
+          stroke-miterlimit: 10;
+        }
+        
+        .cls-4,
+        .cls-6 {
+          fill: $fifth-color;
+        }
+      }
+    }
+  }
+}

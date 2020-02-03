@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { User } from '../profile/user.model';
@@ -11,10 +11,18 @@ export class UserService {
   @Output() userToBeEdited = new EventEmitter<User>();
   @Output() avatarChanged = new EventEmitter<User>();
   @Output() userDeleted = new EventEmitter<string>();
+  @Output() searchUser = new EventEmitter<string>();
 
-  getUsers() {
+  getUsers(limit, skip) {
+    let params = new HttpParams();
+    if (limit !== undefined) {
+      params = params.append('limit', limit.toString());
+    }
+    if (skip !== undefined) {
+      params = params.append('skip', skip.toString());
+    }
     return this.http
-    .get<User[]>(`${this.url}/users`)
+    .get<User[]>(`${this.url}/users`, {params})
     .pipe(
       catchError(this.handleError)
     );

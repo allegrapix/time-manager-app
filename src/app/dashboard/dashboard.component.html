@@ -6,11 +6,15 @@
 </div>
 <div class="tasks-container">
   <div class="tasks-list-wrapper">
-    <form class="dashboard-search-container">
+    <form 
+    [formGroup]="searchUserForm"
+    (keydown.enter)="onSeachUser($event)"
+    class="dashboard-search-container">
       <label for="dashboard-search" class="subtitle faded">Search</label>
       <input
       type="text" 
-      name="dashboard-search" 
+      name="search" 
+      formControlName="search"
       placeholder="..."
       class="form-input search-input">
     </form>
