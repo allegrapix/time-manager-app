@@ -2,11 +2,29 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/profile/user.model';
 import { Subscription } from 'rxjs';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-user-accounts',
   templateUrl: './user-accounts.component.html',
-  styleUrls: ['./user-accounts.component.scss']
+  styleUrls: ['./user-accounts.component.scss'],
+  animations: [
+    trigger('fadeIn', [
+      transition('void => *', [
+        style({
+          opacity: 0
+        }),
+        animate(300)
+      ]),
+      transition('* => void', [
+        animate(200, 
+          style({
+            opacity: 0
+          })
+        )
+      ])
+    ])
+  ]
 })
 export class UserAccountsComponent implements OnInit, OnDestroy {
   getAllUsersSub: Subscription;
@@ -18,16 +36,27 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
   userSearchSub: Subscription;
   searchedWord = '';
   skip = 0;
-  limit = 5;
+  limit = 9;
   noUsersFound = false;
   searchMsg;
   usersFound = false;
+  nSub: Subscription;
+  nrUsers: number;
+  lastPage = false;
+  nrOfPages: number;
 
   constructor(
     private userService: UserService
     ) { }
 
   ngOnInit() {
+    this.nSub = this.userService.getNoOfUsers().subscribe(user => {
+      this.nrUsers = user.numbers; 
+      this.nrOfPages = Math.ceil(this.nrUsers / this.limit);
+      console.log(this.skip);
+      
+      this.lastPage =  Math.ceil(this.skip / this.limit) === this.nrOfPages ? true : false;
+    });
     this.getUsers();
     this.userDeleteSub = this.userService.userDeleted.subscribe(user_id => {
       const index = this.users.findIndex(user => user._id === user_id);
@@ -45,7 +74,7 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
       } else {
         this.getUsers();
       }
-    })
+    });
   }
 
   getUsers() {
@@ -57,7 +86,25 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
   }
 
   resetSearch() {
+    this.skip = 0;
+    this.checkPages();
+  }
+
+  showPrev() {
+    if(this.skip >= this.limit) {
+      this.skip -= this.limit;      
+      this.checkPages();
+    }
+  }
+
+  showNext() {
+    this.skip += this.limit;
+    this.checkPages();
+  }
+
+  checkPages() {
     this.getUsers();
+    this.lastPage =  Math.ceil(this.skip / this.limit) + 1 === this.nrOfPages ? true : false;
   }
 
   ngOnDestroy() {
