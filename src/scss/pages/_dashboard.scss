@@ -56,13 +56,17 @@ app-dashboard {
     z-index: 50;
 
     .users-container-overflow {
-      height: 690px;
+      height: 695px;
       overflow-y: scroll;
       scroll-behavior: smooth; 
 
       &::-webkit-scrollbar {
         display: none;
       }
+    }
+    
+    .arrow-container {
+      @include position(absolute, null, 25px, null, 50px);
     }
 
     .user-card {
@@ -73,7 +77,7 @@ app-dashboard {
       display: block;
       box-shadow: 0 0 20px -20px rgba($primary-color, .5);
       transition: all 200ms ease-in-out;
-      margin-bottom: 5px;
+      margin-bottom: 3px;
       overflow: hidden;
 
       .shown-info-container {

@@ -4,6 +4,10 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { User } from '../profile/user.model';
 
+interface UserNumbers {
+  numbers: number;
+}
+
 @Injectable({providedIn: 'root'})
 export class UserService {
   constructor(private http: HttpClient) {}
@@ -26,6 +30,14 @@ export class UserService {
     .pipe(
       catchError(this.handleError)
     );
+  }
+
+  getNoOfUsers() {
+    return this.http
+    .get<UserNumbers>(`${this.url}/users/numbers`)
+    .pipe(
+      catchError(this.handleError)
+    )
   }
 
   getUser() {

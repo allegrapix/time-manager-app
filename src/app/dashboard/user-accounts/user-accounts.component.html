@@ -1,5 +1,13 @@
 <div class="users-container-overflow">
-  <button class="btn btn-reset shadow" (click)="resetSearch()"  *ngIf="noUsersFound || usersFound">Reset</button>
   <app-account *ngFor="let user of users" [user]="user" class="account-item"></app-account>
   <app-no-users-found [searchMsg]="searchMsg" *ngIf="noUsersFound"></app-no-users-found>
+  <button [@fadeIn] class="btn btn-reset shadow" (click)="resetSearch()"  *ngIf="noUsersFound || usersFound">Reset</button>
+</div>
+<div class="arrow-container">
+  <button class="arrows arrow-left" (click)="showPrev()" *ngIf="skip > 0">
+    <app-arrow-left></app-arrow-left>
+  </button>
+  <button class="arrows arrow-right" (click)="showNext()" *ngIf="!lastPage">
+    <app-arrow-right></app-arrow-right>
+  </button>
 </div>
