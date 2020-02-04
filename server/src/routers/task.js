@@ -53,8 +53,7 @@ router.get('/tasks/mytasks', auth, async (req, res) => {
     case "todo":
       match.status = 'todo';
       break;
-  }
-  
+  }  
   if (req.query.sortBy) {
     const parts = req.query.sortBy.split(':');
     sort[parts[0]] = parts[1] === 'asc' ? 1 : -1;

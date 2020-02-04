@@ -58,6 +58,7 @@ import { StopEventPropagation } from './services/stop-event-propagation.directiv
 import { ViewTaskIconComponent } from './components/view-task-icon/view-task-icon.component';
 import { NoUsersFoundComponent } from './dashboard/user-accounts/no-users-found/no-users-found.component';
 import { NoResultsIconComponent } from './components/no-results-icon/no-results-icon.component';
+import { CogsComponent } from './components/cogs/cogs.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { NoResultsIconComponent } from './components/no-results-icon/no-results-
     ViewTaskModalComponent,
     ViewTaskIconComponent,
     NoUsersFoundComponent,
-    NoResultsIconComponent
+    NoResultsIconComponent,
+    CogsComponent
   ],
   imports: [
     BrowserModule,
