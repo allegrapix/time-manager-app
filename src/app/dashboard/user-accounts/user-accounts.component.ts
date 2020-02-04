@@ -36,57 +36,65 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
   userSearchSub: Subscription;
   searchedWord = '';
   skip = 0;
-  limit = 9;
-  noUsersFound = false;
-  searchMsg;
+  limit = 8;
+  searchMsg = '';
   usersFound = false;
-  nSub: Subscription;
   nrUsers: number;
   lastPage = false;
   nrOfPages: number;
+  searchMode = false;
+  searchItem = '';
 
   constructor(
     private userService: UserService
     ) { }
 
   ngOnInit() {
-    this.nSub = this.userService.getNoOfUsers().subscribe(user => {
-      this.nrUsers = user.numbers; 
-      this.nrOfPages = Math.ceil(this.nrUsers / this.limit);
-      console.log(this.skip);
-      
-      this.lastPage =  Math.ceil(this.skip / this.limit) === this.nrOfPages ? true : false;
-    });
     this.getUsers();
     this.userDeleteSub = this.userService.userDeleted.subscribe(user_id => {
       const index = this.users.findIndex(user => user._id === user_id);
       this.users.splice(index, 1);
     });
     this.userSearchSub = this.userService.searchUser.subscribe(searchedUser => {
+      this.searchMode = true;
+      this.searchItem = searchedUser;
       if (searchedUser.length > 0) {
-        this.userService.getUsers(undefined, undefined).subscribe(users => {
-          this.usersAll = users; 
-          this.users = this.usersAll.filter(user => user.name.includes(searchedUser) || user.email.includes(searchedUser));        
-          this.noUsersFound = this.users.length === 0 ? true : false;
-          this.searchMsg = searchedUser;
-          this.usersFound = true;
-        });
+        this.searchUsers(this.searchItem);
       } else {
         this.getUsers();
       }
     });
   }
 
+  searchUsers(searchTerm) {
+    this.userService.searchUserByAdmin(searchTerm, this.limit, this.skip).subscribe(users => {
+      this.users = users.users;
+      this.searchMsg = this.users.length === 0 ? searchTerm : '';
+      this.nrUsers = users.count; 
+      this.getNrOfPages(users.noOfPages);
+      this.usersFound = true;     
+    });
+  }
+
   getUsers() {
-    this.getUsersOnPageSub = this.userService.getUsers(this.limit, this.skip).subscribe(users => {
-      this.users = users;
-      this.noUsersFound = false;
-      this.usersFound = false;
+    this.getUsersOnPageSub = this.userService.getUsers(this.limit, this.skip).subscribe(users => {      
+      this.users = users.users;
+      this.nrUsers = users.count; 
+      this.getNrOfPages(users.noOfPages);
     })
+  }
+
+  getNrOfPages(noOfPages) {
+    this.nrOfPages = noOfPages;
+    this.lastPage =  Math.ceil(this.skip / this.limit) === this.nrOfPages - 1 ? true : false;
   }
 
   resetSearch() {
     this.skip = 0;
+    this.usersFound = false;
+    this.searchMode = false;
+    this.searchMsg = '';
+    this.searchItem = '';
     this.checkPages();
   }
 
@@ -103,8 +111,7 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
   }
 
   checkPages() {
-    this.getUsers();
-    this.lastPage =  Math.ceil(this.skip / this.limit) + 1 === this.nrOfPages ? true : false;
+    this.searchMode ? this.searchUsers(this.searchItem) : this.getUsers();
   }
 
   ngOnDestroy() {

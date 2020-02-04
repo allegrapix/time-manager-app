@@ -4,8 +4,10 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { User } from '../profile/user.model';
 
-interface UserNumbers {
-  numbers: number;
+interface UserObj {
+  count: number;
+  noOfPages: number;
+  users: User[]
 }
 
 @Injectable({providedIn: 'root'})
@@ -17,6 +19,24 @@ export class UserService {
   @Output() userDeleted = new EventEmitter<string>();
   @Output() searchUser = new EventEmitter<string>();
 
+  searchUserByAdmin(search, limit, skip) {
+    let params = new HttpParams();
+    if (limit !== undefined) {
+      params = params.append('limit', limit.toString());
+    }
+    if (skip !== undefined) {
+      params = params.append('skip', skip.toString());
+    }
+    if (search !== undefined) {
+      params = params.append('search', search.toString());
+    }
+    return this.http
+    .get<UserObj>(`${this.url}/users/search`, {params})
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getUsers(limit, skip) {
     let params = new HttpParams();
     if (limit !== undefined) {
@@ -26,18 +46,10 @@ export class UserService {
       params = params.append('skip', skip.toString());
     }
     return this.http
-    .get<User[]>(`${this.url}/users`, {params})
+    .get<UserObj>(`${this.url}/users`, {params})
     .pipe(
       catchError(this.handleError)
     );
-  }
-
-  getNoOfUsers() {
-    return this.http
-    .get<UserNumbers>(`${this.url}/users/numbers`)
-    .pipe(
-      catchError(this.handleError)
-    )
   }
 
   getUser() {

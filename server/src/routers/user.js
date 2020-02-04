@@ -85,17 +85,42 @@ router.post('/users/:userID/avatar', authManager, upload.single('avatar'), async
 
 router.get('/users', authManager, async (req, res) => {
     try {
+      const count = await User.find({});
       const users = await User.find({}, null, {limit: parseInt(req.query.limit), skip: parseInt(req.query.skip)});
-      res.send(users);
+      const noOfPages = Math.ceil(count.length / parseInt(req.query.limit));
+      res.send({
+        count: count.length,
+        noOfPages,
+        users: users
+      });
     } catch (error) {
       res.status(500).send();
     } 
 });
 
-router.get('/users/numbers', authManager, async (req, res) => {
+router.get('/users/search', authManager, async (req, res) => {
+  const searchTerm = req.query.search;
   try {
-    const users = await User.find({});
-    res.send({numbers: users.length});
+    const count = await User.find({ 
+      $or: [
+        { name: { "$regex": searchTerm, "$options": "i" }},
+        { email: { "$regex": searchTerm, "$options": "i"}}
+      ]}
+    );
+    const users = await User.find({ 
+      $or: [
+        { name: { "$regex": searchTerm, "$options": "i" }},
+        { email: { "$regex": searchTerm, "$options": "i"}}
+      ]}, 
+      null,
+      {limit: parseInt(req.query.limit), skip: parseInt(req.query.skip)}
+    );
+    const noOfPages =  count.length > parseInt(req.query.limit) ? Math.ceil(count.length / parseInt(req.query.limit)) : 1;
+    res.send({
+      count: count.length,
+      noOfPages,
+      users
+    });
   } catch (error) {
     res.status(500).send();
   } 
