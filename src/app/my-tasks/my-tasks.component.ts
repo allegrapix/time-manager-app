@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { trigger, transition, style, group, animate } from '@angular/animations';
+import { Task } from './task/task.model';
 
 @Component({
   selector: 'app-my-tasks',
@@ -38,7 +39,7 @@ export class MyTasksComponent implements OnInit, OnDestroy {
     { name: 'to do', value: 'todo' }
   ];
   dropDownIsOpen = false;
-  tasks;
+  tasks: Task[];
   queryParamsSubscription: Subscription;
   queryParams: string;
   noTaskSelected: boolean = true;
@@ -60,9 +61,14 @@ export class MyTasksComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
+    console.log(this.noTaskSelected);
+    
+    if (this.noTaskSelected) {
+      this.router.navigate(['noTask'], {relativeTo: this.route});
+    }
     this.taskListChangeSub = this.tasksService.taskListModified.subscribe(() => {
       this.loadTasks(this.skip, this.limit);
-    })
+    });    
   }
 
   addStatusParams(event: any) {
@@ -96,10 +102,12 @@ export class MyTasksComponent implements OnInit, OnDestroy {
   }
 
   goToTask(id: string) {
+    this.noTaskSelected = false;
     this.router.navigate([id], {queryParams: {status: this.statusParam}, relativeTo: this.route});
   }
 
   goToNewTask() {
+    this.noTaskSelected = false;
     this.router.navigate(['new'], {queryParams: {status: this.statusParam}, relativeTo: this.route});
   }
 

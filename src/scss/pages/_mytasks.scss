@@ -97,6 +97,7 @@ app-dashboard  {
   }
 
   app-task,
+  app-no-task,
   app-new-task,
   app-edit-task {
     width: 70%;
@@ -124,6 +125,29 @@ app-dashboard  {
 
   .arrow-right {
     right: 0;
+  }
+}
+
+.no-tasks {
+  padding: 0 25px 0 50px;
+  text-align: center;
+  opacity: .6;
+
+  app-cogs {
+    margin-left: 50px;
+    
+    svg {
+      width: 40%;
+    }
+  }
+
+  .title {
+    font-size: 30px;
+    margin-top: 10px;
+  }
+
+  .subtitle {
+    font-size: 18px;
   }
 }
 
@@ -396,6 +420,10 @@ app-dashboard  {
       @include size(10px, 10px);
     }
   }
+
+  .no-tasks {
+    padding: 0 25px 0 30px;
+  }
   
   .task-container {
     padding: 0 25px 0 30px;
@@ -494,6 +522,7 @@ app-dashboard  {
   
     app-task,
     app-new-task,
+    app-no-task,
     app-edit-task  {
       width: 100%;
     }
@@ -533,6 +562,10 @@ app-dashboard  {
     .arrow-container {
       display: none;
     }
+  }
+
+  .no-tasks {
+    padding: 0 25px;
   }
   
   .task-container {
