@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
 
   onSeachUser(event) {
     this.searchedWord = event.srcElement.value;
-    this.userService.searchUser.emit(this.searchedWord);
+    this.userService.searchUser.emit(this.searchedWord.toLowerCase());
     this.searchUserForm.reset();
   }
 }
