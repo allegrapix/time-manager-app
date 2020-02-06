@@ -10,8 +10,8 @@ export class FilterTasksPipe implements PipeTransform {
       return value;
     }
     const tasksArray = [];
-    for(const item of value) {
-      if(item[propName] === filterString) {
+    for (const item of value) {
+      if (item[propName] === filterString) {
         tasksArray.push(item);
       }
     }

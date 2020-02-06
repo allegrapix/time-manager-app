@@ -18,7 +18,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
         animate(300)
       ]),
       transition('* => void', [
-        animate(200, 
+        animate(200,
           style({
             opacity: 0,
             height: 0
@@ -41,9 +41,9 @@ export class ProfileLinkComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userSub = this.userService.getUser().subscribe(user => {
-      this.username = user.name
+      this.username = user.name;
       if (user.avatar) {
-        this.profileImg  = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${user.avatar}`); 
+        this.profileImg  = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${user.avatar}`);
         this.noAvatar = false;
       } else {
         this.noAvatar = true;

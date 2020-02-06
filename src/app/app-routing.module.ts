@@ -18,8 +18,8 @@ import { UserAccountsComponent } from './dashboard/user-accounts/user-accounts.c
 import { TaskManagerComponent } from './dashboard/task-manager/task-manager.component';
 
 const routes: Routes = [
-  { 
-    path: '', 
+  {
+    path: '',
     component: HomeComponent
   },
   {
@@ -38,39 +38,39 @@ const routes: Routes = [
       }
     ]
   },
-  { 
-    path: 'mytasks', 
-    component: MyTasksComponent, 
+  {
+    path: 'mytasks',
+    component: MyTasksComponent,
     canActivate: [AuthGuard],
     children: [
-      { 
-        path: 'noTask', 
-        component: NoTaskComponent 
+      {
+        path: 'noTask',
+        component: NoTaskComponent
       },
-      { 
-        path: 'new', 
-        component: NewTaskComponent 
+      {
+        path: 'new',
+        component: NewTaskComponent
       },
-      { 
+      {
         path: ':id',
-         component: TaskComponent 
+         component: TaskComponent
       },
-      { 
-        path: ':id/edit-task', 
+      {
+        path: ':id/edit-task',
         component: NewTaskComponent,
         resolve: {
           task: TaskResolver
         }
       }
-    ] 
+    ]
   },
-  { 
-    path: 'myschedule', 
+  {
+    path: 'myschedule',
     canActivate: [AuthGuard],
-    component: ScheduleComponent 
+    component: ScheduleComponent
   },
-  { 
-    path: 'myprofile', 
+  {
+    path: 'myprofile',
     canActivate: [AuthGuard],
     component: ProfileComponent
   },
@@ -79,12 +79,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: EditProfileComponent
   },
-  { 
-    path: 'login', 
+  {
+    path: 'login',
     component: LoginComponent
   },
-  { 
-    path: 'register', 
+  {
+    path: 'register',
     component: RegisterComponent
   },
   {

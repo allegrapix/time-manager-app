@@ -22,7 +22,7 @@ import { Task } from 'src/app/my-tasks/task/task.model';
         animate(200)
       ]),
       transition('* => void', [
-        animate(200, 
+        animate(200,
           style({
             opacity: 0
           })
@@ -44,7 +44,7 @@ import { Task } from 'src/app/my-tasks/task/task.model';
         animate(100)
       ]),
       transition('* => void', [
-        animate(200, 
+        animate(200,
           style({
             opacity: 0,
             height: 0
@@ -66,7 +66,7 @@ export class TaskModalComponent implements OnInit {
     status: '',
     workedHours: 0,
     description: ''
-  }
+  };
   defaultStatus = 'todo';
   dropDownIsOpen = false;
   constructor(
@@ -81,7 +81,7 @@ export class TaskModalComponent implements OnInit {
       'workedHours': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required)
     });
-    if(this.taskID) {
+    if (this.taskID) {
       this.taskService.getUserTask(this.userID, this.taskID).subscribe(task => {
         this.modalForm.setValue({
           'title': task.title,
@@ -89,7 +89,7 @@ export class TaskModalComponent implements OnInit {
           'workedHours': task.workedHours,
           'description': task.description
         });
-      })
+      });
     }
   }
 
@@ -99,13 +99,13 @@ export class TaskModalComponent implements OnInit {
 
   onSubmit() {
     if (!this.taskID) {
-      this.taskService.postTaskByAdmin(this.userID, this.modalForm.value).subscribe(task => {   
+      this.taskService.postTaskByAdmin(this.userID, this.modalForm.value).subscribe(task => {
         this.taskService.closeTaskModal.emit(task);
       });
     } else {
       this.taskService.editTaskByAdmin(this.userID, this.taskID, this.modalForm.value).subscribe(task => {
         this.taskService.closeTaskModal.emit(task);
-      })
+      });
     }
   }
 

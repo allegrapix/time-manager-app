@@ -31,6 +31,6 @@ export class NoUsersFoundComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
-  ngOnInit() {    
+  ngOnInit() {
   }
 }

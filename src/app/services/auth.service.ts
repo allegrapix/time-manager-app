@@ -16,8 +16,8 @@ interface AuthResponseData {
     updatedAt: Date;
     expiresIn: string;
     __v: number
-  }
-  token: string
+  };
+  token: string;
 }
 
 @Injectable({providedIn: 'root'})
@@ -27,7 +27,8 @@ export class AuthService {
   private tokenExpirationTimer: any;
   pageNotAllowed =  new EventEmitter<void>();
 
-  constructor(private http: HttpClient,
+  constructor(
+    private http: HttpClient,
     private router: Router
     ) {}
 
@@ -54,7 +55,7 @@ export class AuthService {
             resData.user.preferredWorkingHours,
             +resData.user.expiresIn,
             resData.token
-          )
+          );
         })
       );
   }
@@ -80,9 +81,9 @@ export class AuthService {
           resData.user.preferredWorkingHours,
           +resData.user.expiresIn,
           resData.token
-        )
+        );
       })
-    )
+    );
   }
 
   autoLogin() {
@@ -96,11 +97,21 @@ export class AuthService {
       preferredWorkingHours: number,
       _tokenExpirationDate: string,
       _token: string
-    } = JSON.parse(localStorage.getItem('userData'));    
+    } = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
       return;
     }
-    const loadedUser = new User(userData._id, userData.name, userData.email, userData.role, userData.createdAt, userData.updatedAt, userData.preferredWorkingHours, new Date(userData._tokenExpirationDate), userData._token);    
+    const loadedUser = new User(
+      userData._id,
+      userData.name,
+      userData.email,
+      userData.role,
+      userData.createdAt,
+      userData.updatedAt,
+      userData.preferredWorkingHours,
+      new Date(userData._tokenExpirationDate),
+      userData._token
+      );
     if (loadedUser.token) {
       this.user.next(loadedUser);
       const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
@@ -119,7 +130,17 @@ export class AuthService {
     return throwError(errorMsg);
   }
 
-  private handleAuthentication(_id: string, name: string, email: string, role: string, createdAt: Date, updatedAt: Date, preferredWorkingHours: number, expiresIn: number, token: string ) {
+  private handleAuthentication(
+    _id: string,
+    name: string,
+    email: string,
+    role: string,
+    createdAt: Date,
+    updatedAt: Date,
+    preferredWorkingHours: number,
+    expiresIn: number,
+    token: string
+    ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User( _id, name, email, role,  createdAt, updatedAt, preferredWorkingHours, expirationDate, token);
     this.user.next(user);
@@ -131,7 +152,7 @@ export class AuthService {
     this.user.next(null);
     localStorage.removeItem('userData');
     this.router.navigate(['/']);
-    if(this.tokenExpirationTimer) {
+    if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
@@ -140,6 +161,6 @@ export class AuthService {
   autoLogout(expirationDuration: number) {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
-    }, expirationDuration)
+    }, expirationDuration);
   }
 }

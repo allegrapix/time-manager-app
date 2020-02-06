@@ -3,7 +3,7 @@
   <app-no-users-found [searchMsg]="searchMsg" *ngIf="searchMsg"></app-no-users-found>
   <button [@fadeIn] class="btn btn-reset shadow" (click)="resetSearch()"  *ngIf="searchMsg || usersFound">Reset</button>
 </div>
-<div class="arrow-container">
+<div class="arrow-container dashboard-arrows">
   <button class="arrows arrow-left" (click)="showPrev()" *ngIf="skip > 0">
     <app-arrow-left></app-arrow-left>
   </button>

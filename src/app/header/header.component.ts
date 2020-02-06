@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private componentFactoryResolver: ComponentFactoryResolver,
     private taskService: TasksService
     ) {
-    this.logOrRegServ.goToRegister.subscribe((isTrue: boolean) => {this.register = isTrue;})
+    this.logOrRegServ.goToRegister.subscribe((isTrue: boolean) => this.register = isTrue);
   }
 
   ngOnInit() {
@@ -49,8 +49,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.pageNotAllowed.subscribe(() => {
       this.showAlert();
     });
-    this.taskModalSub = this.taskService.taskModal.subscribe(foundUser => {     
-      if(foundUser.userID) {
+    this.taskModalSub = this.taskService.taskModal.subscribe(foundUser => {
+      if (foundUser.userID) {
         this.showNewTask(foundUser);
       }
     });
@@ -59,20 +59,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
     this.viewTaskSub = this.taskService.viewTaskByAdmin.subscribe(userInfo => {
       this.viewTaskModal(userInfo);
-    })
+    });
   }
 
   showNewTask(userInfo) {
     const compFactory = this.componentFactoryResolver.resolveComponentFactory(TaskModalComponent);
     const hostViewContainerRef = this.newTaskHost.viewContainerRef;
     hostViewContainerRef.clear();
-    const newTaskCompRef = hostViewContainerRef.createComponent(compFactory);  
+    const newTaskCompRef = hostViewContainerRef.createComponent(compFactory);
     newTaskCompRef.instance.userID = userInfo.userID;
     newTaskCompRef.instance.taskID = userInfo.taskID;
     this.closeTaskSub = this.taskService.closeTaskModal.subscribe(() => {
       this.closeTaskSub.unsubscribe();
       hostViewContainerRef.clear();
-    })
+    });
   }
 
   onHandleClose() {
@@ -111,7 +111,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   showAlert() {
     const compFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
     const hostViewContainerRef = this.alertHost.viewContainerRef;
-    hostViewContainerRef.clear();    
+    hostViewContainerRef.clear();
     const alertCompRef = hostViewContainerRef.createComponent(compFactory);
     alertCompRef.instance.message = this.error;
     this.closeAlertSub = alertCompRef.instance.closeAlert.subscribe(() => {
@@ -127,7 +127,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   confirmAlert(userInfo) {
     const compFactory = this.componentFactoryResolver.resolveComponentFactory(ConfirmComponent);
     const hostViewContainerRef = this.confirmAlertHost.viewContainerRef;
-    hostViewContainerRef.clear();    
+    hostViewContainerRef.clear();
     const confirmCompRef = hostViewContainerRef.createComponent(compFactory);
     confirmCompRef.instance.userID = userInfo.userID;
     confirmCompRef.instance.taskID = userInfo.taskID;

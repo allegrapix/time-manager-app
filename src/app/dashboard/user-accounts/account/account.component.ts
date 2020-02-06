@@ -73,22 +73,22 @@ export class AccountComponent implements OnInit, OnDestroy {
     private domSanitizer: DomSanitizer
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.getUserTasks(this.today.value);
     this.getUserAvatar();
     this.avatarChangeSub = this.userService.avatarChanged.subscribe(userData => {
       if (this.user._id === userData._id) {
         this.user = userData;
-        this.getUserAvatar()
+        this.getUserAvatar();
       }
     });
     this.newTaskAdded = this.taskService.closeTaskModal.subscribe(task => {
-      if(task) {
+      if (task) {
         this.getUserTasks(this.today.value);
       }
     });
-    this.taskDeletedSub = this.taskService.deleteTaskConfirmedByAdmin.subscribe(confirmed => {     
-      if(confirmed) {
+    this.taskDeletedSub = this.taskService.deleteTaskConfirmedByAdmin.subscribe(confirmed => {
+      if (confirmed) {
         this.getUserTasks(this.today.value);
       }
     });
@@ -96,7 +96,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   getUserTasks(selDate: Date) {
     const selDay = selDate.getDate();
-    const selMonth = selDate.getMonth();    
+    const selMonth = selDate.getMonth();
     this.tasksSub = this.taskService.getUserTasks(this.user._id).subscribe(tasks => {
       this.tasks = [];
       tasks.filter((task: Task) => {
@@ -104,14 +104,14 @@ export class AccountComponent implements OnInit, OnDestroy {
         const mm = new Date(task.updatedAt).getMonth();
         if (selDay === dd && selMonth === mm) {
           this.tasks.push(task);
-        }  
-      })
+        }
+      });
       this.noTasks = this.tasks.length > 0 ? false : true;
     });
   }
 
   getUserAvatar() {
-    if(this.user.avatar) {
+    if (this.user.avatar) {
       this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${this.user.avatar}`);
     } else {
       this.base64Image = '../../../../assets/img/robot.png';
@@ -129,11 +129,11 @@ export class AccountComponent implements OnInit, OnDestroy {
   deleteSelectedUser() {
     this.userService.deleteUserByAdmin(this.user._id).subscribe(resData => {
       this.userService.userDeleted.emit(resData._id);
-    })
+    });
   }
 
   getTodaysTasks(event: MatDatepickerInputEvent<Date>) {
-    this.getUserTasks(event.value);    
+    this.getUserTasks(event.value);
   }
 
   openTaskModal() {

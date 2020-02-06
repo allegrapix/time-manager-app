@@ -12,7 +12,7 @@
       </div>
       <div class="edit-btn-container">
         <button type="button" 
-        stop-propagation
+        appStopPropagation
         (click)=editSelectedUser()
         class="user-edit-btn">
           <span>Edit</span>
@@ -22,7 +22,7 @@
       <div class="open-btn-container">
         <button 
         type="button" 
-        stop-propagation
+        appStopPropagation
         (click)=showHiddenProfile()
         class="show-profile-btn">
           <span *ngIf="!showProfile">Show profile</span>
@@ -34,7 +34,7 @@
   </div>
   <div 
   class="hidden-info-container"
-  stop-propagation
+  appStopPropagation
   [ngClass]="{'show-hidden-profile': showProfile}">
     <div class="line-separator">
       <div class="line"></div>

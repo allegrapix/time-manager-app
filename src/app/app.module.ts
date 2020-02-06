@@ -54,7 +54,7 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
 import { EnvelopeAlertComponent } from './components/envelope-alert/envelope-alert.component';
 import { EnvelopeSuccessComponent } from './components/envelope-success/envelope-success.component';
 import { ViewTaskModalComponent } from './components/view-task-modal/view-task-modal.component';
-import { StopEventPropagation } from './services/stop-event-propagation.directive';
+import { StopEventPropagationDirective } from './services/stop-event-propagation.directive';
 import { ViewTaskIconComponent } from './components/view-task-icon/view-task-icon.component';
 import { NoUsersFoundComponent } from './dashboard/user-accounts/no-users-found/no-users-found.component';
 import { NoResultsIconComponent } from './components/no-results-icon/no-results-icon.component';
@@ -86,7 +86,7 @@ import { CogsComponent } from './components/cogs/cogs.component';
     AlertComponent,
     AlertSignComponent,
     PlaceHolderDirective,
-    StopEventPropagation,
+    StopEventPropagationDirective,
     PageNotFoundComponent,
     OopsComponent,
     EditProfileComponent,
@@ -124,7 +124,7 @@ import { CogsComponent } from './components/cogs/cogs.component';
     MaterialModule
   ],
   providers: [
-    LoginOrRegisterService, 
+    LoginOrRegisterService,
     TaskResolver,
     {
       provide: HTTP_INTERCEPTORS,

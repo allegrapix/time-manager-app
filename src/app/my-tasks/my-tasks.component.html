@@ -47,20 +47,20 @@
         </div>
       </li>
     </ul>
-    <div class="arrow-container">
-      <button 
-        [disabled]="isfirstpage"
-        (click)="previousTasks()"
-        class="arrows arrow-left">
-        <app-arrow-left></app-arrow-left>
-      </button>
-      <button
-        [disabled]="islastpage"
-        (click)="nextTasks()"
-        class="arrows arrow-right">
-        <app-arrow-right></app-arrow-right>
-      </button>
-    </div>
+  </div>
+  <div class="arrow-container">
+    <button 
+      [disabled]="isfirstpage"
+      (click)="previousTasks()"
+      class="arrows arrow-left">
+      <app-arrow-left></app-arrow-left>
+    </button>
+    <button
+      [disabled]="islastpage"
+      (click)="nextTasks()"
+      class="arrows arrow-right">
+      <app-arrow-right></app-arrow-right>
+    </button>
   </div>
   <router-outlet></router-outlet>
 </div>

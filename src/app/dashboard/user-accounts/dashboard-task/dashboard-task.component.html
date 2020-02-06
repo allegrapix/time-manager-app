@@ -5,10 +5,10 @@
   <p class="db-worked-hours">{{ task.workedHours }}h</p>
   <p class="db-date">{{ task.updatedAt | date: 'dd' }} {{ task.updatedAt | date: 'MMM' }}</p>
   <div class="db-btn-container">
-    <button class="add-btn edit-btn" stop-propagation (click)="editSelectedTask()">
+    <button class="add-btn edit-btn" appStopPropagation (click)="editSelectedTask()">
       <app-edit-btn></app-edit-btn>
     </button>
-    <button class="add-btn cancel-btn" stop-propagation (click)="onDeleteSelectedTask()">
+    <button class="add-btn cancel-btn" appStopPropagation (click)="onDeleteSelectedTask()">
       <app-cancel-btn></app-cancel-btn>
     </button>
   </div>
