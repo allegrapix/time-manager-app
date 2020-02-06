@@ -45,6 +45,7 @@ export class MyTasksComponent implements OnInit, OnDestroy {
   noTaskSelected = true;
   queryParamsSub: Subscription;
   paramsSub: Subscription;
+  idParam: string;
   taskListChangeSub: Subscription;
   statusParam: string;
   skip = 0;
@@ -63,6 +64,12 @@ export class MyTasksComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
+    this.tasksService.noTasksSelected.subscribe(notSelected => {
+      this.noTaskSelected = notSelected;
+      if (this.noTaskSelected) {
+        this.router.navigate(['noTask'], {relativeTo: this.route});
+      }
+    });
     this.taskListChangeSub = this.tasksService.taskListModified.subscribe(() => {
       this.loadTasks(this.skip, this.limit);
     });
