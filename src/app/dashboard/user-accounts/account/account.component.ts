@@ -100,8 +100,8 @@ export class AccountComponent implements OnInit, OnDestroy {
     this.tasksSub = this.taskService.getUserTasks(this.user._id).subscribe(tasks => {
       this.tasks = [];
       tasks.filter((task: Task) => {
-        const dd = new Date(task.updatedAt).getDate();
-        const mm = new Date(task.updatedAt).getMonth();
+        const dd = new Date(task.startedAt).getDate();
+        const mm = new Date(task.startedAt).getMonth();
         if (selDay === dd && selMonth === mm) {
           this.tasks.push(task);
         }

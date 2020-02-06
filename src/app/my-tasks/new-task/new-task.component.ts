@@ -22,6 +22,7 @@ export class NewTaskComponent implements OnInit, OnDestroy {
   dropDownIsOpen = false;
   newTaskForm: FormGroup;
   submitBtn = 'Create';
+  startedAt = new FormControl(new Date());
 
   constructor(
     private router: Router,
@@ -34,7 +35,8 @@ export class NewTaskComponent implements OnInit, OnDestroy {
     this.newTaskForm = new FormGroup({
       'title': new FormControl(null, Validators.required),
       'status': new FormControl(null, Validators.required),
-      'workedHours': new FormControl(null),
+      'startedAt': this.startedAt,
+      'workedHours': new FormControl(0, [Validators.required, Validators.min(0), Validators.max(10)]),
       'description': new FormControl(null, Validators.required)
     });
     this.route.data.subscribe((data: Data) => {
@@ -43,6 +45,7 @@ export class NewTaskComponent implements OnInit, OnDestroy {
         this.newTaskForm.setValue({
           'title': this.task.title,
           'status': this.task.status,
+          'startedAt': this.task.startedAt,
           'workedHours': this.task.workedHours,
           'description': this.task.description
         });

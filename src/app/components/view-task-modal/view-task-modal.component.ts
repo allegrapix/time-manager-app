@@ -61,6 +61,7 @@ export class ViewTaskModalComponent implements OnInit {
     _id: null,
     title: '',
     status: '',
+    startedAt: null,
     workedHours: 0,
     description: ''
   };

@@ -88,6 +88,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   selectedStatus = 'all';
   calendarSub: Subscription;
   showNoTasks = false;
+  hoursToday = 0;
+  hoursTodayArr: number[] = [];
+  hoursColor = '#6FBD97';
 
   constructor(
     private userService: UserService,
@@ -149,6 +152,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       'preferredWorkingHours': new FormControl(parseInt(event.target.value, 10), Validators.required)
     });
     this.patchUserInfo(wh);
+    this.calculateHours();
   }
 
   patchUserInfo(userInfo: FormGroup) {
@@ -229,9 +233,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     const selMonth = selDate.getMonth();
     this.getTasksSub = this.taskService.getTasks(this.selectedStatus, undefined, undefined).subscribe(resData => {
       this.tasks = [];
+      this.hoursTodayArr = [];
       resData.filter((task: Task) => {
-        const dd = new Date(task.updatedAt).getDate();
-        const mm = new Date(task.updatedAt).getMonth();
+        const dd = new Date(task.startedAt).getDate();
+        const mm = new Date(task.startedAt).getMonth();
         if (selDay === dd && selMonth === mm) {
           this.tasks.push(task);
         }
@@ -239,6 +244,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if (this.tasks.length === 0) {
         this.tasks.push(this.noTask);
       }
+      this.tasks.forEach(task => {
+        this.hoursTodayArr.push(task.workedHours);
+      });
+      this.calculateHours();
     },
     (err) => {},
     () => {
@@ -260,5 +269,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
   newStatusSelected(event: any) {
     this.selectedStatus = event.target.value;
     this.loadSelectedDayTasks(this.selectedDate);
+  }
+
+  calculateHours() {
+    this.hoursToday = this.hoursTodayArr.reduce((task1, task2) => {
+      return task1 + task2;
+    });
+    this.getHoursColor(this.hoursToday);
+  }
+
+  getHoursColor(hour) {
+    this.hoursColor = hour < this.loggedUser.preferredWorkingHours ? '#EF463F' : '#6FBD97';
   }
 }
