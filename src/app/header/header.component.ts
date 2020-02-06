@@ -32,6 +32,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   confirmDeleteSub: Subscription;
   viewTaskSub: Subscription;
   closeViewTaskSub: Subscription;
+  notUser = false;
+
 
   constructor(
     private logOrRegServ: LoginOrRegisterService,
@@ -45,6 +47,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userSub = this.authService.user.subscribe(user => {
       this.notLogged = !user;
+      if (!user) {
+        this.notUser = true;
+      } else if(user.role === 'user') {
+        this.notUser = true;
+      } else {
+        this.notUser = false;
+      }
     });
     this.authService.pageNotAllowed.subscribe(() => {
       this.showAlert();

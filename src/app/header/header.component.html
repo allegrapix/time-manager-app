@@ -19,7 +19,7 @@
       class="page-link page-dashboard" 
       routerLinkActive="active-dashboard"
       [routerLinkActiveOptions]="{ exact: false }"
-      *ngIf="!notLogged"
+      *ngIf="!notUser"
       >Dashboard</a>
     <a 
       [routerLink]="['/mytasks']" 
