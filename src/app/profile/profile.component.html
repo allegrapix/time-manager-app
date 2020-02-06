@@ -128,11 +128,15 @@
           </form>
         </div>        
       </div>
-      <div class="buttons-container">
+      <div class="buttons-container flex-vertical-between">
         <button
           (click)="deleteProfile()"
           class="btn btn-alert">Delete profile
-      </button>
+        </button>
+        <div class="calculate-hours">
+          <p class="subtitle faded">Actual worked hours:</p>
+          <p class="subtitle hours" [ngStyle]="{'color': hoursColor, 'borderColor': hoursColor}">{{ hoursToday }}h</p>
+        </div>
       </div>
     </div>
   </div>
@@ -177,8 +181,7 @@
                 <div class="task-status" [ngStyle]="{color: getColor(task.status)}">{{ task.status }}</div>
               </div>
               <div class="task-date">
-                <p class="task-day">{{ task.updatedAt | date: 'dd'}}</p>
-                <p class="task-month">{{ task.updatedAt | date: 'MMM' | uppercase}}</p>
+                <p class="task-day">{{ task.workedHours }}h</p>
               </div>
             </li>
           </ul>

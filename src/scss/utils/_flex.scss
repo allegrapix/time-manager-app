@@ -26,6 +26,12 @@
   justify-content: space-around;
 }
 
+.flex-vertical-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .flex-end-align-end {
   display: flex;
   justify-content: flex-end;
@@ -45,4 +51,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
 }

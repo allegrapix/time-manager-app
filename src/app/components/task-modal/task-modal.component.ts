@@ -69,6 +69,7 @@ export class TaskModalComponent implements OnInit {
   };
   defaultStatus = 'todo';
   dropDownIsOpen = false;
+  startedAt = new FormControl(new Date());
   constructor(
     private taskService: TasksService
     ) { }
@@ -78,7 +79,8 @@ export class TaskModalComponent implements OnInit {
     this.modalForm = new FormGroup({
       'title': new FormControl(null, Validators.required),
       'status': new FormControl(null, Validators.required),
-      'workedHours': new FormControl(null, Validators.required),
+      'startedAt': this.startedAt,
+      'workedHours': new FormControl(0, [Validators.required, Validators.min(0), Validators.max(10)]),
       'description': new FormControl(null, Validators.required)
     });
     if (this.taskID) {
@@ -86,6 +88,7 @@ export class TaskModalComponent implements OnInit {
         this.modalForm.setValue({
           'title': task.title,
           'status': task.status,
+          'startedAt': task.startedAt,
           'workedHours': task.workedHours,
           'description': task.description
         });

@@ -158,9 +158,26 @@ app-profile {
     }
 
     .buttons-container {
+      width: 50%;
+
       .btn {
+        width: auto;
+        align-self: flex-end;
         padding: 8px 50px;
         font-size: 18px;
+      }
+
+      .calculate-hours {
+        width: 100%;
+
+        .hours {
+          @include border-radius(15px);
+          font-size: 18px;
+          border: 1px solid $bgr-color;
+          margin: 10px 0 20px;
+          padding: 3px 15px;
+          background: rgba($default-color, .3);
+        }
       }
     }
   }
@@ -327,6 +344,16 @@ app-profile {
         .btn {
           padding: 8px 35px;
           font-size: 16px;
+          width: auto;
+        }
+
+        .calculate-hours {  
+          .hours {
+            @include border-radius(15px);
+            font-size: 16px;
+            margin: 8px 0 15px;
+            padding: 2px 15px;
+          }
         }
       }
     }
@@ -373,7 +400,6 @@ app-profile {
       .account-info-container {
         padding: 0 25px 0 30px;
         flex-wrap: wrap;
-        
   
         .user-info-container {
           .to-edit-field {  
@@ -386,6 +412,15 @@ app-profile {
         .account-info {
           width: 100%;
         } 
+
+        .buttons-container {  
+          width: 100%;
+
+          .btn {
+            order: 2;
+            width: 100%;
+          }
+        }
       }
     }
   

@@ -219,6 +219,37 @@ app-dashboard  {
         .warning-msg {
           bottom: 0;
         }
+
+        .date-picker-container {
+          .mat-form-field {
+            width: 100%;
+            
+            &-wrapper {
+              padding: 0;
+
+              .mat-form-field-flex {
+                position: relative;
+
+                .mat-form-field-infix .mat-input-element {
+                  color: $bgr-color;
+                  padding: 20px 0;
+                }
+
+                .mat-form-field-suffix {
+                  @include position(absolute, 35px, 0);
+
+                  .mat-datepicker-toggle-default-icon {
+                    color: $bgr-color;
+                  }
+                }
+              }
+
+              .mat-form-field-underline {
+                background: $bgr-color;
+              }
+            }
+          }
+        }
       }
     }
 
@@ -357,6 +388,16 @@ app-dashboard  {
         .status-group {
           width: 58%;
         }
+
+        .hours-group {
+          .date-picker-container {
+            .mat-form-field {              
+              &-wrapper .mat-form-field-flex .mat-form-field-infix .mat-input-element {
+                padding: 17px 0;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -460,6 +501,22 @@ app-dashboard  {
         
         .hours-group {
           width: 150px;
+
+          .date-picker-container {
+            .mat-form-field {              
+              &-wrapper {  
+                .mat-form-field-flex {  
+                  .mat-form-field-infix .mat-input-element {
+                    padding: 15px 0;
+                  }
+                  
+                  .mat-form-field-suffix {
+                    top: 30px;
+                  }
+                }
+              }
+            }
+          }
         }
       }
 
@@ -622,6 +679,20 @@ app-dashboard  {
         
         .hours-group {
           width: 130px;
+
+          .date-picker-container .mat-form-field {
+            &-wrapper {
+              .mat-form-field-flex {
+                .mat-form-field-infix .mat-input-element {
+                  padding: 10px 0 15px;
+                }
+
+                .mat-form-field-suffix {
+                  top: 25px
+                }
+              }
+            }
+          }
         }
       }
 

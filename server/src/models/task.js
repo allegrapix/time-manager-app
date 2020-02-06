@@ -18,7 +18,8 @@ const taskSchema = new mongoose.Schema({
     type: String
   },
   startedAt: {
-    type: Date
+    type: Date,
+    default: new Date()
   },
   endedAt: {
     type: Date

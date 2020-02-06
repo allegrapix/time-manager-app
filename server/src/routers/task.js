@@ -42,7 +42,7 @@ router.get('/tasks/all', authManager, async (req, res) => {
 
 router.get('/tasks/mytasks', auth, async (req, res) => {
   const match = {};
-  const sort = {};
+  let sort = 'desc';
   switch(req.query.status) {
     case 'completed':
       match.status = 'completed';
@@ -56,7 +56,7 @@ router.get('/tasks/mytasks', auth, async (req, res) => {
   }  
   if (req.query.sortBy) {
     const parts = req.query.sortBy.split(':');
-    sort[parts[0]] = parts[1] === 'asc' ? 1 : -1;
+    sort = parts[1] === 'asc' ? 1 : -1;
   }
   try {
     await req.user.populate({
@@ -65,7 +65,7 @@ router.get('/tasks/mytasks', auth, async (req, res) => {
       options: {
         limit: parseInt(req.query.limit),
         skip: parseInt(req.query.skip),
-        sort
+        sort: { 'startedAt': sort }
       }
     }).execPopulate();
     res.send(req.user.tasks);
@@ -120,7 +120,7 @@ router.get('/tasks/:userID/:taskID', authAdmin, async (req, res) => {
 router.patch('/tasks/mytasks/:taskID', auth, async (req, res) => {
   const _id = req.params.taskID;
   const updates = Object.keys(req.body);
-  const allowedOp = ['title', 'status', 'workedHours', 'description'];
+  const allowedOp = ['title', 'status', 'workedHours', 'description', 'startedAt'];
   const isValidOp = updates.every(update => allowedOp.includes(update));
   if (!isValidOp) {
     return res.status(400).send('Invalid updates');
