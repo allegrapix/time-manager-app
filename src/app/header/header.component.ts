@@ -62,6 +62,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
+  noTasksSelected() {
+    this.taskService.noTasksSelected.emit(true);
+  }
+
   showNewTask(userInfo) {
     const compFactory = this.componentFactoryResolver.resolveComponentFactory(TaskModalComponent);
     const hostViewContainerRef = this.newTaskHost.viewContainerRef;

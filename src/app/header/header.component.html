@@ -2,7 +2,7 @@
   <img src="../../assets/img/Logo.png" alt="logo" class="img-logo">
   <p class="text-logo">Time management</p>
 </a>
-<div class="links-container flex-end-align-end">
+<div class="links-container flex-end-align-end" (click)="noTasksSelected()">
   <div class="burger-btn" (click)="onMenuOpen()">
     <div class="burger-bar-container" [ngClass]="{open: menuIsOpen}">
         <div class="burger-bar bar-1"></div>
