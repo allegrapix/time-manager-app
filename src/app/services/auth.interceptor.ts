@@ -9,7 +9,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return this.authSevice.user.pipe(
       take(1),
-      exhaustMap(user => {        
+      exhaustMap(user => {
         if (!user) {
           return next.handle(req);
         }
@@ -20,6 +20,6 @@ export class AuthInterceptor implements HttpInterceptor {
         });
         return next.handle(modifiedReqeq);
       })
-    )
+    );
   }
 }

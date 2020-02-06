@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['accounts'], {relativeTo: this.route});
     this.searchUserForm = new FormGroup({
       'search': new FormControl(null)
-    })
+    });
   }
 
   goToAccounts() {

@@ -43,7 +43,7 @@ export class EditAccountComponent implements OnInit {
   dropDownIsOpen = false;
   hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   base64Image: SafeUrl;
-  
+
   constructor(
     private userService: UserService,
     private domSanitizer: DomSanitizer
@@ -51,7 +51,7 @@ export class EditAccountComponent implements OnInit {
 
   ngOnInit() {
     this.userEditSub = this.userService.userToBeEdited.subscribe(user => {
-      if(user) {        
+      if (user) {
         this.selectedUser = user;
         this.editModalIsOpen = true;
         this.editUserAdminForm = new FormGroup({
@@ -60,7 +60,7 @@ export class EditAccountComponent implements OnInit {
           'preferredWorkingHours': new FormControl(user.preferredWorkingHours, Validators.required)
         });
       }
-      if(user.avatar) {
+      if (user.avatar) {
         this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${user.avatar}`);
         this.noAvatar = false;
       } else {
@@ -73,36 +73,36 @@ export class EditAccountComponent implements OnInit {
     this.editModalIsOpen = false;
   }
 
-  adminEditUser() {    
+  adminEditUser() {
     this.userService.editUserByAdmin(this.selectedUser._id, this.editUserAdminForm.value)
     .subscribe(resData => {
       const updates = Object.keys(resData);
       updates.forEach(update => {
         this.selectedUser[update] = resData[update];
-      })
+      });
       this.editModalIsOpen = false;
     });
   }
 
   onAvatarSelected(event) {
-    this.selectedFile = <File>event.target.files[0];
+    this.selectedFile = <File> event.target.files[0];
     this.onSubmitAvatar();
   }
 
   onSubmitAvatar() {
     const formData = new FormData();
-    formData.append('avatar', this.selectedFile, this.selectedFile.name);    
+    formData.append('avatar', this.selectedFile, this.selectedFile.name);
     this.userService.postAvatarByAdmin(formData, this.selectedUser._id).subscribe(resData => {
       this.getUserAvatar();
-    })
+    });
   }
 
   getUserAvatar() {
     this.userService.getUserByAdmin(this.selectedUser._id).subscribe(resData => {
       this.selectedUser.avatar = resData.avatar;
-      this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${resData.avatar}`);      
+      this.base64Image = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${resData.avatar}`);
       this.userService.avatarChanged.emit(this.selectedUser);
-    })
+    });
   }
 
   rotateArrow() {

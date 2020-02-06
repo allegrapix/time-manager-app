@@ -30,6 +30,7 @@ export class TasksService {
   @Output() deleteTaskConfirmedByAdmin = new EventEmitter<boolean>();
   @Output() viewTaskByAdmin = new EventEmitter<TaskModalMode>();
   @Output() closeViewTaskByAdmin = new EventEmitter<boolean>();
+  @Output() noTasksSelected = new EventEmitter<boolean>();
 
   getStatuses() {
     return this.statuses;
@@ -37,21 +38,21 @@ export class TasksService {
 
   getAllTasks(statusParam) {
     let params = new HttpParams();
-    params = params.append("status", statusParam);
-    return this.http.get<Task[]>(`${this.url}/tasks/mytasks`, {params: params});
+    params = params.append('status', statusParam);
+    return this.http.get<Task[]>(`${this.url}/tasks/mytasks`, { params });
   }
 
   getTasks(statusParam, skip, limit) {
-    let params = new HttpParams();   
-    params = params.append("status", statusParam);
+    let params = new HttpParams();
+    params = params.append('status', statusParam);
     if (skip !== undefined) {
-      params = params.append("skip", skip.toString());
+      params = params.append('skip', skip.toString());
     }
     if (limit !== undefined) {
-      params = params.append("limit", limit.toString());
+      params = params.append('limit', limit.toString());
     }
-    params = params.append("sortBy", 'createdAt:desc');
-    return this.http.get<Task[]>(`${this.url}/tasks/mytasks`, {params: params});
+    params = params.append('sortBy', 'createdAt:desc');
+    return this.http.get<Task[]>(`${this.url}/tasks/mytasks`, { params });
   }
 
   getUserTasks(id: string) {
@@ -61,7 +62,7 @@ export class TasksService {
       catchError(this.handleError)
     );
   }
-  
+
   getTask(id: string) {
     return this.http.get<Task>(`${this.url}/tasks/mytasks/${id}`);
   }
@@ -73,18 +74,18 @@ export class TasksService {
   getColor(status: string) {
     let color = '';
     switch (status) {
-      case 'ongoing': 
+      case 'ongoing':
         color = '#EF463F';
         break;
-      case '': 
+      case '':
         color = '#EF463F';
         break;
-      case 'completed': 
+      case 'completed':
         color = '#6FBD97';
         break;
-      case 'todo': 
+      case 'todo':
         color = '#334763';
-        break;        
+        break;
     }
     return color;
   }
@@ -106,7 +107,7 @@ export class TasksService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    let errorMsg = 'An error ocurred';
+    const errorMsg = 'An error ocurred';
     if (!errorRes.error) {
       return throwError(errorMsg);
     }
@@ -134,7 +135,7 @@ export class TasksService {
     .patch<Task>(`${this.url}/tasks/mytasks/${id}`, task)
     .pipe(
       catchError(this.handleError)
-    )
+    );
   }
 
   editTaskByAdmin(userID: string, taskID: string, task: Task) {
@@ -142,6 +143,6 @@ export class TasksService {
     .patch<Task>(`${this.url}/tasks/${userID}/${taskID}`, task)
     .pipe(
       catchError(this.handleError)
-    )
+    );
   }
 }

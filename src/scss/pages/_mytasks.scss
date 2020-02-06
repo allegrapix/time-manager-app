@@ -85,11 +85,16 @@ app-dashboard  {
 }
 
 .tasks-container {
-  display: flex;  
+  display: flex; 
+  position: relative; 
+  min-height: 540px;
+
+  .arrow-container {
+    @include position(absolute, null, 70%, 0, 0);
+  }
 
   .tasks-list-wrapper {
     width: 30%;
-    position: relative;
   }
   
   .task-list {
@@ -292,6 +297,8 @@ app-dashboard  {
   }
   
   .tasks-container {
+    min-height: 400px;
+
     .task-item {
       @include border-radius(15px);
       margin: 15px 0 20px;
@@ -503,6 +510,7 @@ app-dashboard  {
   .tasks-container {
     flex-wrap: wrap;
     overflow: hidden;
+    min-height: auto;
 
     .tasks-list-wrapper {
       width: 100%;
@@ -512,6 +520,11 @@ app-dashboard  {
       &::-webkit-scrollbar {
         display: none;
       }
+    }
+
+    .arrow-container {
+      @include position(absolute, 130px, 25px, null, 25px);
+      z-index: 10;
     }
 
     .task-list {
@@ -557,11 +570,7 @@ app-dashboard  {
         padding: 17px 15px 10px 0;
         font-size: 16px;
       }
-    }
-  
-    .arrow-container {
-      display: none;
-    }
+    }  
   }
 
   .no-tasks {
@@ -569,7 +578,7 @@ app-dashboard  {
   }
   
   .task-container {
-    padding: 0 25px;
+    padding: 25px;
   
     .task-header {  
       .title {

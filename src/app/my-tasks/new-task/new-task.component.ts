@@ -17,7 +17,7 @@ export class NewTaskComponent implements OnInit, OnDestroy {
     status: '',
     workedHours: 0,
     description: ''
-  }
+  };
   defaultStatus = 'todo';
   dropDownIsOpen = false;
   newTaskForm: FormGroup;
@@ -29,15 +29,15 @@ export class NewTaskComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
     ) { }
 
-  ngOnInit() {  
+  ngOnInit() {
     this.statuses = this.tasksService.getStatuses();
     this.newTaskForm = new FormGroup({
       'title': new FormControl(null, Validators.required),
       'status': new FormControl(null, Validators.required),
-      'workedHours': new FormControl(null, Validators.required),
+      'workedHours': new FormControl(null),
       'description': new FormControl(null, Validators.required)
-    });    
-    this.route.data.subscribe((data: Data) => {      
+    });
+    this.route.data.subscribe((data: Data) => {
       this.task = data['task'];
       if (this.task) {
         this.newTaskForm.setValue({
@@ -59,7 +59,7 @@ export class NewTaskComponent implements OnInit, OnDestroy {
     if (this.task) {
       this.tasksService.editTask(this.task._id, this.newTaskForm.value).subscribe(resData => {
         this.navigateAfterSubmit(resData._id);
-      })
+      });
     } else {
       this.tasksService.postTask(this.newTaskForm.value).subscribe(resData => {
         this.navigateAfterSubmit(resData._id);

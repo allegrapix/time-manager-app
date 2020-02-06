@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { trigger, transition, style, group, animate } from '@angular/animations';
 import { Task } from './task/task.model';
 
@@ -13,13 +13,13 @@ import { Task } from './task/task.model';
   animations: [
     trigger('taskListAnimation', [
       transition(':enter', [
-        style({ 
+        style({
             opacity: 0,
             transform: 'translateX(-100px)'
           }),
         group([
           animate('250ms ease-in',
-            style({ 
+            style({
               opacity: 1,
               transform: 'translateX(0)'
             })
@@ -42,8 +42,9 @@ export class MyTasksComponent implements OnInit, OnDestroy {
   tasks: Task[];
   queryParamsSubscription: Subscription;
   queryParams: string;
-  noTaskSelected: boolean = true;
+  noTaskSelected = true;
   queryParamsSub: Subscription;
+  paramsSub: Subscription;
   taskListChangeSub: Subscription;
   statusParam: string;
   skip = 0;
@@ -51,6 +52,7 @@ export class MyTasksComponent implements OnInit, OnDestroy {
   isfirstpage = true;
   islastpage = false;
   nrOfTasks;
+  noTasksSelectedSub: Subscription;
 
   constructor(
     private tasksService: TasksService,
@@ -61,25 +63,20 @@ export class MyTasksComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
-    console.log(this.noTaskSelected);
-    
-    if (this.noTaskSelected) {
-      this.router.navigate(['noTask'], {relativeTo: this.route});
-    }
     this.taskListChangeSub = this.tasksService.taskListModified.subscribe(() => {
       this.loadTasks(this.skip, this.limit);
-    });    
+    });
   }
 
   addStatusParams(event: any) {
     this.skip = 0;
-    if(event.target.value !== 'all') {
+    if (event.target.value !== 'all') {
       this.router.navigate([], {
         queryParams: {
           status: event.target.value
         },
         queryParamsHandling: 'merge'
-      });    
+      });
     } else {
       this.router.navigate([]);
     }
@@ -92,11 +89,11 @@ export class MyTasksComponent implements OnInit, OnDestroy {
       this.statusParam = updateQueryParams.status;
       this.tasksService.getAllTasks(this.statusParam).subscribe(resData => {
         this.nrOfTasks = resData.length;
-        this.checkPages();    
-      })
-      this.defaultStatus = this.statusParam ? this.statusParam : 'all';      
+        this.checkPages();
+      });
+      this.defaultStatus = this.statusParam ? this.statusParam : 'all';
       this.tasksService.getTasks(this.statusParam, skip, limit).subscribe(resData => {
-        this.tasks = resData;        
+        this.tasks = resData;
       });
     });
   }
@@ -114,7 +111,7 @@ export class MyTasksComponent implements OnInit, OnDestroy {
   rotateArrow() {
     this.dropDownIsOpen = !this.dropDownIsOpen;
   }
-  
+
   getColor(status: string) {
     const color = this.tasksService.getColor(status);
     return color;

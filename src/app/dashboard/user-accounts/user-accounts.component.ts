@@ -17,7 +17,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
         animate(300)
       ]),
       transition('* => void', [
-        animate(200, 
+        animate(200,
           style({
             opacity: 0
           })
@@ -31,7 +31,7 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
   getUsersOnPageSub: Subscription;
   winHeight: number = window.innerHeight;
   users: User[] = [];
-  usersAll: User[] = [];  
+  usersAll: User[] = [];
   userDeleteSub: Subscription;
   userSearchSub: Subscription;
   searchedWord = '';
@@ -51,8 +51,8 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getUsers();
-    this.userDeleteSub = this.userService.userDeleted.subscribe(user_id => {
-      const index = this.users.findIndex(user => user._id === user_id);
+    this.userDeleteSub = this.userService.userDeleted.subscribe(userID => {
+      const index = this.users.findIndex(user => user._id === userID);
       this.users.splice(index, 1);
     });
     this.userSearchSub = this.userService.searchUser.subscribe(searchedUser => {
@@ -70,18 +70,18 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
     this.userService.searchUserByAdmin(searchTerm, this.limit, this.skip).subscribe(users => {
       this.users = users.users;
       this.searchMsg = this.users.length === 0 ? searchTerm : '';
-      this.nrUsers = users.count; 
+      this.nrUsers = users.count;
       this.getNrOfPages(users.noOfPages);
-      this.usersFound = true;     
+      this.usersFound = true;
     });
   }
 
   getUsers() {
-    this.getUsersOnPageSub = this.userService.getUsers(this.limit, this.skip).subscribe(users => {      
+    this.getUsersOnPageSub = this.userService.getUsers(this.limit, this.skip).subscribe(users => {
       this.users = users.users;
-      this.nrUsers = users.count; 
+      this.nrUsers = users.count;
       this.getNrOfPages(users.noOfPages);
-    })
+    });
   }
 
   getNrOfPages(noOfPages) {
@@ -99,8 +99,8 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
   }
 
   showPrev() {
-    if(this.skip >= this.limit) {
-      this.skip -= this.limit;      
+    if (this.skip >= this.limit) {
+      this.skip -= this.limit;
       this.checkPages();
     }
   }

@@ -45,25 +45,25 @@ export class RegisterComponent implements OnInit {
     this.dropDownIsOpen = !this.dropDownIsOpen;
   }
 
-  validatePassword(control: FormControl): {[s:string]: boolean} {
+  validatePassword(control: FormControl): {[s: string]: boolean} {
     const reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
     if (!reg.test(control.value)) {
-      return {'validationError': true}
+      return {'validationError': true};
     }
     this.samePass = control.value;
     return null;
   }
 
-  confirmPassword(control: FormControl): {[s:string]: boolean} {
-    if(control.value !== this.samePass) {
-      return {'validationError': true}
-    }    
+  confirmPassword(control: FormControl): {[s: string]: boolean} {
+    if (control.value !== this.samePass) {
+      return {'validationError': true};
+    }
     return null;
   }
 
   onSubmit() {
     if (!this.signupForm.value) {
-      return;      
+      return;
     }
     this.isLoading = true;
     const role = 'user';

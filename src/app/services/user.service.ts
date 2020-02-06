@@ -7,7 +7,7 @@ import { User } from '../profile/user.model';
 interface UserObj {
   count: number;
   noOfPages: number;
-  users: User[]
+  users: User[];
 }
 
 @Injectable({providedIn: 'root'})
@@ -57,10 +57,10 @@ export class UserService {
     .get<User>(`${this.url}/users/me`)
     .pipe(
       catchError(this.handleError)
-    )
+    );
   }
 
-  getUserByAdmin(id) {    
+  getUserByAdmin(id) {
     return this.http
     .get<User>(`${this.url}/users/${id}`)
     .pipe(
@@ -68,7 +68,7 @@ export class UserService {
     );
   }
 
-  postAvatar(file) { 
+  postAvatar(file) {
     return this.http
     .post(`${this.url}/users/me/avatar`, file, {
       reportProgress: true,
@@ -103,10 +103,10 @@ export class UserService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    let errorMsg = 'An error ocurred';
+    const errorMsg = 'An error ocurred';
     if (!errorRes.error) {
       return throwError(errorMsg);
-    }    
+    }
     return throwError(errorRes.error);
   }
 
@@ -115,7 +115,7 @@ export class UserService {
     .patch(`${this.url}/users/me`, payload)
     .pipe(
       catchError(this.handleError)
-    )
+    );
   }
 
   editUserByAdmin(id, payload) {

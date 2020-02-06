@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   notLogged = true;
   imgSrc = '../../assets/img/banner_light.jpg';
   bannerText = 'No time to loose';
-  welcomeText = ["Quick to learn", "Easy to use", "Manage your tasks", "Save your time"];
+  welcomeText = ['Quick to learn', 'Easy to use', 'Manage your tasks', 'Save your time'];
   constructor(
     private router: Router,
     private logOrRegServ: LoginOrRegisterService,
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.notLogged = user ? false : true;
     });
   }
-  
+
   ngOnDestroy() {
     this.userSub.unsubscribe();
   }

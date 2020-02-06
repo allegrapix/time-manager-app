@@ -6,7 +6,7 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
 @Component({
   selector: 'app-view-task-modal',
   templateUrl: './view-task-modal.component.html',
-  styleUrls: ['./view-task-modal.component.scss'], 
+  styleUrls: ['./view-task-modal.component.scss'],
   animations: [
     trigger('showTaskModalBgr', [
       state('fadeIn',
@@ -21,7 +21,7 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
         animate(200)
       ]),
       transition('* => void', [
-        animate(200, 
+        animate(200,
           style({
             opacity: 0
           })
@@ -43,7 +43,7 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
         animate(100)
       ]),
       transition('* => void', [
-        animate(200, 
+        animate(200,
           style({
             opacity: 0,
             height: 0
@@ -64,7 +64,7 @@ export class ViewTaskModalComponent implements OnInit {
     workedHours: 0,
     description: ''
   };
-  
+
   constructor(
     private taskService: TasksService
   ) { }
@@ -73,7 +73,7 @@ export class ViewTaskModalComponent implements OnInit {
     this.taskService.getUserTask(this.userID, this.taskID).subscribe(task => {
       this.task = task;
       this.color = this.taskService.getColor(this.task.status);
-    });    
+    });
   }
 
   getColor() {

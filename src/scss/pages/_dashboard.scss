@@ -65,7 +65,7 @@ app-dashboard {
       }
     }
     
-    .arrow-container {
+    .arrow-container.dashboard-arrows {
       @include position(absolute, null, 25px, null, 50px);
     }
 

@@ -48,7 +48,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     return this.color;
   }
 
-  goToEditTask() {  
+  goToEditTask() {
     this.router.navigate(['edit-task', this.task], {queryParams: {status: this.statusParam}, relativeTo: this.route});
   }
 
@@ -60,6 +60,6 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.tasksService.deleteTask(this.task._id).subscribe(resData => {
       this.tasksService.taskListModified.emit();
       this.router.navigate(['/mytasks']);
-    })
+    });
   }
 }

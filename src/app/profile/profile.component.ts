@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FormGroup, NgForm, FormControl, Validators } from '@angular/forms';
 import { HttpEventType } from '@angular/common/http';
@@ -18,12 +18,12 @@ import { Task } from '../my-tasks/task/task.model';
   animations: [
     trigger('editField', [
       transition(':enter', [
-        style({ 
+        style({
             opacity: 0
           }),
         group([
           animate('250ms ease-in',
-            style({ 
+            style({
               opacity: 1
             })
           )
@@ -32,13 +32,13 @@ import { Task } from '../my-tasks/task/task.model';
     ]),
     trigger('expandField', [
       transition(':enter', [
-        style({ 
+        style({
             opacity: 0,
             width: 0
           }),
         group([
           animate('250ms ease-in-out',
-            style({ 
+            style({
               opacity: 1,
               width: '100%'
             })
@@ -48,7 +48,7 @@ import { Task } from '../my-tasks/task/task.model';
     ])
   ]
 })
-export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   @ViewChild('dropdownStatusForm', {static: true}) dropdownStatusForm: NgForm;
   @ViewChild('listItem', {static: true}) listItem: ElementRef;
   @ViewChild('workingHoursForm', {static: true}) workingHoursForm: NgForm;
@@ -76,40 +76,36 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   emailEditForm: FormGroup;
   locStorage;
   selectedDate: Date = new Date();
-  getTasksSub: Subscription; 
+  getTasksSub: Subscription;
   noTask: Task = {
-    status: "",
+    status: '',
     workedHours: 0,
-    _id: "new",
-    title: "No tasks",
-    description: ""
-  }
+    _id: 'new',
+    title: 'No tasks',
+    description: ''
+  };
   tasks: Task[] = [this.noTask];
   selectedStatus = 'all';
   calendarSub: Subscription;
   showNoTasks = false;
-  
+
   constructor(
     private userService: UserService,
     private domSanitizer: DomSanitizer,
     private router: Router,
-    private auth: AuthService, 
+    private auth: AuthService,
     private taskService: TasksService,
     private elRef: ElementRef
     ) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.calendarSub = this.taskService.newDateSelected.subscribe(newDate => {
-      this.selectedDate = new Date(newDate); 
+      this.selectedDate = new Date(newDate);
       this.loadSelectedDayTasks(this.selectedDate);
     });
     this.getUserAvatar();
     this.getUser();
     this.locStorage = JSON.parse(localStorage.getItem('userData'));
-  }
-
-  ngAfterViewInit() {
-    
   }
 
   ngOnDestroy() {
@@ -150,11 +146,11 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
 
   changeWorkingHours(event: any) {
     const wh = new FormGroup({
-      'preferredWorkingHours': new FormControl(parseInt(event.target.value), Validators.required)
+      'preferredWorkingHours': new FormControl(parseInt(event.target.value, 10), Validators.required)
     });
     this.patchUserInfo(wh);
   }
-  
+
   patchUserInfo(userInfo: FormGroup) {
     const objKey = Object.keys(userInfo.value)[0];
     this.userService.editUser(userInfo.value).subscribe((updatedUser: User) => {
@@ -179,7 +175,7 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onFileSelected(event) {
-    this.selectedFile = <File>event.target.files[0]; 
+    this.selectedFile = <File> event.target.files[0];
     this.onSubmit();
   }
 
@@ -190,7 +186,7 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
         this.base64Image  = this.domSanitizer.bypassSecurityTrustUrl(`data:image/jpg;base64, ${user.avatar}`);
         this.auth.user.value.avatar = user.avatar;
       } else {
-        this.noAvatar = true
+        this.noAvatar = true;
       }
     });
   }
@@ -220,7 +216,7 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   deleteProfile() {
     this.userService.deleteUser().subscribe(resData => {
       localStorage.removeItem('userData');
-      this.router.navigate(['login']);      
+      this.router.navigate(['login']);
     });
   }
 
@@ -238,15 +234,15 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
         const mm = new Date(task.updatedAt).getMonth();
         if (selDay === dd && selMonth === mm) {
           this.tasks.push(task);
-        }        
-      }); 
-      if(this.tasks.length === 0) {
+        }
+      });
+      if (this.tasks.length === 0) {
         this.tasks.push(this.noTask);
       }
     },
     (err) => {},
     () => {
-      const taskItemHeight = this.elRef.nativeElement.querySelector('.task-item')
+      const taskItemHeight = this.elRef.nativeElement.querySelector('.task-item');
       this.listHeight = (taskItemHeight.offsetHeight + 15) * 3;
     });
   }
@@ -257,7 +253,8 @@ export class ProfileComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   goToTask(task: Task) {
-    this.router.navigate(['mytasks', task._id], {queryParams: {status:'all'}});
+    this.taskService.noTasksSelected.emit(false);
+    this.router.navigate(['mytasks', task._id], {queryParams: {status: 'all'}});
   }
 
   newStatusSelected(event: any) {
