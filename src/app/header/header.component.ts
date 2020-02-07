@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.notLogged = !user;
       if (!user) {
         this.notUser = true;
-      } else if(user.role === 'user') {
+      } else if (user.role === 'user') {
         this.notUser = true;
       } else {
         this.notUser = false;
