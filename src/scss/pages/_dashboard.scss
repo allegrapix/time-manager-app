@@ -71,6 +71,7 @@ app-dashboard {
 
     .user-card {
       @include border-radius(10px);
+      height: 70px;
       border: .5px solid rgba($secondary-color, .3);
       padding: 15px;
       background: $default-color;
@@ -171,7 +172,6 @@ app-dashboard {
       }
 
       .show-profile-btn {
-        
         span {
           @include font($font-size: 16px, $font-weight: 600, $color: $fifth-color);
         }
@@ -422,6 +422,10 @@ app-dashboard {
     background: $fifth-color;
   }
 
+  .db-task-wrapper {
+    width: 98%;
+  }
+
   .db-task-title {
     width: 28%;
     padding-left: 15px;
@@ -552,6 +556,609 @@ app-no-users-found {
         .cls-6 {
           fill: $fifth-color;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  app-dashboard {
+    .mt-menu-container {
+      padding-left: 50px;
+    }
+
+    .dashboard-search-container {
+      margin-left: 50px;  
+    }
+
+    .tasks-container .task-item {
+      margin: 0 0 15px;
+
+      .task-color {
+        height: 65px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  app-dashboard {
+    .mt-menu-container {
+      padding-left: 45px;
+    }
+
+    .dashboard-search-container {
+      padding: 10px 0;
+      margin-left: 45px;
+    }
+    
+    app-user-accounts {
+      padding: 10px 25px 0 30px;
+  
+      .user-card {
+        height: 60px;
+
+        .user-avatar {
+          @include size(30px, 30px);
+        }
+  
+        .username-container {
+          width: 20%;
+          overflow: hidden;
+          
+          .subtitle {
+            font-size: 14px;
+          }
+        }
+  
+        .userrole-container {
+          width: 15%;
+  
+          .userrole {
+            font-size: 14px;
+          }
+        }
+  
+        .edit-btn-container {
+          width: 15%;
+        }
+  
+        .open-btn-container {
+          width: 35%;
+        }
+  
+        .user-edit-btn, 
+        .show-profile-btn {  
+          span {
+            font-size: 14px;
+          }
+  
+          svg {
+            @include size(15px, 15px);
+          }
+        }
+  
+        .user-edit-btn {
+          width: auto;
+  
+          span {
+            font-size: 14px;
+          }
+        }
+  
+        .show-profile-btn {
+          app-open-profile {
+            @include size(15px, 15px);  
+          }
+        } 
+        
+        .hidden-info-container {  
+          .line-separator {
+            padding: 5px 0;
+          }
+  
+          .hidden-info {
+            margin-left: 0;
+            width: 100%;
+          }
+  
+          .hidden-line {
+            padding: 5px 0;
+  
+            .subtitle {
+              font-size: 12px;
+            }
+  
+            .display-hours-container {
+              padding-right: 10px;
+
+              .display-hour {
+                font-size: 12px;
+              }
+            }
+  
+            .btn-alert {
+              padding: 5px 15px;
+            }
+
+            .input-container.date-picker-container {
+              padding-right: 10px;
+            }
+          }
+  
+          .task-table-wrapper {
+            font-size: 12px;
+            padding: 10px 0;
+  
+            .header-title {
+              width: 30%;
+            }
+            
+            .header-status {
+              width: 15%;
+            }
+  
+            .header-hours {
+              width: 25%;
+            }
+  
+            .header-date {
+              width: 10%;
+            }
+  
+            .header-btn {
+              width: 20%;
+  
+              .btn-new {                
+                span {              
+                  margin-right: 3px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .db-tasks {
+    height: 190px;
+  }
+  
+  .db-task-container {    
+    .db-task-color {
+      height: 30px;
+    }
+  
+    .db-task-title {
+      width: 25%;
+      padding-left: 5px;
+    }
+  
+    .db-task-status {
+      width: 20%;
+    }
+  
+    .db-worked-hours {
+      width: 15%;
+    }
+  
+    .db-date {
+      width: 17%;
+    }
+  
+    .db-btn-container {
+      width: 10%;
+  
+      button svg {
+        @include size(15px, 15px);
+      }
+    }
+  }
+   
+  app-no-users-found {
+    .no-results {
+      @include border-radius(10px);
+      padding: 15px;
+  
+      &-container {
+        padding: 0 10px;
+        width: 90%;
+      }
+  
+      &-msg {
+        font-size: 14px;
+        padding: 0;
+      }
+    }
+  }  
+}
+
+@media screen and (max-width: 767px) {
+  app-dashboard {
+    .mt-menu {
+      flex-wrap: wrap;
+    }
+
+    .mt-menu-container {
+      padding: 0 25px;
+      width: 100%;
+      order: 2;
+
+      .title {
+        font-size: 18px;
+      }
+    }
+
+    .tasks-container {
+      .tasks-list-wrapper {
+        display: block;
+        overflow: auto;
+      }
+    } 
+
+    .dashboard-search-container {
+      padding: 10px 25px;
+      margin-left: 0;
+
+      label {
+        width: 15%;
+      }
+  
+      .search-input {
+        width: 85%;
+      }
+    }
+
+    .task-list {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .task-item {
+        width: 49%;
+        align-items: center;
+      }
+    }
+  
+    .dashboard-menu-item.task-item {
+      margin: 10px 0;
+
+      .task-info {
+        width: 60%;
+      }
+  
+      .task-color {
+        height: 70px;
+      }
+  
+      .menu-icon {
+        width: 25px;
+        margin-right: 10px;
+      }
+    }
+    
+    app-user-accounts {
+      padding: 0 25px;
+      width: 100%;
+      
+      .arrow-container.dashboard-arrows {
+        @include position(absolute, 600px, 25px, null, 50px);
+      }
+  
+      .user-card {
+        margin-bottom: 5px;
+     
+        .username-container {
+          width: 30%;
+        }
+  
+        .userrole-container {
+          width: 20%;
+        }
+  
+        .edit-btn-container {
+          width: 20%;
+        }
+  
+        .open-btn-container {
+          width: 30%;
+        }
+    
+        .user-edit-btn {  
+          app-edit-btn {
+            margin-top: 5px;
+          }
+        }
+  
+        .show-profile-btn {
+          app-open-profile {
+            margin-top: 2px;
+          }
+        }
+
+        .hidden-info-container {
+          .hidden-line {
+            padding: 5px 0;
+  
+            .display-hours-container {
+              padding-right: 15px;
+              
+              .display-hour {
+                @include font($font-size: 14px, $color: $secondary-color, $text-align: right, $font-weight: 700);
+              }
+            }
+  
+            .input-container {
+              padding-right: 20px;
+            }
+  
+            .delete-btn-container {
+              width: 30%;
+            }
+
+            .worked-hours-container {
+              width: 30%;
+            }
+          }
+  
+          .task-table-wrapper {
+            font-size: 14px;
+            padding: 20px 0 10px;
+  
+            .header-title {
+              width: 30%;
+            }
+            
+            .header-status {
+              width: 20%;
+            }
+  
+            .header-hours {
+              width: 20%;
+            }
+  
+            .header-date {
+              width: 15%;
+            }
+  
+            .header-btn {
+              width: 15%;
+  
+              .btn-new {                
+                span {           
+                  margin-right: 5px;
+                }
+                
+                svg {
+                  @include size(15px, 15px);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .db-tasks {
+    height: 168px;
+  }
+  
+  .db-task-container {
+    .db-task-color {
+      width: 2%;
+      height: 35px;
+    }
+  
+    .db-task-title {
+      width: 28%;
+      padding-left: 15px;
+    }
+  
+    .db-task-status {
+      width: 20%;
+    }
+  
+    .db-worked-hours {
+      width: 20%;
+    }
+  
+    .db-date {
+      width: 15%;
+    }
+  
+    .db-btn-container {
+      width: 15%;
+  
+      button svg {
+        @include size(20px, 20px);
+      }
+    }
+  }
+ 
+  app-no-users-found {
+    .no-results {  
+      &-container {
+        padding: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  app-dashboard {
+    .dashboard-search-container {
+      label {
+        width: 25%;
+      }
+  
+      .search-input {
+        width: 75%;
+      }
+    }
+  
+    .dashboard-menu-item.task-item {
+      .task-info {
+        margin: 0;
+      }
+    }
+    
+    app-user-accounts {
+      .user-card {
+        height: 70px;
+
+        .shown-info-container .user-card-info {
+          flex-wrap: wrap;
+        }
+     
+        .username-container {
+          width: 50%;
+          padding-left: 10px;
+          order: 1;
+        }
+  
+        .userrole-container {
+          width: 50%;
+          padding-left: 10px;
+          order: 3;
+        }
+  
+        .edit-btn-container {
+          width: 50%;
+          order: 2;
+          display: flex;
+          justify-content: flex-end;
+        }
+  
+        .open-btn-container {
+          width: 50%;
+          order: 4;
+        }
+        
+        .hidden-info-container {
+          .hidden-line {
+            flex-wrap: wrap;
+
+            .line-info {
+              width: 70%;
+            }
+  
+            .display-hours-container {
+              padding-right: 0;
+              width: 30%;
+            }
+  
+            .delete-btn-container {
+              width: 100%;
+              padding: 10px 0;
+              justify-content: flex-start;
+
+              .btn-alert {
+                width: 62%;
+              }
+            }
+
+            .worked-hours-container {
+              width: 100%;
+              justify-content: flex-start;
+            }
+
+            .input-container.date-picker-container {
+              width: 30%;
+              padding-right: 0;
+            }
+          }
+  
+          .task-table-wrapper {
+            padding: 0;
+  
+            .header-title,
+            .header-status,
+            .header-hours,
+            .header-date {
+              display: none;
+            }
+
+            .header-btn {
+              width: 100%;
+              justify-content: flex-end;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .db-tasks {
+    height: 135px;
+  }
+  
+  .db-task-container {  
+    .db-task-color {
+      width: 2%;
+      height: 60px;
+    }
+
+    .db-task-wrapper {
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  
+    .db-task-title {
+      width: 70%;
+      padding-left: 10px;
+      order: 1;
+    }
+  
+    .db-task-status {
+      width: 30%;
+      text-align: right;
+      padding-right: 10px;
+      order: 2;
+    }
+  
+    .db-worked-hours {
+      width: 40%;
+      order: 4;
+      padding-left: 10px;
+    }
+  
+    .db-date {
+      position: relative;
+      order: 3;
+      padding-left: 10px;
+      width: 30%;
+
+      &::before {
+        @include size(100%, 1px);
+        @include position(absolute, null, 0);
+        display: block;
+        content: '';
+        background: $secondary-color;        
+      }
+    }
+  
+    .db-btn-container {
+      width: 30%;
+      order: 5;
+      padding: 3px 10px;
+
+      .edit-btn {
+        margin-right: 3px;
+      }
+
+      button,
+      button svg {
+        @include size(15px, 15px);
+      }
+    }
+  }
+ 
+  app-no-users-found {
+    .no-results {  
+      &-container {
+        padding: 0;
       }
     }
   }

@@ -41,10 +41,10 @@
     </div>
     <div class="hidden-info">
       <div class="hidden-line">
-        <p class="subtitle faded">{{ user.email}}</p>
+        <p class="subtitle faded line-info">{{ user.email}}</p>
       </div>
       <div class="hidden-line">
-        <p class="subtitle faded">Preferred working hours:</p>
+        <p class="subtitle faded line-info">Preferred working hours:</p>
         <div class="display-hours-container">
           <p class="display-hour">{{ user.preferredWorkingHours}}h</p>
         </div>
@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="hidden-line">
-        <p class="subtitle faded">User tasks</p>
+        <p class="subtitle faded line-info">User tasks</p>
         <div class="date-picker-container input-container">
           <mat-form-field>
             <input matInput [matDatepicker]="picker" [formControl]="today" (dateChange)="getTodaysTasks($event)">

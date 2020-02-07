@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { trigger, transition, style, animate, state } from '@angular/animations';
+import { trigger, transition, style, animate, state, AUTO_STYLE } from '@angular/animations';
 import { User } from 'src/app/profile/user.model';
 import { Task } from 'src/app/my-tasks/task/task.model';
 import { TasksService } from 'src/app/services/tasks.service';
@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material';
+import { Platform } from '@angular/cdk/platform';
 
 @Component({
   selector: 'app-account',
@@ -40,7 +41,7 @@ import { MatDatepickerInputEvent } from '@angular/material';
     trigger('openCloseCard', [
       state('closed',
         style({
-          height: '70px'
+          height: '*'
         })
       ),
       state('open',

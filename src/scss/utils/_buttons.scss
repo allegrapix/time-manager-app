@@ -64,7 +64,7 @@
   border: 1px solid rgba($secondary-color, .3);
   background: $default-color;
   padding: 20px;
-  margin-bottom: 5px;
+  margin-top: 5px;
   transition: all 200ms ease;
 
   @include on_event {
@@ -156,5 +156,9 @@
 @media screen and (max-width: 991px) {
   .add-btn {
     @include size(23px, 23px);
+  }
+
+  .btn-reset {
+    font-size: 14px;
   }
 }

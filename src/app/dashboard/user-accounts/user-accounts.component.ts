@@ -36,7 +36,7 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
   userSearchSub: Subscription;
   searchedWord = '';
   skip = 0;
-  limit = 8;
+  limit = 7;
   searchMsg = '';
   usersFound = false;
   nrUsers: number;
