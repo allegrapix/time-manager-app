@@ -213,10 +213,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  goToEditProfile() {
-    this.router.navigate(['edit-profile']);
-  }
-
   deleteProfile() {
     this.userService.deleteUser().subscribe(resData => {
       localStorage.removeItem('userData');

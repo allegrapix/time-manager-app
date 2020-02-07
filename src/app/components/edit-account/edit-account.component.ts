@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/profile/user.model';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-edit-account',
@@ -43,13 +44,16 @@ export class EditAccountComponent implements OnInit {
   dropDownIsOpen = false;
   hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   base64Image: SafeUrl;
+  locStorage;
 
   constructor(
     private userService: UserService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private auth: AuthService
     ) { }
 
   ngOnInit() {
+    this.locStorage = JSON.parse(localStorage.getItem('userData'));
     this.userEditSub = this.userService.userToBeEdited.subscribe(user => {
       if (user) {
         this.selectedUser = user;
@@ -79,6 +83,11 @@ export class EditAccountComponent implements OnInit {
       const updates = Object.keys(resData);
       updates.forEach(update => {
         this.selectedUser[update] = resData[update];
+        if (this.selectedUser._id === this.locStorage._id) {
+          this.locStorage[update] = resData[update];
+          localStorage.setItem('userData', JSON.stringify(this.locStorage));
+          this.auth.autoLogin();
+        }
       });
       this.editModalIsOpen = false;
     });
