@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/profile/user.model';
 import { Subscription } from 'rxjs';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-accounts',
@@ -46,7 +47,8 @@ export class UserAccountsComponent implements OnInit, OnDestroy {
   searchItem = '';
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
     ) { }
 
   ngOnInit() {
