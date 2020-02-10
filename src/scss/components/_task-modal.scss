@@ -9,7 +9,7 @@
   @include position(absolute, 100px, 50%);
   @include prefix(transform, translateX(50%), webkit moz ms o);
   @include border-radius(15px);
-  width: 50%;
+  width: 900px;
   padding: 75px 50px 25px 65px;
   background: $default-color;
   z-index: 12;
@@ -24,11 +24,71 @@
     background: $bgr-color;
   }
 
+  .task-modal-container {
+    .task-container.new-task-container {
+      .status-group {
+        width: 70%;
+      }
+    }
+  }
+
   .close-modal-container {
     @include position(absolute, 20px, 65px);
   }
 
   .task-container {
     padding: 0;
+  }
+}
+
+@media screen and (max-width: 991px) { 
+  .task-modal {
+    width: 700px;
+  }
+}
+
+
+@media screen and (max-width: 767px) { 
+  .task-modal {
+    width: 90%;
+
+    .task-modal-container {
+      max-height: 400px;
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 650px) { 
+  .task-modal {
+    padding: 75px 25px 25px 40px;
+  }
+
+  .task-modal-container {
+    .task-container.new-task-container {
+      .form-group-container {
+        flex-wrap: wrap;
+      }
+
+      .form-group.status-group {
+        width: 100%;
+      }
+
+      .form-group.hours-group {
+        width: 100%;
+
+        .mat-form-field-infix {
+          border: 0;
+        }
+
+        .date-picker-container .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-suffix {
+          top: 10px;
+        }
+      }
+    }
   }
 }

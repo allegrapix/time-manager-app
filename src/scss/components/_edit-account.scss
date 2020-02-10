@@ -6,7 +6,7 @@
   &-container {
     @include position(absolute, 10%, 50%);
     @include prefix(transform, translateX(50%), webkit moz ms o);
-    @include size(auto, 40%);
+    @include size(auto, 900px);
     @include border-radius(20px);
     background: $default-color;
     padding: 50px 25px;
@@ -28,8 +28,8 @@
 
     .edit-user-form {
       .edit-user-image-container {
-        @include position(absolute, 0, null, null, -100px);
-        @include size(200px, 30%);
+        @include position(absolute, 0, null, null, -45px);
+        @include size(200px, 200px);
         @include border-radius(10px);
         box-shadow: 0px 10px 56px -26px rgba($primary-color, .75);
         background: $default-color;
@@ -96,6 +96,54 @@
           margin: 25px 0;
           padding: 7px 30px;
           font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .edit-account {  
+    &-container {
+      width: 600px;
+  
+      .edit-user-form {
+        .edit-user-image-container {
+          left: -100px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .edit-account {  
+    &-container {
+      @include border-radius(15px);
+      width: 90%;
+      padding: 30px 15px;
+      min-height: 450px;
+  
+      &::before {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        width: 15px;
+      }  
+
+      .edit-user-form {
+        .edit-user-image-container {
+          @include size(60px, 60px);
+          left: 25px;
+
+          &::before {
+            width: 8px;
+          }
+        }
+  
+        .edit-user-info-container {
+          @include position(absolute, 50px, 15px, null, 30px);
+          width: auto;
+          padding: 50px 15px;
         }
       }
     }

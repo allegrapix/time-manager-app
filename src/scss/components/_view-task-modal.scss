@@ -62,5 +62,80 @@
   
   .task-description {
     padding: 10px 0;
+    max-height: 400px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .view-task-modal {
+    @include position(absolute, 50px, 20%, null, 20%);
+    @include prefix(transform, translateX(0), webkit moz ms o);
+    width: auto;
+  }  
+}
+
+@media screen and (max-width: 991px) {
+  .view-task-modal {
+    @include position(absolute, 50px, 75px, null, 75px);
+    @include prefix(transform, translateX(0), webkit moz ms o);
+    width: auto;
+  }  
+}
+
+@media screen and (max-width: 767px) {
+  .view-task-modal {
+    @include position(absolute, 50px, 30px, null, 30px);
+    @include prefix(transform, translateX(0), webkit moz ms o);
+    @include border-radius(10px);
+    padding: 10px 20px 20px 30px;
+    width: auto;
+
+    .task-header {
+      align-items: flex-start;
+    }
+  
+    .task-color {
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+      width: 10px;
+    }
+  
+    .view-task-icon {
+      padding: 5px 0;
+    }
+  
+    .title {
+      @include font($font-size: 16px);
+    }
+  
+    .subtitle {
+      font-size: 14px;
+    }
+  
+    .default-text {
+      font-size: 14px;
+      padding: 5px 0;
+    }
+  
+    .task-header-container {
+      width: 85%;
+  
+      .header-line {
+        padding: 5px 0;
+
+        .flex-between {
+          flex-wrap: wrap;
+
+          .subtitle {
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 }
